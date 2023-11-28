@@ -1,8 +1,9 @@
-import { Card, CardTitle, CardBody, Col, Row, Container } from 'reactstrap';
+import { Card, CardTitle, Col, Row, Container } from 'reactstrap';
 
 export default function Recipe({ recipe }) {
-    const title = recipe.title ? recipe.title : '';
+    const title = recipe.title ? recipe.title.toUpperCase() : '';
     const source = recipe.source ? recipe.source : '';
+    const category = recipe.category ? recipe.category : '';
     const equipment = recipe.equipment ? recipe.equipment : [];
     const ingredient_groups = recipe.ingredients ? recipe.ingredients : [];
 
@@ -10,7 +11,10 @@ export default function Recipe({ recipe }) {
         <Card className='recipe-card'>
             <CardTitle>{title}</CardTitle>    
             <Container fluid>
-                <p className='source'>source: {source}</p>
+                <div className='subtitle'>
+                    <p><span className='bold'>source: </span>{source}</p>
+                    <p><span className='bold'>category: </span> {category}</p>
+                </div>
                 <Row>
                 {
                     ingredient_groups.map((group, idx) => (
@@ -26,14 +30,30 @@ export default function Recipe({ recipe }) {
                         </Col>
                     ))
                 }
+                { equipment.length > 0 && (
+                    <ul className='equipment'>
+                        <li>
+                            <span className='bold'>equipment: </span>
+                        {
+                            equipment.map((equipment, idx) => (
+                                <span key={idx}>{equipment}</span>
+                            ))
+                        }
+                        </li>
+                    </ul>
+                )}
                 </Row>
-                <ol>
-                    {
-                        recipe.directions.map((direction, idx) => (
-                            <li key={idx}>{direction}</li>
-                        ))
-                    }
-                </ol>
+                <Row>
+                    <Col>
+                        <ul>
+                            {
+                                recipe.directions.map((direction, idx) => (
+                                    <li key={idx}>{direction}</li>
+                                ))
+                            }
+                        </ul>
+                    </Col>
+                </Row>
             </Container>
         </Card>
   )

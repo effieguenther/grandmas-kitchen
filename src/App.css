@@ -1,28 +1,54 @@
+span.bold {
+  font-weight: bold;
+}
+
 div.recipe-card {
   margin-bottom: 2em;
-  padding: 1em 0.75em;
+  padding: 1em 0.5em;
+  border: 20px solid rgb(240, 185, 185);
+  background-color: rgb(255, 253, 249);
+  font-family: 'Sandy-Daniel'
 }
 
 div.recipe-card .card-title {
   font-size: x-large;
-  text-align: center;
-  margin-bottom: 0em;
+  margin-bottom: 0.25em;
+  margin-left: 0.5em;
 }
 
-div.recipe-card .source {
+div.recipe-card .subtitle {
   font-size: small;
-  text-align: center;
+  display: flex;
+}
+
+div.recipe-card .subtitle p {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  margin-bottom: 1em;
 }
 
 div.recipe-card .group-title {
   font-weight: bold;
 }
 
+div.recipe-card .equipment {
+  padding-left: 1em;
+}
+
 div.recipe-card ul {
   list-style: none;
+  font-size: small;
   padding-left: 0em;
 }
 
 div.recipe-card li {
-  border-bottom: 1px solid rgb(207, 207, 207);
+  border-bottom: 0.5px solid rgb(207, 207, 207);
+}
+
+@font-face {
+  font-family: 'Sandy-Daniel';
+  src: url('./font/Sandy-Daniel.woff') format('woff'),
+      url('./font/Sandy-Daniel.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
 }
