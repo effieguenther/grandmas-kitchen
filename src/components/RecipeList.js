@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { Container } from 'reactstrap';
+import Recipe from './Recipe';
 
 export default function RecipeList() {
   const [recipes, setRecipes] = useState([]);
@@ -13,11 +15,18 @@ export default function RecipeList() {
     fetchRecipes()
       .then(response => {
         console.log("response", response);
+        setRecipes(response.recipes);
       })
   }, [])
 
   return (
-    <div>RecipeList</div>
+    <Container className='mt-4'>
+      {
+        recipes.map((recipe, idx) => (
+          <Recipe recipe={recipe} key={idx} />
+        ))
+      }
+    </Container>
   )
 
 }
