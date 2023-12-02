@@ -15,6 +15,7 @@ export default function Recipe({ recipe }) {
                     <p><span className='bold'>source: </span>{source}</p>
                     <p><span className='bold'>category: </span> {category}</p>
                 </div>
+                <hr />
                 <Row>
                 {
                     ingredient_groups.map((group, idx) => (
