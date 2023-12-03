@@ -1,20 +1,37 @@
-import { Card, CardTitle, Col, Row, Container } from 'reactstrap';
+import { Card, CardTitle, Col, Row, Container, Button } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPrint, faHeart } from '@fortawesome/free-solid-svg-icons';
+import '../css/recipe.css';
 
 export default function Recipe({ recipe }) {
     const title = recipe.title ? recipe.title.toUpperCase() : '';
-    const source = recipe.source ? recipe.source : '';
-    const category = recipe.category ? recipe.category : '';
-    const equipment = recipe.equipment ? recipe.equipment : [];
-    const ingredient_groups = recipe.ingredients ? recipe.ingredients : [];
+    const source = recipe.source || '';
+    const category = recipe.category || '';
+    const equipment = recipe.equipment || [];
+    const ingredient_groups = recipe.ingredients || [];
 
     return (
         <Card className='recipe-card'>
-            <CardTitle>{title}</CardTitle>    
+            <CardTitle>
+                <Row>
+                    <Col xs='9'>
+                        {title}
+                        <div className='subtitle'>
+                            <p><span className='bold'>source: </span>{source}</p>
+                            <p><span className='bold'>category: </span> {category}</p>
+                        </div>
+                    </Col>
+                    <Col className='print-btn'>
+                        <Button>
+                            <FontAwesomeIcon icon={faHeart} />
+                        </Button>
+                        <Button>
+                            <FontAwesomeIcon icon={faPrint} />
+                        </Button>
+                    </Col>
+                </Row>
+            </CardTitle>    
             <Container fluid>
-                <div className='subtitle'>
-                    <p><span className='bold'>source: </span>{source}</p>
-                    <p><span className='bold'>category: </span> {category}</p>
-                </div>
                 <hr />
                 <Row>
                 {

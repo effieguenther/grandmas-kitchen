@@ -1,3 +1,7 @@
+.app {
+  font-family: 'Sandy-Daniel';
+}
+
 span.bold {
   font-weight: bold;
 }
@@ -10,71 +14,6 @@ div.header {
   background-color: rgb(255, 247, 248);
   border-bottom: 1px solid rgb(199, 105, 135, 0.75);
   color: rgb(199, 105, 135);
-}
-
-div.search-btns button {
-  background-color: rgb(255, 247, 248);
-  color: rgb(199, 105, 135);
-  border: 1px solid rgb(199, 105, 135, 0.75);
-}
-
-div.search-btns button:hover {
-  background-color: rgb(255, 229, 232);
-  color: rgb(188, 77, 112);
-  border: 1px solid rgb(199, 105, 135, 0.75);
-}
-
-div.recipe-card {
-  margin-bottom: 2em;
-  padding: 1em 0.5em;
-  position: relative;
-  background-color: rgb(255, 253, 250);
-  color: rgb(0, 0, 0);
-  font-family: 'Sandy-Daniel';
-  box-shadow: 0px 5px 15px #d7d7d7;
-}
-
-div.recipe-card .card-title {
-  font-size: x-large;
-  margin-bottom: 0.25em;
-  margin-left: 0.5em;
-  font-weight: bold;
-}
-
-div.recipe-card .subtitle {
-  font-size: small;
-  display: flex;
-}
-
-div.recipe-card .subtitle p {
-  margin-left: 0.5em;
-  margin-right: 0.5em;
-  margin-bottom: 1em;
-}
-
-div.recipe-card hr {
-  margin-top: 0em;
-  margin-bottom: 1em;
-  color: red;
-}
-
-div.recipe-card .group-title {
-  font-weight: bold;
-}
-
-div.recipe-card .equipment {
-  padding-left: 1em;
-}
-
-div.recipe-card ul {
-  list-style: none;
-  font-size: medium;
-  padding-left: 0em;
-}
-
-div.recipe-card li {
-  border-bottom: 1px solid rgb(209, 225, 253);
-  padding-top: 0.3em;
 }
 
 @font-face {

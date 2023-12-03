@@ -1,0 +1,16 @@
+div.search-btns {
+    display: flex;
+    justify-content: end;
+}
+
+div.search-btns button {
+    background-color: rgb(255, 247, 248);
+    color: rgb(199, 105, 135);
+    border: 1px solid rgb(199, 105, 135, 0.75);
+  }
+  
+  div.search-btns button:hover {
+    background-color: rgb(255, 229, 232);
+    color: rgb(188, 77, 112);
+    border: 1px solid rgb(199, 105, 135, 0.75);
+  }

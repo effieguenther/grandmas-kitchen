@@ -1,0 +1,91 @@
+div.next-prev-btns {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1em;
+}
+
+div.next-prev-btns button {
+  margin: 0em 0.5em;
+  background-color: rgb(255, 247, 248);
+  color: rgb(199, 105, 135);
+  border: 1px solid rgb(199, 105, 135, 0.75);
+}
+
+div.next-prev-btns button:hover {
+  background-color: rgb(255, 229, 232);
+  color: rgb(188, 77, 112);
+  border: 1px solid rgb(199, 105, 135, 0.75);
+}
+
+div.recipe-card {
+    margin-bottom: 2em;
+    padding: 1em 0.5em;
+    position: relative;
+    background-color: rgb(255, 253, 250);
+    color: rgb(0, 0, 0);
+    box-shadow: 0px 5px 15px #d7d7d7;
+    font-family: 'Sandy-Daniel';
+    width: 100%;
+  }
+  
+  div.recipe-card .card-title {
+    font-size: x-large;
+    margin-bottom: 0.25em;
+    margin-left: 0.5em;
+    font-weight: bold;
+  }
+  
+  div.print-btn {
+    display: flex;
+    justify-content: end;
+    align-items: start;
+  }
+  
+  div.print-btn button {
+    margin-right: 0.5em;
+    background-color: rgb(247, 243, 237);
+    color: rgb(144, 186, 222);
+    border: 1px solid rgb(144, 186, 222);
+  }
+  
+  div.print-btn button:hover {
+    background-color: rgb(240, 235, 227);
+    color: rgb(116, 158, 194);
+    border: 1px solid rgb(116, 158, 194);
+  }
+  
+  div.recipe-card .subtitle {
+    font-size: small;
+    display: flex;
+  }
+  
+  div.recipe-card .subtitle p {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    margin-bottom: 1em;
+  }
+  
+  div.recipe-card hr {
+    margin-top: 0em;
+    margin-bottom: 1em;
+    color: red;
+  }
+  
+  div.recipe-card .group-title {
+    font-weight: bold;
+  }
+  
+  div.recipe-card .equipment {
+    padding-left: 1em;
+  }
+  
+  div.recipe-card ul {
+    list-style: none;
+    font-size: medium;
+    padding-left: 0em;
+  }
+  
+  div.recipe-card li {
+    border-bottom: 1px solid rgb(209, 225, 253);
+    padding-top: 0.3em;
+  }
