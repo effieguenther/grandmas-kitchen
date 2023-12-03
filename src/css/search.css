@@ -4,15 +4,17 @@ div.search-bar {
   margin-bottom: 2em;
 }
 
-div.search-bar input {
-  margin-right: 0.5em;
+div.search-input {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  margin-top: 0.5em;
 }
 
 div.search-btns {
     display: flex;
-    justify-content: end;
+    justify-content: center;
     align-items: end;
-    margin-left: 0.5em;
+    padding-top: 1em;
 }
 
 div.search-btns button {
