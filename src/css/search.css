@@ -1,16 +1,35 @@
+div.search-bar {
+  display: flex;
+  align-items: end;
+  margin-bottom: 2em;
+}
+
+div.search-bar input {
+  margin-right: 0.5em;
+}
+
 div.search-btns {
     display: flex;
     justify-content: end;
+    align-items: end;
+    margin-left: 0.5em;
 }
 
 div.search-btns button {
     background-color: rgb(255, 247, 248);
     color: rgb(199, 105, 135);
     border: 1px solid rgb(199, 105, 135, 0.75);
+    text-wrap: nowrap;
   }
   
   div.search-btns button:hover {
     background-color: rgb(255, 229, 232);
     color: rgb(188, 77, 112);
     border: 1px solid rgb(199, 105, 135, 0.75);
+  }
+
+  p.search-results {
+    text-align: center;
+    font-style: italic;
+    color: rgb(144, 186, 222);
   }
