@@ -9,11 +9,23 @@ div.recipe-card {
     width: 100%;
   }
   
-  div.recipe-card .card-title {
+  div.card-title {
     font-size: x-large;
     margin-bottom: 0.25em;
     margin-left: 0.5em;
     font-weight: bold;
+  }
+
+  div.recipe-card .subtitle {
+    font-size: small;
+    font-weight: normal;
+    display: flex;
+  }
+  
+  div.recipe-card .subtitle p {
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
+    margin-right: 1em;
   }
   
   div.print-btn {
@@ -33,17 +45,6 @@ div.recipe-card {
     background-color: rgb(240, 235, 227);
     color: rgb(116, 158, 194);
     border: 1px solid rgb(116, 158, 194);
-  }
-  
-  div.recipe-card .subtitle {
-    font-size: small;
-    display: flex;
-  }
-  
-  div.recipe-card .subtitle p {
-    margin-left: 0.5em;
-    margin-right: 0.5em;
-    margin-bottom: 1em;
   }
   
   div.recipe-card hr {

@@ -1,0 +1,16 @@
+div.header {
+    text-align: center;
+    font-size: 18px;
+    padding-bottom: 0.3em;
+    padding-top: 1em;
+    /* background-color: rgb(255, 247, 248); */
+    border-bottom: 1px solid rgb(199, 105, 135, 0.75);
+    color: rgb(199, 105, 135);
+  }
+  
+  p.title {
+    font-size: large;
+    display: inline;
+    margin: 0em 0.5em;
+  }
+  

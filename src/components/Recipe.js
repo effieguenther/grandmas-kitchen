@@ -14,12 +14,8 @@ export default function Recipe({ recipe }) {
         <Card className='recipe-card'>
             <CardTitle>
                 <Row>
-                    <Col xs='9'>
+                    <Col xs='8'>
                         {title}
-                        <div className='subtitle'>
-                            <p><span className='bold'>source: </span>{source}</p>
-                            <p><span className='bold'>category: </span> {category}</p>
-                        </div>
                     </Col>
                     <Col className='print-btn'>
                         <Button>
@@ -30,6 +26,10 @@ export default function Recipe({ recipe }) {
                         </Button>
                     </Col>
                 </Row>
+                <div className='subtitle'>
+                    <p><span className='bold'>source: </span>{source}</p>
+                    <p><span className='bold'>category: </span> {category}</p>
+                </div>
             </CardTitle>    
             <Container fluid>
                 <hr />
