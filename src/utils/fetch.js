@@ -11,7 +11,6 @@ export const get = async (path) => {
         const response = await fetch(
             baseUrl + path, {
             method: 'GET',
-            credentials: 'include',
             headers: { 
                 'Content-Type': 'application/json',
             },
@@ -29,7 +28,7 @@ export const post = async (path, body) => {
         const response = await fetch(
             baseUrl + path, {
                 method: 'POST',
-                credential: 'include',
+                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json',
                 },

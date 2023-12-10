@@ -1,11 +1,11 @@
 import { Card, CardTitle, Col, Row, Container, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPrint, faHeart } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import '../css/recipe.css';
 import { put } from '../utils/fetch';
 
-export default function Recipe({ recipe }) {
+export default function Recipe({ recipe, currentUser }) {
     const title = recipe.title ? recipe.title.toUpperCase() : '';
     const source = recipe.source || '';
     const category = recipe.category || '';
@@ -15,10 +15,15 @@ export default function Recipe({ recipe }) {
     const [favorite, setFavorite] = useState(false);
 
     const addToFavorites = async () => {
-        const response = await put('users/addToFavorites', { favorite: id });
-        setFavorite(true);
-        console.log(`${id} in favorites`)
+        setFavorite(!favorite);
+        const response = await put('users/updateFavorites', { favorite: id });
     }
+
+    useEffect(() => {
+        const inFavorites = currentUser.favorites.includes(id);
+        setFavorite(inFavorites);
+        console.log('current user', currentUser);
+    }, [currentUser])
 
     return (
         <Card className='recipe-card'>
@@ -28,8 +33,8 @@ export default function Recipe({ recipe }) {
                         {title}
                     </Col>
                     <Col className='print-btn'>
-                        <Button>
-                            <FontAwesomeIcon icon={faHeart} onClick={addToFavorites}/>
+                        <Button className={favorite ? 'favorite' : ''} onClick={addToFavorites}>
+                            <FontAwesomeIcon icon={faHeart} />
                         </Button>
                         <Button>
                             <FontAwesomeIcon icon={faPrint} />

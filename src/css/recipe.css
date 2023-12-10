@@ -40,6 +40,18 @@ div.recipe-card {
     color: rgb(144, 186, 222);
     border: 1px solid rgb(144, 186, 222);
   }
+
+  div.print-btn button.favorite {
+    color: rgb(247, 237, 237);
+    border: 1px solid rgb(241, 87, 87);
+    background-color: rgb(241, 87, 87);
+  }
+
+  div.print-btn button.favorite:hover {
+    color: rgb(247, 237, 237);
+    border: 1px solid rgb(255, 147, 147);
+    background-color: rgb(255, 147, 147);
+  }
   
   div.print-btn button:hover {
     background-color: rgb(240, 235, 227);

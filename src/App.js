@@ -3,7 +3,7 @@ import {
   redirect,
   RouterProvider
 } from 'react-router-dom';
-import { get } from './utils/fetch';
+import { get, post } from './utils/fetch';
 import LandingPage from './pages/LandingPage';
 import RecipePage from './pages/RecipePage';
 import LoginPage from './pages/LoginPage';
@@ -13,7 +13,12 @@ import './App.css';
 const router = createBrowserRouter([
   {
     element: <LandingPage />,
-    path: '/'
+    path: '/',
+    loader: async () => {
+      const verifyUser = await post('users/verify');
+      if (verifyUser.success) { return redirect('/recipes') }
+      return null;
+    }
   },
   {
     element: <LoginPage />,
@@ -21,7 +26,7 @@ const router = createBrowserRouter([
     loader: async () => {
       const question_answered = localStorage.getItem('question-answered');
       if (!question_answered) { return redirect('/') }
-      const verifyUser = await get('users/verify');
+      const verifyUser = await post('users/verify');
       if (verifyUser.success) { return redirect('/recipes') }
       return null;
     }
@@ -29,18 +34,22 @@ const router = createBrowserRouter([
   {
     element: <RecipePage />,
     path: '/recipes',
-    loader: () => {
+    loader: async () => {
       const question_answered = localStorage.getItem('question-answered');
       if (!question_answered) { return redirect('/') }
+      const verifyUser = await post('users/verify');
+      if (!verifyUser.success) { return redirect('/login') }
       return null;
     }
   },
   {
     element: <FavoritesPage />,
     path: '/',
-    loader: () => {
+    loader: async () => {
       const question_answered = localStorage.getItem('question-answered');
       if (!question_answered) { return redirect('/') }
+      const verifyUser = await post('users/verify');
+      if (!verifyUser.success) { return redirect('/login') }
       return null;
     }
   }

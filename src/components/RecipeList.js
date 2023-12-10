@@ -7,7 +7,7 @@ import SearchBar from './SearchBar';
 import Loading from './Loading';
 import '../css/search.css';
 
-export default function RecipeList() {
+export default function RecipeList({ currentUser }) {
   //holds all the recipes from the search function
   const [recipes, setRecipes] = useState([]);
   //holds the current recipe in an array
@@ -126,7 +126,7 @@ export default function RecipeList() {
     <Container className='mt-4'>
       <SearchBar searchFunction={search} viewAllFunction={fetchRecipes}/>
         {
-          recipes.length
+          recipes
           ? (<p className='search-results'>{activeIndex + 1} of {recipes.length} (use arrow keys or swipe)</p>)
           : (<p className='search-results'>no results</p>)
         }
@@ -135,16 +135,18 @@ export default function RecipeList() {
           ? (<Loading />) 
           : error
           ? (<p className='text-center mt-4'>{error}</p>)
-          : cardAnimation((style, recipe) => (
+          : recipes 
+          ? cardAnimation((style, recipe) => (
             <animated.div 
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
               style={{...style, width: '100%'}}
             >
-              <Recipe recipe={recipe} />
+              <Recipe recipe={recipe} currentUser={currentUser} />
             </animated.div>
           ))
+          : (<p className='text-center mt-4'>no results</p>)
         }
     </Container>
     )
