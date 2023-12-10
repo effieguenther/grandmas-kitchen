@@ -15,10 +15,10 @@ export default function LandingScreen() {
       </p>
       <p className='question'>If God had a refrigerator, would your picture be on it?</p>
       <div className='yes-no'>
-        <Link to='/recipes'>
+        <Link to='/login'>
           <Button onClick={handleClick}>Yes</Button>
         </Link>
-        <Link to='/recipes'>
+        <Link to='/login'>
           <Button onClick={handleClick}>No</Button>
         </Link>
       </div>

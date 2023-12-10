@@ -1,7 +1,9 @@
 import { Card, CardTitle, Col, Row, Container, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPrint, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { useState } from 'react';
 import '../css/recipe.css';
+import { put } from '../utils/fetch';
 
 export default function Recipe({ recipe }) {
     const title = recipe.title ? recipe.title.toUpperCase() : '';
@@ -9,6 +11,14 @@ export default function Recipe({ recipe }) {
     const category = recipe.category || '';
     const equipment = recipe.equipment || [];
     const ingredient_groups = recipe.ingredients || [];
+    const id = recipe._id || '';
+    const [favorite, setFavorite] = useState(false);
+
+    const addToFavorites = async () => {
+        const response = await put('users/addToFavorites', { favorite: id });
+        setFavorite(true);
+        console.log(`${id} in favorites`)
+    }
 
     return (
         <Card className='recipe-card'>
@@ -19,7 +29,7 @@ export default function Recipe({ recipe }) {
                     </Col>
                     <Col className='print-btn'>
                         <Button>
-                            <FontAwesomeIcon icon={faHeart} />
+                            <FontAwesomeIcon icon={faHeart} onClick={addToFavorites}/>
                         </Button>
                         <Button>
                             <FontAwesomeIcon icon={faPrint} />

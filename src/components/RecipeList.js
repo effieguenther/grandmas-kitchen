@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Container } from 'reactstrap';
 import { useTransition, animated } from "@react-spring/web";
+import { get, post } from '../utils/fetch';
 import Recipe from './Recipe';
 import SearchBar from './SearchBar';
 import Loading from './Loading';
@@ -25,7 +26,6 @@ export default function RecipeList() {
     setIsLoading(false);
   }, [recipes])
 
-  //move to next recipe
   const handleNext = () => {
     setActiveIndex(prevIndex => {
       if (prevIndex === recipes.length - 1) { return prevIndex }
@@ -34,7 +34,6 @@ export default function RecipeList() {
     })
   }
 
-  //move to previous recipe
   const handlePrev = () => {
     setActiveIndex(prevIndex => {
       if (prevIndex === 0 ) { return 0 }
@@ -98,14 +97,7 @@ export default function RecipeList() {
   const search = async (search_criteria) => {
     setIsLoading(true);
     try {
-      const response = await fetch(
-        'https://us-central1-grandma-8ed4c.cloudfunctions.net/api/recipes/search', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(search_criteria)
-      });
-
-      const recipe_data = await response.json();
+      const recipe_data = await post('recipes/search', search_criteria);
       setRecipes(recipe_data.recipes);
     } catch (error) {
       setError(`HTTP error! Status: ${error}`)
@@ -115,14 +107,13 @@ export default function RecipeList() {
   const fetchRecipes = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch('https://us-central1-grandma-8ed4c.cloudfunctions.net/api/recipes');
-      const recipe_data = await response.json();
+      const recipe_data = await get('recipes');
       setRecipes(recipe_data.recipes);
     } catch (error) {
       setError(`HTTP error! Status: ${error}`)
     }
   }
-  //card animation
+
   const cardAnimation = useTransition(activeRecipes, {
     from: { opacity: 0, transform: "scaleY(0) translateZ(10px)" },
     enter: { opacity: 1, transform: "scaleY(1) translateZ(0px)" },
