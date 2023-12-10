@@ -44,7 +44,7 @@ const router = createBrowserRouter([
   },
   {
     element: <FavoritesPage />,
-    path: '/',
+    path: '/favorites',
     loader: async () => {
       const question_answered = localStorage.getItem('question-answered');
       if (!question_answered) { return redirect('/') }

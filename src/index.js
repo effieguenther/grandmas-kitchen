@@ -1,16 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { FacebookProvider } from 'react-facebook';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { QueryClientProvider, QueryClient } from 'react-query';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+})
+
 root.render(
   <React.StrictMode>
-    <FacebookProvider appId="340415318619128" cookie={true} xfbml={true} version="v13.0" >
+    <QueryClientProvider client={queryClient}>
       <App />
-    </FacebookProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );
 

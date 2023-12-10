@@ -1,11 +1,12 @@
 import { Input, Button, Row, Col } from 'reactstrap';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faHeart } from '@fortawesome/free-solid-svg-icons';
 
 export default function SearchBar({ searchFunction, viewAllFunction }) {
     const [title, setTitle] = useState("");
     const [category, setCategory] = useState(null);
+    const [favorites, setFavorites] = useState(false);
     const categories = ["Appetizers", "Breakfast", "Breads", "Cakes", "Candy", "Casseroles", "Canning", "Cookies", "Desserts", "Drinks", "Fish", "Frosting", "Ice Cream", "Meat", "Pasta", "Pie", "Poultry", "Pudding", "Salads", "Soups", "Vegetables"]; 
 
     const handleSearch = () => {
@@ -40,6 +41,18 @@ export default function SearchBar({ searchFunction, viewAllFunction }) {
               </Input>
         </Col>
         <Col className='search-btns'>
+            <label check className='switch'>
+                <input 
+                    type="checkbox" 
+                    checked={favorites}
+                    onChange={() => { 
+                        setFavorites(!favorites);
+                        console.log(favorites);
+                    }}/>
+                <span class="slider round">
+                    <FontAwesomeIcon icon={faHeart} />
+                </span>
+            </label>
             <Button onClick={handleSearch} className='me-1'>
                 <FontAwesomeIcon icon={faSearch} />
             </Button>

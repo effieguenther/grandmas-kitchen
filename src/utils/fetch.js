@@ -1,12 +1,7 @@
 const baseUrl = 'https://us-central1-grandma-8ed4c.cloudfunctions.net/api/'
 // const baseUrl = 'http://127.0.0.1:5001/grandma-8ed4c/us-central1/api/users/'
 
-const getToken = () => {
-    return localStorage.getItem('token');
-}
-
 export const get = async (path) => {
-    const token = getToken();
     try {
         const response = await fetch(
             baseUrl + path, {
@@ -23,7 +18,6 @@ export const get = async (path) => {
 }
 
 export const post = async (path, body) => {
-    const token = getToken();
     try {
         const response = await fetch(
             baseUrl + path, {
@@ -37,12 +31,11 @@ export const post = async (path, body) => {
             const data = await response.json();
             return data;
     } catch (err) {
-        return err
+        throw new Error (err)
     }
 }
 
 export const put = async (path, body) => {
-    const token = getToken();
     try {
         const response = await fetch(
             baseUrl + path, {

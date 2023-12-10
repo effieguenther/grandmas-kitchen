@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import { Link } from "react-router-dom";
 import '../css/header.css';
 
 export default function Header() {
@@ -9,5 +10,6 @@ export default function Header() {
         <p className='title'>Grandma Sandy's Kitchen</p>
         <FontAwesomeIcon icon={faHeart} size='xs' />
     </div>
+
   )
 }

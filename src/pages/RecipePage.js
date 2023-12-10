@@ -1,19 +1,17 @@
 import { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
 import { post } from '../utils/fetch';
 import RecipeList from '../components/RecipeList';
 import Header from '../components/Header';
 
 export default function RecipePage() {
 
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState({});
+  const { isLoading, isError, data, error } = useQuery('currentUser', () => post('users'));
 
-  const getUser = async () => {
-    let user_response = await post('users');
-    let user = user_response.user || {};
-    setCurrentUser(user);
-  }
-
-  useEffect(() => { getUser() }, [])
+  useEffect(() => { 
+    setCurrentUser(data?.user || {});
+  }, [data])
 
   return (
     <>

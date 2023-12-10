@@ -2,6 +2,7 @@ import { Card, CardTitle, Col, Row, Container, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPrint, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from 'react';
+import { useQueryClient } from 'react-query';
 import '../css/recipe.css';
 import { put } from '../utils/fetch';
 
@@ -13,16 +14,18 @@ export default function Recipe({ recipe, currentUser }) {
     const ingredient_groups = recipe.ingredients || [];
     const id = recipe._id || '';
     const [favorite, setFavorite] = useState(false);
+    const queryClient = useQueryClient();
 
     const addToFavorites = async () => {
         setFavorite(!favorite);
         const response = await put('users/updateFavorites', { favorite: id });
+        //triggers another call to get current user to update favorites list
+        queryClient.invalidateQueries('currentUser');
     }
 
     useEffect(() => {
         const inFavorites = currentUser.favorites.includes(id);
         setFavorite(inFavorites);
-        console.log('current user', currentUser);
     }, [currentUser])
 
     return (
