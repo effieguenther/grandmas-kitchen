@@ -1,21 +1,52 @@
 div.header {
-    text-align: center;
-    font-size: 18px;
-    padding-bottom: 0.3em;
-    padding-top: 1em;
-    /* background-color: rgb(255, 247, 248); */
-    border-bottom: 1px solid rgb(199, 105, 135, 0.75);
-    color: rgb(199, 105, 135);
-  }
-  
-  p.title {
-    font-size: large;
-    display: inline;
-    margin: 0em 0.5em;
-  }
+  text-align: center;
+  align-items: center;
+  font-size: 18px;
+  border-bottom: 1px solid rgb(199, 105, 135, 0.75);
+  color: rgb(199, 105, 135);
+}
 
-  .nav-links a {
-    margin: 0em 0.75em;
-    font-size: small;
-  }
+p.title {
+  font-size: large;
+  display: inline;
+  margin: 0em 0.5em;
+}
+
+.nav-links a {
+  margin: 0em 0.75em;
+  font-size: small;
+}
+
+.title-container {
+  padding: 0.75em 0.25em;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.initial-container {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.dropdown button.toggle {
+  background-color: rgb(255, 247, 248);
+  border: 1px solid rgb(199, 105, 135, 0.75);
+  color: rgb(199, 105, 135);
+  padding: 0.2em 0.7em;
+  border-radius: 5em;
+  cursor: pointer;
+}
+
+button.edit-name {
+  display: flex;
+}
+
+button.edit-name button {
+  margin-left: 1em;
+  padding: 0.1em 0.5em;
+  position: absolute;
+  right: 8px;
+}
   

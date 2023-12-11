@@ -126,7 +126,7 @@ export default function RecipeList({ currentUser }) {
     <Container className='mt-4'>
       <SearchBar searchFunction={search} viewAllFunction={fetchRecipes}/>
         {
-          recipes
+          recipes && recipes?.length !== 0
           ? (<p className='search-results'>{activeIndex + 1} of {recipes.length} (use arrow keys or swipe)</p>)
           : (<p className='search-results'>no results</p>)
         }
