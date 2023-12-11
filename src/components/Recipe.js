@@ -1,10 +1,13 @@
 import { Card, CardTitle, Col, Row, Container, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPrint, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faComment } from '@fortawesome/free-regular-svg-icons';
 import { useState, useEffect } from 'react';
 import { useQueryClient } from 'react-query';
 import '../css/recipe.css';
 import { put } from '../utils/fetch';
+import CommentModal from './CommentModal';
+import CommentList from './CommentList';
 
 export default function Recipe({ recipe, currentUser }) {
     const title = recipe.title ? recipe.title.toUpperCase() : '';
@@ -14,6 +17,7 @@ export default function Recipe({ recipe, currentUser }) {
     const ingredient_groups = recipe.ingredients || [];
     const id = recipe._id || '';
     const [favorite, setFavorite] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
     const queryClient = useQueryClient();
 
     const addToFavorites = async () => {
@@ -23,21 +27,30 @@ export default function Recipe({ recipe, currentUser }) {
         queryClient.invalidateQueries('currentUser');
     }
 
+    const addComment = async () => {
+        // const response = await post('comments', {} );
+        // queryClient.invalidateQueries('comments')
+    }
+
     useEffect(() => {
         const inFavorites = currentUser.favorites.includes(id);
         setFavorite(inFavorites);
     }, [currentUser])
 
     return (
+        <>
         <Card className='recipe-card'>
             <CardTitle>
                 <Row>
-                    <Col xs='8'>
+                    <Col xs='6' sm='7' md='8' lg='9' xl='10'>
                         {title}
                     </Col>
                     <Col className='print-btn'>
                         <Button className={favorite ? 'favorite' : ''} onClick={addToFavorites}>
                             <FontAwesomeIcon icon={faHeart} />
+                        </Button>
+                        <Button onClick={() => setIsOpen(true)}>
+                            <FontAwesomeIcon icon={faComment} />
                         </Button>
                         <Button>
                             <FontAwesomeIcon icon={faPrint} />
@@ -91,6 +104,9 @@ export default function Recipe({ recipe, currentUser }) {
                     </Col>
                 </Row>
             </Container>
+            <CommentModal userId={currentUser._id} recipeId={id} isOpen={isOpen} setIsOpen={setIsOpen}/>
         </Card>
+        <CommentList recipeId={id} />
+        </>
   )
 }

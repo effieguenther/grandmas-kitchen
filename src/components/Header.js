@@ -41,7 +41,7 @@ export default function Header({ currentUser }) {
   return (
     <Container fluid >
       <Row className='header'>
-        <Col className='title-container'>
+        <Col className='title-container' xs='9'>
           <FontAwesomeIcon icon={faHeart} size='xs' />
           <p className='title'>Grandma Sandy's Kitchen</p>
           <FontAwesomeIcon icon={faHeart} size='xs' />

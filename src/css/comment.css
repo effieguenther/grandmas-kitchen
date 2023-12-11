@@ -1,0 +1,53 @@
+div.comment-list {
+    padding-bottom: 5em;
+}
+
+p.comment-title {
+    text-align: center;
+    margin-top: 4em;
+}
+
+div.comment {
+    background-color: rgb(255, 253, 250);
+    padding: 1em;
+    margin-bottom: 0.75em;    
+    box-shadow: 0px 5px 15px #d7d7d7;
+}
+
+div.comment-header {
+    display: flex;
+    justify-content: end;
+    font-size: small;
+    color: rgb(67, 128, 181)
+}
+
+div.comment-header p {
+    margin-bottom: 0.5em;
+}
+
+.comment hr {
+    margin-top: 0;
+    margin-bottom: 1em;
+}
+
+p.comment-name {
+    margin-right: 0.25em;
+}
+
+p.comment-date {
+    margin-left: 0.25em;
+}
+
+p.comment-text {
+    margin-left: 0.75em;
+}
+
+p.no-comments {
+    text-align: center;
+    margin-top: 2em;
+    font-style: italic;
+    color: #cdcdcd;
+    box-shadow: 0px 2px 15px #e7e7e7;
+    padding: 2em;
+    border-radius: 1em;
+}
