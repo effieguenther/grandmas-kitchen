@@ -7,11 +7,11 @@ import '../../css/comment.css';
 
 export default function CommentList({ recipeId, currentUserId }) {
     const [comments, setComments] = useState(null)
-    const { isLoading, isError, data, error } = useQuery(['comments', recipeId], () => post(`recipes/comments/${recipeId}`), { staleTime: 0 });
+    const { isLoading, isError, data, error } = useQuery(['comments', recipeId], () => post(`recipes/comments/${recipeId}`));
 
     useEffect(() => {
         if (data?.comments) {
-            setComments(data?.comments);
+            setComments(data.comments);
         }
     }, [data])
 
@@ -21,7 +21,6 @@ export default function CommentList({ recipeId, currentUserId }) {
     ? (<p>{error}</p>)
     : (
         <div className='comment-list'>
-            <p className='comment-title'>Comments</p>
             <hr className='mb-4'/>
             {
                 comments && (comments.length !== 0)

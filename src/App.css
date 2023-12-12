@@ -14,7 +14,17 @@ span.bold {
   font-size: x-large;
   text-align: center;
   margin-top: 5em;
-  color: rgb(199, 105, 135);
+  color: rgb(241, 87, 87);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading svg {
+  background-color: #fff;
+  padding: 0.5em;
+  border-radius: 5em;
+  margin-bottom: 5em;
 }
 
 @font-face {

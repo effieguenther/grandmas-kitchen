@@ -4,6 +4,7 @@ import { post } from '../utils/fetch';
 import RecipeList from '../components/RecipeList';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
+import '../css/recipe-page.css';
 
 export default function RecipePage() {
 
@@ -19,9 +20,9 @@ export default function RecipePage() {
   : isError
   ? (<p>{error}</p>)
   : (
-    <>
+    <div className='recipe-page-container'>
         <Header currentUser={currentUser} />
         <RecipeList currentUser={currentUser} />
-    </>
+    </div>
   )
 }

@@ -4,6 +4,14 @@ div.search-bar {
   margin-bottom: 2em;
 }
 
+div.search-input input {
+  border: 1px solid #a7a7a7;
+}
+
+div.search-input select {
+  border: 1px solid #a7a7a7;
+}
+
 div.search-input {
   padding-left: 0.5em;
   padding-right: 0.5em;
@@ -17,15 +25,10 @@ div.search-btns {
     padding-top: 1em;
 }
 
-div.search-btns input, label {
-  margin-right: 0.5em;
-  color: rgb(199, 105, 135);
-}
-
 div.search-btns button {
   background-color: rgb(255, 247, 248);
-  color: rgb(199, 105, 135);
-  border: 1px solid rgb(199, 105, 135, 0.75);
+  color: rgb(241, 87, 87);
+  border: 1px solid rgb(241, 87, 87);
   text-wrap: nowrap;
 }
 
@@ -36,17 +39,22 @@ div.search-btns button:hover {
 }
 
 p.search-results {
+  display: none;
   text-align: center;
   font-style: italic;
-  color: rgb(144, 186, 222);
+  color: #000;
 }
 
-/* The switch - the box around the slider */
+/* The switch - the bkg behind the slider */
 .switch {
   position: relative;
   display: inline-block;
   width: 60px;
   height: 34px;
+  margin-right: 0.5em;
+  /* background-color: #fff;
+  border-radius: 1em; */
+  color: rgb(241, 87, 87);
 }
 
 /* Hide default HTML checkbox */
@@ -64,7 +72,9 @@ p.search-results {
   left: 0;
   right: 0;
   bottom: 0;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #d1d1d1;
+  box-shadow: 0 0 4px 2px rgb(191, 208, 224);
+  background-color: #fff;
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -77,7 +87,7 @@ p.search-results {
   width: 26px;
   left: 4px;
   bottom: 3px;
-  background-color: #eaeaea;
+  background-color: #d1d1d1;
   -webkit-transition: .4s;
   transition: .4s;
 }

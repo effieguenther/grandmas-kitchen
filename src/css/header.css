@@ -2,8 +2,9 @@ div.header {
   text-align: center;
   align-items: center;
   font-size: 18px;
-  border-bottom: 1px solid rgb(199, 105, 135, 0.75);
-  color: rgb(199, 105, 135);
+  border-bottom: 1px solid #000;
+  color: #000;
+  background-color: #fff;
 }
 
 p.title {
@@ -32,8 +33,8 @@ p.title {
 
 .dropdown button.toggle {
   background-color: rgb(255, 247, 248);
-  border: 1px solid rgb(199, 105, 135, 0.75);
-  color: rgb(199, 105, 135);
+  border: 1px solid rgb(241, 87, 87);
+  color: rgb(241, 87, 87);
   padding: 0.2em 0.7em;
   border-radius: 5em;
   cursor: pointer;
