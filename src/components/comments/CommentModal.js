@@ -7,7 +7,7 @@ import {
     ModalFooter } from 'reactstrap';
 import { useState } from 'react';
 import { useQueryClient } from 'react-query';
-import { post } from '../utils/fetch';
+import { post } from '../../utils/fetch';
 
 export default function CommentModal({ userId, recipeId, setIsOpen, isOpen }) {
     const [text, setText] = useState('');

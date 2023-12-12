@@ -6,8 +6,8 @@ import { useState, useEffect } from 'react';
 import { useQueryClient } from 'react-query';
 import '../css/recipe.css';
 import { put } from '../utils/fetch';
-import CommentModal from './CommentModal';
-import CommentList from './CommentList';
+import CommentModal from './comments/CommentModal';
+import CommentList from './comments/CommentList';
 
 export default function Recipe({ recipe, currentUser }) {
     const title = recipe.title ? recipe.title.toUpperCase() : '';
@@ -18,19 +18,20 @@ export default function Recipe({ recipe, currentUser }) {
     const id = recipe._id || '';
     const [favorite, setFavorite] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const [favIsLoading, setFavIsLoading] = useState(false);
     const queryClient = useQueryClient();
 
     const addToFavorites = async () => {
-        setFavorite(!favorite);
+        setFavIsLoading(true);
         const response = await put('users/updateFavorites', { favorite: id });
         //triggers another call to get current user to update favorites list
         queryClient.invalidateQueries('currentUser');
+        setFavorite(!favorite);
     }
 
-    const addComment = async () => {
-        // const response = await post('comments', {} );
-        // queryClient.invalidateQueries('comments')
-    }
+    useEffect(() => {
+        setFavIsLoading(false);
+    }, [favorite])
 
     useEffect(() => {
         const inFavorites = currentUser.favorites.includes(id);
@@ -45,10 +46,20 @@ export default function Recipe({ recipe, currentUser }) {
                     <Col xs='6' sm='7' md='8' lg='9' xl='10'>
                         {title}
                     </Col>
-                    <Col className='print-btn'>
-                        <Button className={favorite ? 'favorite' : ''} onClick={addToFavorites}>
-                            <FontAwesomeIcon icon={faHeart} />
-                        </Button>
+                    <Col className='recipe-btns'>
+                        {
+                            favIsLoading
+                            ? (
+                                <Button disabled className={favorite ? 'favorite' : ''}>
+                                    <FontAwesomeIcon icon={faHeart} beat className="loader" />
+                                </Button>
+                            )
+                            : (
+                                <Button className={favorite ? 'favorite' : ''} onClick={addToFavorites}>
+                                    <FontAwesomeIcon icon={faHeart} />
+                                </Button>
+                            )
+                        }
                         <Button onClick={() => setIsOpen(true)}>
                             <FontAwesomeIcon icon={faComment} />
                         </Button>
@@ -106,7 +117,7 @@ export default function Recipe({ recipe, currentUser }) {
             </Container>
             <CommentModal userId={currentUser._id} recipeId={id} isOpen={isOpen} setIsOpen={setIsOpen}/>
         </Card>
-        <CommentList recipeId={id} />
+        <CommentList recipeId={id} currentUserId={currentUser._id}/>
         </>
   )
 }

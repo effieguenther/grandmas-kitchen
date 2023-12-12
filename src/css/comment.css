@@ -5,10 +5,11 @@ div.comment-list {
 p.comment-title {
     text-align: center;
     margin-top: 4em;
+    color: rgb(199, 105, 135);
 }
 
 div.comment {
-    background-color: rgb(255, 253, 250);
+    background-color: rgb(255, 247, 248);
     padding: 1em;
     margin-bottom: 0.75em;    
     box-shadow: 0px 5px 15px #d7d7d7;
@@ -18,16 +19,18 @@ div.comment-header {
     display: flex;
     justify-content: end;
     font-size: small;
-    color: rgb(67, 128, 181)
+    color: rgb(199, 105, 135, 0.75);
 }
 
 div.comment-header p {
-    margin-bottom: 0.5em;
+    margin-bottom: 0;
+    font-style: italic;
 }
 
 .comment hr {
     margin-top: 0;
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
+    color: rgb(199, 105, 135);
 }
 
 p.comment-name {
@@ -39,7 +42,9 @@ p.comment-date {
 }
 
 p.comment-text {
-    margin-left: 0.75em;
+    color: rgb(199, 105, 135);
+    padding-top: 0.5em;
+    padding-left: 0.5em;
 }
 
 p.no-comments {
@@ -50,4 +55,25 @@ p.no-comments {
     box-shadow: 0px 2px 15px #e7e7e7;
     padding: 2em;
     border-radius: 1em;
+}
+
+div.edit-btns {
+    flex: 1;
+    align-self: start;
+    margin-left: 0.5em;
+}
+
+div.edit-btns button {
+    padding: 0.1em 0.4em;
+    margin-right: 0.25em;
+    background-color: rgb(255, 247, 248);
+    color: rgb(231, 167, 188);
+    border: 1px solid rgb(231, 167, 188);
+
+}
+
+div.edit-btns button:hover {
+    background-color: rgb(240, 209, 213);
+    color: rgb(205, 128, 154);
+    border: 1px solid rgb(231, 167, 188); 
 }

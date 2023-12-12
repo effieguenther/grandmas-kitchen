@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react"
 import { useQuery } from "react-query";
-import { post } from "../utils/fetch"
-import Loading from './Loading';
+import { post } from "../../utils/fetch"
+import Loading from '../Loading';
 import Comment from './Comment';
-import '../css/comment.css';
+import '../../css/comment.css';
 
-export default function CommentList({ recipeId }) {
+export default function CommentList({ recipeId, currentUserId }) {
     const [comments, setComments] = useState(null)
-    const [stateLoading, setStateLoading] = useState(true);
     const { isLoading, isError, data, error } = useQuery(['comments', recipeId], () => post(`recipes/comments/${recipeId}`), { staleTime: 0 });
 
     useEffect(() => {
@@ -16,12 +15,8 @@ export default function CommentList({ recipeId }) {
         }
     }, [data])
 
-    useEffect(() => {
-        console.log(isLoading);
-        setStateLoading(isLoading);
-    }, [isLoading])
-
-    return stateLoading ? (<Loading />)
+    return isLoading 
+    ? (<Loading />)
     : isError
     ? (<p>{error}</p>)
     : (
@@ -31,7 +26,7 @@ export default function CommentList({ recipeId }) {
             {
                 comments && (comments.length !== 0)
                 ? (comments.map((comment, idx) => (
-                    <Comment comment={comment} key={idx} />
+                    <Comment comment={comment} currentUserId={currentUserId} recipeId={recipeId} key={idx} />
                 )))
                 : (<p className='no-comments'>no comments</p>)
             }
