@@ -2,6 +2,14 @@
   font-family: 'Sandy-Daniel';
 }
 
+@font-face {
+  font-family: 'Sandy-Daniel';
+  src: url('./font/Sandy-Daniel.woff') format('woff'),
+      url('./font/Sandy-Daniel.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   height: 100%;
 }
@@ -14,23 +22,100 @@ span.bold {
   font-size: x-large;
   text-align: center;
   margin-top: 5em;
-  color: rgb(241, 87, 87);
+  color: rgb(226, 135, 135);
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-bottom: 5em;
 }
 
 .loading svg {
   background-color: #fff;
   padding: 0.5em;
   border-radius: 5em;
-  margin-bottom: 5em;
 }
 
-@font-face {
-  font-family: 'Sandy-Daniel';
-  src: url('./font/Sandy-Daniel.woff') format('woff'),
-      url('./font/Sandy-Daniel.ttf') format('ttf');
-  font-weight: normal;
-  font-style: normal;
+/* ================== BUTTONS ================== */
+
+/* pink */
+
+button.pink-btn {
+  padding: 0.35em 0.75em;
+  border-radius: 0.25em;
+  background-color: rgb(255, 247, 248);
+  border: 1px solid rgb(241, 87, 87);
+  color: rgb(241, 87, 87);
+  transition: all 0.5s;
+}
+
+button.pink-btn:hover {
+  background-color: rgb(255, 224, 224);
+  border: 1px solid rgb(227, 45, 45);
+  color: rgb(227, 45, 45);
+}
+
+button.pink-btn:active {
+  background-color: rgb(255, 224, 224);
+  border: 1px solid rgb(227, 45, 45);
+  color: rgb(227, 45, 45);
+  box-shadow: 0 0 0 2px rgb(227, 45, 45);
+}
+
+button.pink-btn:disabled {
+  background-color: rgb(255, 224, 224);
+  border: 1px solid rgb(227, 45, 45);
+  color: rgb(227, 45, 45);
+}
+
+/* blue */
+
+button.blue-btn {
+  padding: 0.35em 0.75em;
+  border-radius: 0.25em;
+  background-color: transparent;
+  color: rgb(122, 171, 214);
+  border: 1px solid rgb(122, 171, 214);
+  transition: all 0.5s;
+}
+
+button.blue-btn:hover {
+  background-color: rgba(112, 112, 112, 0.1);
+  color: rgb(116, 158, 194);
+  border: 1px solid rgb(116, 158, 194);
+}
+
+button.blue-btn:active {
+  background-color: rgba(112, 112, 112, 0.1);
+  color: rgb(116, 158, 194);
+  border: 1px solid rgb(116, 158, 194);
+  box-shadow: 0 0 0 2px rgb(116, 158, 194);
+}
+
+button.blue-btn:disabled {
+  background-color: rgba(112, 112, 112, 0.1);
+  color: rgb(116, 158, 194);
+  border: 1px solid rgb(116, 158, 194); 
+}
+
+/* grey */
+
+button.grey-btn {
+  padding: 0.35em 0.75em;
+  border-radius: 0.25em;
+  color: grey;
+  background-color: white;
+  border: 1px solid grey;
+}
+
+button.grey-btn:hover {
+  color: rgb(45, 45, 45);;
+  background-color: rgb(202, 202, 202);
+  border: 1px solid rgb(45, 45, 45);
+}
+
+button.grey-btn:active {
+  color: rgb(45, 45, 45);;
+  background-color: rgb(202, 202, 202);
+  border: 1px solid rgb(45, 45, 45);
+  box-shadow: 0 0 0 2px rgb(45, 45, 45);
 }

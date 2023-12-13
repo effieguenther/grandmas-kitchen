@@ -8,29 +8,35 @@ import {
 import { useState } from 'react';
 import { useQueryClient } from 'react-query';
 import { post } from '../../utils/fetch';
+import Loading from '../Loading';
 
 export default function CommentModal({ userId, recipeId, setIsOpen, isOpen }) {
     const [text, setText] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
     const queryClient = useQueryClient();
 
     const handleSave = async () => {
-        try {
-            const response = await post('comments', {
-                authorId: userId,
-                recipeId: recipeId,
-                text: text
-            });
-            if (response.success) {
-                queryClient.invalidateQueries(['comments', recipeId]);
-                toggle()
-                console.log('comment posted!')
-            } else {
-                console.log('comment not posted :(')
-            }
-        } catch (err) {
-            console.error(err);
-        }
+      setIsLoading(true);
+      try {
+          const response = await post('comments', {
+              authorId: userId,
+              recipeId: recipeId,
+              text: text
+          });
+          if (response.success) {
+              queryClient.invalidateQueries(['comments', recipeId]);
+              toggle()
+              console.log('comment posted!')
+              setIsLoading(false);
+          } else {
+              console.log('comment not posted :(')
+              setIsLoading(false);
+          }
+      } catch (err) {
+          console.error(err);
+          setIsLoading(false);
+      }
     }
 
     return (
@@ -41,11 +47,17 @@ export default function CommentModal({ userId, recipeId, setIsOpen, isOpen }) {
             value={text}
             onChange={(e) => { setText(e.target.value) }}
           />
+          {
+            isLoading
+            ? (<Loading />)
+            : (
+              <div className='yes-no-btns'>
+                <Button onClick={handleSave} className='pink-btn'>Save</Button>
+                <Button onClick={toggle} className='grey-btn'>Cancel</Button>
+              </div>
+            )
+          }
         </ModalBody>
-        <ModalFooter>
-          <Button onClick={handleSave}>Save</Button>
-          <Button onClick={toggle}>Cancel</Button>
-        </ModalFooter>
       </Modal>
     )
   }

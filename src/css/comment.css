@@ -68,16 +68,5 @@ div.edit-btns {
 }
 
 div.edit-btns button {
-    padding: 0.1em 0.4em;
     margin-right: 0.25em;
-    background-color: rgb(255, 247, 248);
-    color: rgb(241, 87, 87);
-    border: 1px solid rgb(241, 87, 87);
-
-}
-
-div.edit-btns button:hover {
-    background-color: rgb(240, 209, 213);
-    color: rgb(205, 128, 154);
-    border: 1px solid rgb(231, 167, 188); 
 }

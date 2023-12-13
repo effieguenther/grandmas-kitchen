@@ -35,30 +35,8 @@ div.recipe-card {
   }
   
   div.recipe-btns button {
-    margin-right: 0.25em;
-    background-color: rgb(247, 243, 237);
-    color: rgb(144, 186, 222);
-    border: 1px solid rgb(144, 186, 222);
-    padding: 0.3em 0.6em;
-    transition: all 0.5s;
-  }
-
-  div.recipe-btns button.favorite {
-    color: rgb(247, 237, 237);
-    border: 1px solid rgb(241, 87, 87);
-    background-color: rgb(241, 87, 87);
-  }
-
-  div.recipe-btns button.favorite:hover {
-    color: rgb(247, 237, 237);
-    border: 1px solid rgb(255, 147, 147);
-    background-color: rgb(255, 147, 147);
-  }
-  
-  div.recipe-btns button:hover {
-    background-color: rgb(240, 235, 227);
-    color: rgb(116, 158, 194);
-    border: 1px solid rgb(116, 158, 194);
+    margin-right: 0.3em;
+    font-size: 17px;
   }
   
   div.recipe-card hr {

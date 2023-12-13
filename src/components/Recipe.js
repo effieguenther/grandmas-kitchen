@@ -1,4 +1,4 @@
-import { Card, CardTitle, Col, Row, Container, Button } from 'reactstrap';
+import { Card, CardTitle, Col, Row, Container } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPrint, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faComment } from '@fortawesome/free-regular-svg-icons';
@@ -47,25 +47,25 @@ export default function Recipe({ recipe, currentUser }) {
                         {title}
                     </Col>
                     <Col className='recipe-btns'>
+                        <button className='blue-btn'>
+                            <FontAwesomeIcon icon={faPrint} />
+                        </button>
+                        <button onClick={() => setIsOpen(true)} className='blue-btn'>
+                            <FontAwesomeIcon icon={faComment} />
+                        </button>
                         {
                             favIsLoading
                             ? (
-                                <Button disabled className={favorite ? 'favorite' : ''}>
+                                <button disabled className={favorite ? 'pink-btn' : 'blue-btn'}>
                                     <FontAwesomeIcon icon={faHeart} beat className="loader" />
-                                </Button>
+                                </button>
                             )
                             : (
-                                <Button className={favorite ? 'favorite' : ''} onClick={addToFavorites}>
+                                <button className={favorite ? 'pink-btn' : 'blue-btn'} onClick={addToFavorites}>
                                     <FontAwesomeIcon icon={faHeart} />
-                                </Button>
+                                </button>
                             )
                         }
-                        <Button onClick={() => setIsOpen(true)}>
-                            <FontAwesomeIcon icon={faComment} />
-                        </Button>
-                        <Button>
-                            <FontAwesomeIcon icon={faPrint} />
-                        </Button>
                     </Col>
                 </Row>
                 <div className='subtitle'>

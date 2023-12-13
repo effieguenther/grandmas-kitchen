@@ -78,8 +78,7 @@ DisplayNameModal
 
 ### TO DO
 
-- add loading indicators to modals
-- add error indicators to all API calls
+- add error/success indicators to all API calls
     - search recipes
     - change display name
     - add comment

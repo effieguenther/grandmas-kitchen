@@ -1,7 +1,5 @@
 import { Button } from "reactstrap";
 import { useTransition, animated, easings } from "@react-spring/web";
-import { useEffect } from "react";
-import { post, put } from '../utils/fetch';
 import '../css/login-page.css';
 
 export default function LoginPage() {

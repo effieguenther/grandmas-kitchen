@@ -1,4 +1,4 @@
-import { Card, Button } from 'reactstrap';
+import { Card } from 'reactstrap';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
@@ -33,12 +33,14 @@ export default function Comment({ comment, currentUserId, recipeId }) {
                     currentUserId === authorId &&
                     (
                         <div className='edit-btns'>
-                            <Button onClick={() => setEditIsOpen(true)}>
-                                <FontAwesomeIcon icon={faPenToSquare} size='sm' />
-                            </Button>
-                            <Button onClick={() => setDeleteIsOpen(true)}>
-                                <FontAwesomeIcon icon={faTrashCan} size='sm' />
-                            </Button>
+                            <button onClick={() => setEditIsOpen(true)} className='pink-btn'>
+                                <FontAwesomeIcon icon={faPenToSquare} size='sm' className='me-1' />
+                                Edit
+                            </button>
+                            <button onClick={() => setDeleteIsOpen(true)} className='pink-btn'>
+                                <FontAwesomeIcon icon={faTrashCan} size='sm' className='me-1' />
+                                Delete
+                            </button>
                         </div>
                     )
 

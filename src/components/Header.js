@@ -40,13 +40,13 @@ export default function Header({ currentUser }) {
 
   return (
     <Container fluid >
-      <Row className='header'>
-        <Col className='title-container' xs='9'>
-          <FontAwesomeIcon icon={faHeart} size='xs' />
-          <p className='title'>Grandma Sandy's Kitchen</p>
-          <FontAwesomeIcon icon={faHeart} size='xs' />
-        </Col>
-        <Col className='initial-container'>
+      <Row>
+        <div className='header'>
+          <div className='title-container'>
+            <FontAwesomeIcon icon={faHeart} size='xs' />
+            <p className='title'>Grandma Sandy's Kitchen</p>
+            <FontAwesomeIcon icon={faHeart} size='xs' />
+          </div>
           <Dropdown isOpen={dropdownIsOpen} toggle={() => setDropdownIsOpen(!dropdownIsOpen)}>
             <DropdownToggle className='toggle'>{initial}</DropdownToggle>
             <DropdownMenu>
@@ -56,7 +56,7 @@ export default function Header({ currentUser }) {
               <DropdownItem onClick={logout}>logout</DropdownItem>
             </DropdownMenu>
           </Dropdown>
-        </Col>
+          </div>
       </Row>
       <Row>
         <div className='instructions'>

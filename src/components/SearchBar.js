@@ -53,9 +53,10 @@ export default function SearchBar({ searchFunction, viewAllFunction }) {
                     <FontAwesomeIcon icon={faHeart} />
                 </span>
             </label>
-            <Button onClick={handleSearch} className='me-1'>
-                <FontAwesomeIcon icon={faSearch} />
-            </Button>
+            <button onClick={handleSearch} className='me-1 pink-btn'>
+                <FontAwesomeIcon icon={faSearch} className='me-2'/>
+                Search
+            </button>
         </Col>
       </Row>
     )

@@ -1,16 +1,16 @@
 import {
-    Button,
     Input,
     Modal,
     ModalHeader,
-    ModalBody,
-    ModalFooter } from 'reactstrap';
+    ModalBody } from 'reactstrap';
 import { useState, useEffect } from 'react';
 import { useQueryClient } from 'react-query';
 import { put } from '../utils/fetch';
+import Loading from './Loading';
 
 export default function DisplayNameModal({ name, setIsOpen, isOpen }) {
     const [newName, setNewName] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
     const queryClient = useQueryClient();
 
@@ -21,17 +21,21 @@ export default function DisplayNameModal({ name, setIsOpen, isOpen }) {
       }, [name]) 
 
     const handleSave = async () => {
+        setIsLoading(true);
         try {
             const response = await put('users/changeDisplayName', { name: newName });
             if (response.success) {
                 queryClient.invalidateQueries('currentUser');
                 toggle()
                 console.log('name updated!')
+                setIsLoading(false);
             } else {
                 console.log('name not updated :(')
+                setIsLoading(false);
             }
         } catch (err) {
             console.error(err);
+            setIsLoading(false);
         }
     }
 
@@ -43,11 +47,17 @@ export default function DisplayNameModal({ name, setIsOpen, isOpen }) {
             value={newName}
             onChange={(e) => { setNewName(e.target.value) }}
           />
+          {
+            isLoading
+            ? (<Loading />)
+            : (
+              <div className='yes-no-btns'>
+                <button onClick={handleSave} className='pink-btn'>Save</button>
+                <button onClick={toggle} className='grey-btn'>Cancel</button>
+              </div>
+            )
+          }
         </ModalBody>
-        <ModalFooter>
-          <Button onClick={handleSave}>Save</Button>
-          <Button onClick={toggle}>Cancel</Button>
-        </ModalFooter>
       </Modal>
     )
   }
