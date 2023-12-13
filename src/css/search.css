@@ -39,10 +39,13 @@ div.search-btns button:hover {
 }
 
 p.search-results {
-  display: none;
   text-align: center;
   font-style: italic;
   color: #000;
+  padding: 0.25em 0;
+  border-radius: 0.5em;
+  background-color: rgba(255, 255, 255, 0.75);
+  color: rgb(80, 145, 178);
 }
 
 /* The switch - the bkg behind the slider */

@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { post } from '../utils/fetch';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import { faHeart, faLightbulb } from '@fortawesome/free-regular-svg-icons';
 import DisplayNameModal from './DisplayNameModal';
 import '../css/header.css';
 
@@ -57,6 +57,12 @@ export default function Header({ currentUser }) {
             </DropdownMenu>
           </Dropdown>
         </Col>
+      </Row>
+      <Row>
+        <div className='instructions'>
+          <FontAwesomeIcon icon={faLightbulb} />
+          <p>Use arrow keys or swipe to navigate</p>
+        </div>
       </Row>
       <DisplayNameModal name={name} setIsOpen={setModalIsOpen} isOpen={modalIsOpen} />
     </Container>

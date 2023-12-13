@@ -115,9 +115,9 @@ export default function RecipeList({ currentUser }) {
   }
 
   const cardAnimation = useTransition(activeRecipes, {
-    from: { opacity: 0, transform: "scaleY(0) translateZ(10px)" },
-    enter: { opacity: 1, transform: "scaleY(1) translateZ(0px)" },
-    leave: { opacity: 0, transform: "scaleY(0) translateZ(10px)" },
+    from: { opacity: 0, transform: "scaleX(0) translateZ(10px)" },
+    enter: { opacity: 1, transform: "scaleX(1) translateZ(0px)" },
+    leave: { opacity: 0, transform: "scaleX(0) translateZ(10px)" },
     exitBeforeEnter: true,
     config: { duration: 200 }
   });
@@ -127,7 +127,7 @@ export default function RecipeList({ currentUser }) {
       <SearchBar searchFunction={search} viewAllFunction={fetchRecipes}/>
         {
           recipes && recipes?.length !== 0
-          ? (<p className='search-results'>{activeIndex + 1} of {recipes.length} (use arrow keys or swipe)</p>)
+          ? (<p className='search-results'>{activeIndex + 1} of {recipes.length}</p>)
           : (<p className='search-results'>no results</p>)
         }
         {

@@ -3,11 +3,10 @@ import {
   redirect,
   RouterProvider
 } from 'react-router-dom';
-import { get, post } from './utils/fetch';
+import { post } from './utils/fetch';
 import LandingPage from './pages/LandingPage';
 import RecipePage from './pages/RecipePage';
 import LoginPage from './pages/LoginPage';
-import FavoritesPage from './pages/FavoritesPage';
 import './App.css';
 
 const router = createBrowserRouter([
@@ -42,17 +41,17 @@ const router = createBrowserRouter([
       return null;
     }
   },
-  {
-    element: <FavoritesPage />,
-    path: '/favorites',
-    loader: async () => {
-      const question_answered = localStorage.getItem('question-answered');
-      if (!question_answered) { return redirect('/') }
-      const verifyUser = await post('users/verify');
-      if (!verifyUser.success) { return redirect('/login') }
-      return null;
-    }
-  }
+  // {
+  //   element: <FavoritesPage />,
+  //   path: '/favorites',
+  //   loader: async () => {
+  //     const question_answered = localStorage.getItem('question-answered');
+  //     if (!question_answered) { return redirect('/') }
+  //     const verifyUser = await post('users/verify');
+  //     if (!verifyUser.success) { return redirect('/login') }
+  //     return null;
+  //   }
+  // }
 ]);
 
 function App() {

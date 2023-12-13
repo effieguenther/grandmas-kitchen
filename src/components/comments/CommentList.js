@@ -21,7 +21,7 @@ export default function CommentList({ recipeId, currentUserId }) {
     ? (<p>{error}</p>)
     : (
         <div className='comment-list'>
-            <hr className='mb-4'/>
+            <p className='comment-section-header'>Comments</p>
             {
                 comments && (comments.length !== 0)
                 ? (comments.map((comment, idx) => (

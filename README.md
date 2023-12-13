@@ -59,8 +59,33 @@ When building this I had a few main goals in mind
 - fetches comments for the recipe on mount
     - unique Query for each recipe from react-query
     - using react-query cache data, the user can quickly flip back and forth through the recipes without waiting for a reload each time
-- fetched comments are stored in the comments array, which is mapped into Comment components
+- fetched comments are stored in the comments array, which is mapped into Comment componen
 
 (Comment)[./components/comments/Comment.js]
 - receives the comment object, currentUserId, and recipeId from CommentList
-- 
+
+CommentModal
+- in design
+
+DeleteCommentModal
+- in design
+
+EditCommentModal
+- in design
+
+DisplayNameModal
+- in design
+
+### TO DO
+
+- add loading indicators to modals
+- add error indicators to all API calls
+    - search recipes
+    - change display name
+    - add comment
+    - add favorite
+    - edit comment
+    - delete comment
+    - log in?
+- general user testing + debugging
+- search function execute on 'enter' key
