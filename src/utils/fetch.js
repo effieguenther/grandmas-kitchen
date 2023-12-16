@@ -17,7 +17,7 @@ export const get = async (path) => {
     }
 }
 
-export const post = async (path, body) => {
+export const post = async (path, body, responseType = 'json') => {
     try {
         const response = await fetch(
             baseUrl + path, {
@@ -28,8 +28,14 @@ export const post = async (path, body) => {
                 },
                 body: JSON.stringify(body)
             });
-            const data = await response.json();
-            return data;
+            if (responseType === 'json') {
+                return await response.json();
+              } else if (responseType === 'blob') {
+                console.log('response', response);
+                return await response.blob();
+            } else {
+                throw new Error(`Unsupported response type: ${responseType}`);
+              }
     } catch (err) {
         throw new Error (err)
     }

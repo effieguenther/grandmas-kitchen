@@ -78,6 +78,8 @@ DisplayNameModal
 
 ### TO DO
 
+- guest account setup
+- print generate pdf
 - add error/success indicators to all API calls
     - search recipes
     - change display name

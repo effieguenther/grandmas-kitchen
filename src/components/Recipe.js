@@ -5,7 +5,7 @@ import { faComment } from '@fortawesome/free-regular-svg-icons';
 import { useState, useEffect } from 'react';
 import { useQueryClient } from 'react-query';
 import '../css/recipe.css';
-import { put } from '../utils/fetch';
+import { put, post } from '../utils/fetch';
 import CommentModal from './comments/CommentModal';
 import CommentList from './comments/CommentList';
 
@@ -29,6 +29,18 @@ export default function Recipe({ recipe, currentUser }) {
         setFavorite(!favorite);
     }
 
+    const downloadPdf = async () => {
+        try {
+            const response = await post(`recipes/pdf/${id}`, {}, 'blob');
+            console.log('response blob', response)
+            const pdfBlob = new Blob([response], { type: 'application/pdf' });
+            const pdfUrl = URL.createObjectURL(pdfBlob);
+            window.open(pdfUrl, '_blank');    
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
     useEffect(() => {
         setFavIsLoading(false);
     }, [favorite])
@@ -47,7 +59,7 @@ export default function Recipe({ recipe, currentUser }) {
                         {title}
                     </Col>
                     <Col className='recipe-btns'>
-                        <button className='blue-btn'>
+                        <button onClick={downloadPdf} className='blue-btn'>
                             <FontAwesomeIcon icon={faPrint} />
                         </button>
                         <button onClick={() => setIsOpen(true)} className='blue-btn'>
