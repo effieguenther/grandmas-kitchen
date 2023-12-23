@@ -11,6 +11,7 @@ import Loading from './Loading';
 export default function DisplayNameModal({ name, setIsOpen, isOpen }) {
     const [newName, setNewName] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState('');
     const toggle = () => setIsOpen(!isOpen);
     const queryClient = useQueryClient();
 
@@ -21,20 +22,20 @@ export default function DisplayNameModal({ name, setIsOpen, isOpen }) {
       }, [name]) 
 
     const handleSave = async () => {
+        setError('');
         setIsLoading(true);
         try {
             const response = await put('users/changeDisplayName', { name: newName });
             if (response.success) {
-                queryClient.invalidateQueries('currentUser');
-                toggle()
-                console.log('name updated!')
-                setIsLoading(false);
+              queryClient.invalidateQueries('currentUser');
+              toggle();
+              setIsLoading(false);
             } else {
-                console.log('name not updated :(')
-                setIsLoading(false);
+              setError(response.message + ' :(')
+              setIsLoading(false);
             }
         } catch (err) {
-            console.error(err);
+            setError(err + ' :(');
             setIsLoading(false);
         }
     }
@@ -51,10 +52,17 @@ export default function DisplayNameModal({ name, setIsOpen, isOpen }) {
             isLoading
             ? (<Loading />)
             : (
-              <div className='yes-no-btns'>
-                <button onClick={handleSave} className='pink-btn'>Save</button>
-                <button onClick={toggle} className='grey-btn'>Cancel</button>
-              </div>
+              <>
+                {
+                  error && (
+                    <p className='err-msg'>{error}</p>
+                  )
+                }
+                <div className='yes-no-btns'>
+                  <button onClick={handleSave} className='pink-btn'>Save</button>
+                  <button onClick={toggle} className='grey-btn'>Cancel</button>
+                </div>
+              </>
             )
           }
         </ModalBody>

@@ -14,23 +14,24 @@ export default function DeleteCommentModal({ isOpen, setIsOpen, commentId, recip
   const queryClient = useQueryClient();
   const toggle = () => setIsOpen(!isOpen);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const deleteComment = async () => {
+    setError('');
     setIsLoading(true);
     try {
       const response = await put(`comments/delete/${commentId}`);
       if (response.success) {
-          queryClient.invalidateQueries(['comments', recipeId]);
-          toggle()
-          console.log('comment deleted!')
-          setIsLoading(false);
+        queryClient.invalidateQueries(['comments', recipeId]);
+        toggle()
+        setIsLoading(false);
       } else {
-          console.log('comment not deleted :(')
-          setIsLoading(false);
+        setError(response.message + ' :(')
+        setIsLoading(false);
       }
     } catch (err) {
-        console.error(err);
-        setIsLoading(false);
+      setError(err + ' :(');
+      setIsLoading(false);
     }
   }
 
@@ -44,10 +45,17 @@ export default function DeleteCommentModal({ isOpen, setIsOpen, commentId, recip
               <Loading />
             </div>)
           : (
-            <div className='delete'>
-              <Button onClick={deleteComment} className='pink-btn'>Yes</Button>
-              <Button onClick={toggle} className='grey-btn'>No</Button>
-            </div>
+            <>
+              {
+                error && (
+                  <p className='err-msg'>{error}</p>
+                )
+              }
+              <div className='delete'>
+                <Button onClick={deleteComment} className='pink-btn'>Yes</Button>
+                <Button onClick={toggle} className='grey-btn'>No</Button>
+              </div>
+            </>
           )
         }
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Container } from 'reactstrap';
 import { useTransition, animated } from "@react-spring/web";
-import { get, post } from '../utils/fetch';
+import { post } from '../utils/fetch';
 import Recipe from './Recipe';
 import SearchBar from './SearchBar';
 import Loading from './Loading';
@@ -95,22 +95,14 @@ export default function RecipeList({ currentUser }) {
 
   //search with keywords
   const search = async (search_criteria) => {
+    setError("");
     setIsLoading(true);
     try {
       const recipe_data = await post('recipes/search', search_criteria);
       setRecipes(recipe_data.recipes);
     } catch (error) {
       setError(`HTTP error! Status: ${error}`)
-    }
-  }
-  //fetch all recipes
-  const fetchRecipes = async () => {
-    setIsLoading(true);
-    try {
-      const recipe_data = await get('recipes');
-      setRecipes(recipe_data.recipes);
-    } catch (error) {
-      setError(`HTTP error! Status: ${error}`)
+      setIsLoading(false);
     }
   }
 
@@ -124,7 +116,7 @@ export default function RecipeList({ currentUser }) {
 
   return (
     <Container className='mt-4'>
-      <SearchBar searchFunction={search} viewAllFunction={fetchRecipes}/>
+      <SearchBar searchFunction={search} currentUser={currentUser}/>
         {
           recipes && recipes?.length !== 0
           ? (<p className='search-results'>{activeIndex + 1} of {recipes.length}</p>)

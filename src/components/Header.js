@@ -1,11 +1,11 @@
 import { 
   Row, 
-  Col,
   Container, 
   Dropdown, 
   DropdownItem, 
   DropdownToggle,
   DropdownMenu } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { post } from '../utils/fetch';
@@ -47,16 +47,24 @@ export default function Header({ currentUser }) {
             <p className='title'>Grandma Sandy's Kitchen</p>
             <FontAwesomeIcon icon={faHeart} size='xs' />
           </div>
-          <Dropdown isOpen={dropdownIsOpen} toggle={() => setDropdownIsOpen(!dropdownIsOpen)}>
-            <DropdownToggle className='toggle'>{initial}</DropdownToggle>
-            <DropdownMenu>
-              <DropdownItem className='edit-name' onClick={() => setModalIsOpen(true) }>
-                {name}
-              </DropdownItem>
-              <DropdownItem onClick={logout}>logout</DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
-          </div>
+          {
+            currentUser ? (
+              <Dropdown isOpen={dropdownIsOpen} toggle={() => setDropdownIsOpen(!dropdownIsOpen)}>
+              <DropdownToggle className='toggle'>{initial}</DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem className='edit-name' onClick={() => setModalIsOpen(true) }>
+                  {name}
+                </DropdownItem>
+                <DropdownItem onClick={logout}>logout</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+            ) : (
+              <Link to='/login'>
+                <button className='pink-btn'>Log in</button>
+              </Link>
+            )
+          }
+        </div>
       </Row>
       <Row>
         <div className='instructions'>

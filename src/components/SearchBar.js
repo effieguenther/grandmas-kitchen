@@ -1,9 +1,9 @@
-import { Input, Button, Row, Col } from 'reactstrap';
+import { Input, Row, Col } from 'reactstrap';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faHeart } from '@fortawesome/free-solid-svg-icons';
 
-export default function SearchBar({ searchFunction, viewAllFunction }) {
+export default function SearchBar({ searchFunction, currentUser }) {
     const [title, setTitle] = useState("");
     const [category, setCategory] = useState("");
     const [favorites, setFavorites] = useState(false);
@@ -42,17 +42,21 @@ export default function SearchBar({ searchFunction, viewAllFunction }) {
               </Input>
         </Col>
         <Col className='search-btns'>
-            <label check className='switch'>
-                <input 
-                    type="checkbox" 
-                    checked={favorites}
-                    onChange={() => { 
-                        setFavorites(!favorites);
-                    }}/>
-                <span className="slider round">
-                    <FontAwesomeIcon icon={faHeart} />
-                </span>
-            </label>
+            {
+                currentUser && (
+                    <label check className='switch'>
+                        <input 
+                            type="checkbox" 
+                            checked={favorites}
+                            onChange={() => { 
+                                setFavorites(!favorites);
+                            }}/>
+                        <span className="slider round">
+                            <FontAwesomeIcon icon={faHeart} />
+                        </span>
+                    </label>
+                )
+            }
             <button onClick={handleSearch} className='me-1 pink-btn'>
                 <FontAwesomeIcon icon={faSearch} className='me-2'/>
                 Search

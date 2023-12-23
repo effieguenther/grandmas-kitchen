@@ -22,11 +22,16 @@ export default function Recipe({ recipe, currentUser }) {
     const queryClient = useQueryClient();
 
     const addToFavorites = async () => {
-        setFavIsLoading(true);
-        const response = await put('users/updateFavorites', { favorite: id });
-        //triggers another call to get current user to update favorites list
-        queryClient.invalidateQueries('currentUser');
-        setFavorite(!favorite);
+        try {
+            setFavIsLoading(true);
+            await put('users/updateFavorites', { favorite: id });
+            //triggers another call to get current user to update favorites list
+            queryClient.invalidateQueries('currentUser');
+            setFavorite(!favorite);
+        } catch (err) {
+            console.err(err);
+            setFavIsLoading(false);
+        }
     }
 
     const downloadPdf = async () => {
@@ -46,15 +51,17 @@ export default function Recipe({ recipe, currentUser }) {
     }, [favorite])
 
     useEffect(() => {
-        const inFavorites = currentUser.favorites.includes(id);
-        setFavorite(inFavorites);
-    }, [currentUser])
+        if (currentUser) {
+            const inFavorites = currentUser.favorites.includes(id);
+            setFavorite(inFavorites);
+        }
+    }, [currentUser, id])
 
     return (
         <>
         <Card className='recipe-card'>
             <CardTitle>
-                <Row>
+                <Row className='mb-1'>
                     <Col xs='6' sm='7' md='8' lg='9' xl='10'>
                         {title}
                     </Col>
@@ -62,7 +69,7 @@ export default function Recipe({ recipe, currentUser }) {
                         <button onClick={downloadPdf} className='blue-btn'>
                             <FontAwesomeIcon icon={faPrint} />
                         </button>
-                        <button onClick={() => setIsOpen(true)} className='blue-btn'>
+                        <button onClick={() => setIsOpen(true)} className='blue-btn' disabled={currentUser ? false : true}>
                             <FontAwesomeIcon icon={faComment} />
                         </button>
                         {
@@ -73,7 +80,7 @@ export default function Recipe({ recipe, currentUser }) {
                                 </button>
                             )
                             : (
-                                <button className={favorite ? 'pink-btn' : 'blue-btn'} onClick={addToFavorites}>
+                                <button className={favorite ? 'pink-btn' : 'blue-btn'} onClick={addToFavorites} disabled={currentUser ? false : true}>
                                     <FontAwesomeIcon icon={faHeart} />
                                 </button>
                             )
@@ -127,9 +134,9 @@ export default function Recipe({ recipe, currentUser }) {
                     </Col>
                 </Row>
             </Container>
-            <CommentModal userId={currentUser._id} recipeId={id} isOpen={isOpen} setIsOpen={setIsOpen}/>
+            <CommentModal userId={currentUser?._id} recipeId={id} isOpen={isOpen} setIsOpen={setIsOpen}/>
         </Card>
-        <CommentList recipeId={id} currentUserId={currentUser._id}/>
+        <CommentList recipeId={id} currentUserId={currentUser?._id}/>
         </>
   )
 }

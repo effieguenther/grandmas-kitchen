@@ -24,14 +24,21 @@ div.modal-body {
 
 div.modal-body div.loading {
     margin-top: 1em;
-    margin-right: 2em;
     padding-bottom: 0.5em;
-    justify-content: end;
+    justify-content: center;
 }
 
 div.delete div.loading {
     margin-right: 0;
     margin-top: 0.5em;
+}
+
+p.err-msg {
+    margin-top: 0.5em;
+    margin-bottom: 0em;
+    padding-left: 1em;
+    font-style: italic;
+    color: red;
 }
 
 

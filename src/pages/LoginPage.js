@@ -1,5 +1,6 @@
 import { Button } from "reactstrap";
 import { useTransition, animated, easings } from "@react-spring/web";
+import { Link } from "react-router-dom";
 import '../css/login-page.css';
 
 export default function LoginPage() {
@@ -21,6 +22,9 @@ export default function LoginPage() {
             <animated.div style={style} className='login-pane'>
                 <h2 className='login-text'>Log in</h2>
                 <Button className='login-btn' onClick={handleLogin}>Login with Facebook</Button>
+                <Link to='/recipes' className='continue-as-guest'>
+                    <Button className='continue-as-guest grey-btn'>Continue as guest</Button>
+                </Link>
             </animated.div>
         </div>
     ))

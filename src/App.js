@@ -16,6 +16,8 @@ const router = createBrowserRouter([
     loader: async () => {
       const verifyUser = await post('users/verify');
       if (verifyUser.success) { return redirect('/recipes') }
+      const question_answered = localStorage.getItem('question-answered');
+      if (question_answered) { return redirect('/login') }
       return null;
     }
   },
@@ -23,8 +25,6 @@ const router = createBrowserRouter([
     element: <LoginPage />,
     path: '/login',
     loader: async () => {
-      const question_answered = localStorage.getItem('question-answered');
-      if (!question_answered) { return redirect('/') }
       const verifyUser = await post('users/verify');
       if (verifyUser.success) { return redirect('/recipes') }
       return null;
@@ -36,22 +36,9 @@ const router = createBrowserRouter([
     loader: async () => {
       const question_answered = localStorage.getItem('question-answered');
       if (!question_answered) { return redirect('/') }
-      const verifyUser = await post('users/verify');
-      if (!verifyUser.success) { return redirect('/login') }
       return null;
     }
-  },
-  // {
-  //   element: <FavoritesPage />,
-  //   path: '/favorites',
-  //   loader: async () => {
-  //     const question_answered = localStorage.getItem('question-answered');
-  //     if (!question_answered) { return redirect('/') }
-  //     const verifyUser = await post('users/verify');
-  //     if (!verifyUser.success) { return redirect('/login') }
-  //     return null;
-  //   }
-  // }
+  }
 ]);
 
 function App() {
