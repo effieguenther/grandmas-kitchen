@@ -1,5 +1,6 @@
-const baseUrl = 'https://us-central1-grandma-8ed4c.cloudfunctions.net/api/'
+// const baseUrl = 'https://us-central1-grandma-8ed4c.cloudfunctions.net/api/'
 // const baseUrl = 'http://127.0.0.1:5001/grandma-8ed4c/us-central1/api/users/'
+const baseUrl = 'https://grandma-8ed4c.web.app/api/'
 
 export const get = async (path) => {
     try {
@@ -29,6 +30,7 @@ export const post = async (path, body, responseType = 'json') => {
                 body: JSON.stringify(body)
             });
             if (responseType === 'json') {
+                console.log("response", response);
                 return await response.json();
               } else if (responseType === 'blob') {
                 console.log('response', response);

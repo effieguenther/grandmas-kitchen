@@ -6,7 +6,7 @@ import '../css/login-page.css';
 export default function LoginPage() {
 
     const handleLogin = () => {
-        window.open("https://us-central1-grandma-8ed4c.cloudfunctions.net/api/users/auth/facebook", "_self");
+        window.open("https://grandma-8ed4c.web.app/api/users/auth/facebook", "_self");
     }
 
     const transition = useTransition(true, {
