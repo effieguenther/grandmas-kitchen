@@ -1,0 +1,16 @@
+.error-pane {
+    background-color: white;
+    border-radius: 1em;
+    box-shadow: 0px 5px 15px #d7d7d7;
+    margin-top: 4em;
+    padding: 4em 5em 3em 5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: rgb(241, 87, 87);
+    font-size: large;
+}
+
+a.try-again {
+    font-size: small;
+}

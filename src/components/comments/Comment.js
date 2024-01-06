@@ -14,13 +14,13 @@ export default function Comment({ comment, currentUserId, recipeId }) {
         year: 'numeric',
         month: 'short',
         day: 'numeric',
-
     }
-    const name = comment.authorId.display_name || "";
-    const authorId = comment.authorId._id || "";
-    const commentId = comment._id || "";
-    const text = comment.text || "";
-    let date = comment.createdAt 
+    
+    const name = comment.authorId?.display_name || "";
+    const authorId = comment.authorId?._id || "";
+    const commentId = comment?._id || "";
+    const text = comment?.text || "";
+    let date = comment?.createdAt 
         ? new Date(comment.createdAt).toLocaleString('en-US', dateOptions)
         : "";
 

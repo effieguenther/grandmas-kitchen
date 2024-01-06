@@ -39,7 +39,8 @@ const router = createBrowserRouter([
       const question_answered = localStorage.getItem('question-answered');
       if (!question_answered) { return redirect('/') }
       return null;
-    }
+    },
+    errorElement: <Error />
   }
 ]);
 

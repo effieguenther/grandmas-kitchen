@@ -24,7 +24,7 @@ export default function LoginPage() {
     });
 
     return transition((style, item) => 
-        item && (<div className='login-container'>
+        item && (<div className='background'>
             <animated.div style={style} className='login-pane'>
                 <h2 className='login-text'>Log in</h2>
                 {/* <Button className='login-btn' onClick={facebookLogin}>Login with Facebook</Button> */}

@@ -24,7 +24,7 @@ export default function CommentList({ recipeId, currentUserId }) {
             <p className='comment-section-header'>Comments</p>
             {
                 comments && (comments.length !== 0)
-                ? (comments.map((comment, idx) => (
+                ? (comments.map((comment, idx) => comment.authorId?.display_name && (
                     <Comment comment={comment} currentUserId={currentUserId} recipeId={recipeId} key={idx} />
                 )))
                 : (<p className='no-comments'>no comments</p>)

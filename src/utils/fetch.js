@@ -30,10 +30,8 @@ export const post = async (path, body, responseType = 'json') => {
                 body: JSON.stringify(body)
             });
             if (responseType === 'json') {
-                console.log("response", response);
                 return await response.json();
               } else if (responseType === 'blob') {
-                console.log('response', response);
                 return await response.blob();
             } else {
                 throw new Error(`Unsupported response type: ${responseType}`);

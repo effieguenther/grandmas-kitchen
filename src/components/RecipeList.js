@@ -18,28 +18,25 @@ export default function RecipeList({ currentUser }) {
   const [error, setError] = useState('');
   const [startX, setStartX] = useState(null);
 
-
   //whenever recipes array changes, set the active recipe to first recipe
   useEffect(() => {
     setActiveIndex(0);
     setActiveRecipes(recipes[0]);
     setIsLoading(false);
-  }, [recipes])
+  }, [recipes]);
 
-  const handleNext = () => {
-    setActiveIndex(prevIndex => {
-      if (prevIndex === recipes.length - 1) { return prevIndex }
-      setActiveRecipes(recipes[prevIndex + 1]);
-      return prevIndex + 1;
-    })
+  useEffect(() => {
+    setActiveRecipes(recipes[activeIndex])
+  }, [activeIndex]);
+
+  const handleNext = async () => {
+    if (activeIndex === recipes.length - 1) { return }
+    setActiveIndex(prevIndex => prevIndex + 1);
   }
 
   const handlePrev = () => {
-    setActiveIndex(prevIndex => {
-      if (prevIndex === 0 ) { return 0 }
-      setActiveRecipes(recipes[prevIndex - 1]);
-      return prevIndex - 1;
-    })
+    if (activeIndex === 0) { return }
+    setActiveIndex(prevIndex => prevIndex - 1);
   }
 
   //navigate through list with arrow keys
