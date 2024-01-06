@@ -7,6 +7,7 @@ import { post } from './utils/fetch';
 import LandingPage from './pages/LandingPage';
 import RecipePage from './pages/RecipePage';
 import LoginPage from './pages/LoginPage';
+import Error from './components/Error';
 import './App.css';
 
 const router = createBrowserRouter([
@@ -28,7 +29,8 @@ const router = createBrowserRouter([
       const verifyUser = await post('users/verify');
       if (verifyUser.success) { return redirect('/recipes') }
       return null;
-    }
+    },
+    errorElement: <Error />
   },
   {
     element: <RecipePage />,

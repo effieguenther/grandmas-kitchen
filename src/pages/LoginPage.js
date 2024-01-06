@@ -5,8 +5,14 @@ import '../css/login-page.css';
 
 export default function LoginPage() {
 
-    const handleLogin = () => {
-        window.open("https://grandma-8ed4c.web.app/api/users/auth/facebook", "_self");
+    //unable to login with facebook in production - no business verification 
+
+    // const facebookLogin = () => {
+    //     window.open("https://grandma-8ed4c.web.app/api/users/auth/facebook", "_self");
+    // }
+
+    const googleLogin = () => {
+        window.open("https://grandma-8ed4c.web.app/api/users/auth/google", "_self");
     }
 
     const transition = useTransition(true, {
@@ -21,7 +27,8 @@ export default function LoginPage() {
         item && (<div className='login-container'>
             <animated.div style={style} className='login-pane'>
                 <h2 className='login-text'>Log in</h2>
-                <Button className='login-btn' onClick={handleLogin}>Login with Facebook</Button>
+                {/* <Button className='login-btn' onClick={facebookLogin}>Login with Facebook</Button> */}
+                <Button className='login-btn' onClick={googleLogin}>Log in with Google</Button>
                 <Link to='/recipes' className='continue-as-guest'>
                     <Button className='continue-as-guest grey-btn'>Continue as guest</Button>
                 </Link>
