@@ -17,6 +17,7 @@ export default function RecipeList({ currentUser }) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
   const [startX, setStartX] = useState(null);
+  let timerId = undefined;
 
   //whenever recipes array changes, set the active recipe to first recipe
   useEffect(() => {
@@ -29,14 +30,21 @@ export default function RecipeList({ currentUser }) {
     setActiveRecipes(recipes[activeIndex])
   }, [activeIndex]);
 
-  const handleNext = async () => {
-    if (activeIndex === recipes.length - 1) { return }
-    setActiveIndex(prevIndex => prevIndex + 1);
-  }
+  const handleNav = (direction) => {
+    console.log("handle nav");
+    if (timerId) { return }
 
-  const handlePrev = () => {
-    if (activeIndex === 0) { return }
-    setActiveIndex(prevIndex => prevIndex - 1);
+    timerId = setTimeout(() => {
+      if (direction === 'next') {
+        if (activeIndex === recipes.length - 1) { return }
+        setActiveIndex(prevIndex => prevIndex + 1);
+      } else if (direction === 'prev') {
+        if (activeIndex === 0) { return }
+        setActiveIndex(prevIndex => prevIndex - 1);
+      }
+      timerId = undefined
+    }, 180)
+    return;
   }
 
   //navigate through list with arrow keys
@@ -44,10 +52,10 @@ export default function RecipeList({ currentUser }) {
     const handleKeyPress = (e) => {
       switch (e.key) {
         case 'ArrowLeft':
-          handlePrev();
+          handleNav('prev');
           break;
         case 'ArrowRight':
-          handleNext();
+          handleNav('next');
           break;
         default:
           break;
@@ -60,7 +68,7 @@ export default function RecipeList({ currentUser }) {
     return () => {
       document.removeEventListener('keydown', handleKeyPress);
     };
-  }, [handleNext, handlePrev]);
+  }, [handleNav]);
 
   //navigate through list with swiping
   const handleTouchStart = (e) => {
@@ -76,10 +84,10 @@ export default function RecipeList({ currentUser }) {
     if (Math.abs(deltaX) > 50) {
       if (deltaX > 0) {
         //swiped right
-        handlePrev();
+        handleNav('prev');
       } else {
         //swiped left
-        handleNext();
+        handleNav('next');
       }
       // Reset startX to prevent continuous swipes
       setStartX(null);
