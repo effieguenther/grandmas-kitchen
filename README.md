@@ -2,6 +2,8 @@
 
 In honor of our grandma who passed in 2023, Sandy Daniel, this is a digitized version of her coveted recipe box. There are over 200 tried and tested meals that we grew up eating our whole lives. Some are her own creation, and others were shared through her community and church. 
 
+View the site [here](https://grandma-8ed4c.web.app/)
+
 When building this I had a few main goals in mind
 - With a direct and singular purpose of giving the whole family quick access to the recipe box, the interface is simple. Outside of the landing/login pages, all features are availalbe from a single 'recipes' page
 - In an attempt to preserve as much sentiment as possible, the recipe card elements are designed to resemble her actual note cards. The design includes a font which mimics her handwriting, and you flip through them one at a time as if you're flipping through her box.
@@ -23,18 +25,18 @@ When building this I had a few main goals in mind
 
 ### Components
 
-[Header](./components/Header.js)
+[Header](./src/components/Header.js)
 - displays the site name
 - contains a dropdown user menu
     - display name: opens a modal where the user can edit their display name
     - logout: logs out the user and redirects to the login page
 
-[SearchBar](./components/SearchBar.js)
+[SearchBar](./src/components/SearchBar.js)
 - contains search options: title, category, and favorites filter
 - search button searches recipes by criteria
 - 'view all' button pulls all recipes from the database
 
-[RecipeList](./components/RecipeList.js)
+[RecipeList](./src/components/RecipeList.js)
 - receives the currentUser object from RecipePage.js
 - holds the search functions, animation logic, and navigation through keys/swiping
 - results from search functions are stored in the recipes array
@@ -42,7 +44,7 @@ When building this I had a few main goals in mind
 - the activeIndex tells activeRecipes which object to pull from recipes array
 - useTransition from react-spring configures the animation pulling data from activeRecipes array
 
-[Recipe](./components/Recipe.js)
+[Recipe](./src/components/Recipe.js)
 - receives the recipe object and currentUser Object from RecipeList.js
 - displays all the recipe info
 - contains buttons for user to interact with the recipe
@@ -51,27 +53,27 @@ When building this I had a few main goals in mind
     - print: generates a printer-friendly pdf of the recipe
 - CommentList component is rendered below recipe card
 
-[CommentList](./components/comments/CommentList.js)
+[CommentList](./src/components/comments/CommentList.js)
 - receives the recipeId and currentUserId from Recipe.js
 - fetches comments for the recipe on mount
     - unique Query for each recipe from react-query
     - using react-query cache data, the user can quickly flip back and forth through the recipes without waiting for a reload each time
 - fetched comments are stored in the comments array, which is mapped into Comment componen
 
-[Comment](./components/comments/Comment.js)
+[Comment](./src/components/comments/Comment.js)
 - receives the comment object, currentUserId, and recipeId from CommentList
 
-[CommentModal](./components/comments/CommentModal.js)
+[CommentModal](./src/components/comments/CommentModal.js)
 - receives userId, recipeId, setIsOpen, and isOpen from Recipe.js
 - receives text input from the user, and sends the info to the server
     - invalidates the comment query for the recipe so the comments are refreshed from the server
 
-[DeleteCommentModal](./components/comments/DeleteCommentModal.js)
+[DeleteCommentModal](./src/components/comments/DeleteCommentModal.js)
 - receives isOpen, setIsOpen, commentId, and recipeId from Comment.js
 - lets the user delete a comment they posted
     - invalidates the comment query for the recipe so the comments are refreshed from the server
 
-[EditCommentModal](./components/comments/EditCommentModal.js)
+[EditCommentModal](./src/components/comments/EditCommentModal.js)
 - receives  isOpen, setIsOpen, commentText, commentId, and recipeId from Comment.js
 - lets the user edit a comment they posted
     - invalidates the comment query for the recipe so the comments are refreshed from the server
@@ -81,6 +83,7 @@ DisplayNameModal
 ### TO DO
 
 - form validation!!!
+- print button not working on mobile?
 - test and perfect error handling
 - search function execute on 'enter' key
 - add tutorial to replace 'no results' on entering recipes page
