@@ -3,8 +3,7 @@ import {
     Input,
     Modal,
     ModalHeader,
-    ModalBody,
-    ModalFooter } from 'reactstrap';
+    ModalBody } from 'reactstrap';
 import { useState } from 'react';
 import { useQueryClient } from 'react-query';
 import { post } from '../../utils/fetch';
