@@ -1,6 +1,7 @@
 import { Button } from "reactstrap";
-import { useTransition, animated, easings } from "@react-spring/web";
 import { Link } from "react-router-dom";
+import { slideUp } from "../utils/animations";
+import { useTransition, animated } from "@react-spring/web";
 import '../css/login-page.css';
 
 export default function LoginPage() {
@@ -15,13 +16,7 @@ export default function LoginPage() {
         window.open("https://grandma-8ed4c.web.app/api/users/auth/google", "_self");
     }
 
-    const transition = useTransition(true, {
-        from: { opacity: 0, transform: 'translate3d(0, 40vh, 0)' },
-        enter: { opacity: 1, transform: 'translate3d(0, 0, 0)' },
-        leave: { opacity: 0, transform: 'translate3d(0, -40vh, 0)' },
-        config: { duration: 500, easing: easings.easeOutSine },
-        exitBeforeEnter: true
-    });
+    const transition = useTransition(true, slideUp);
 
     return transition((style, item) => 
         item && (<div className='background'>

@@ -33,7 +33,7 @@ export default function SearchBar({ searchFunction, currentUser }) {
                   value={category} 
                   onChange={(e) => setCategory(e.target.value)}
               >
-                  <option value="" placeholder="category"></option>
+                  <option value="">no category</option>
                   {
                       categories.map((cat, idx) => (
                           <option key={idx} value={cat}>{cat}</option>

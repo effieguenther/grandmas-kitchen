@@ -32,9 +32,9 @@ When building this I had a few main goals in mind
     - logout: logs out the user and redirects to the login page
 
 [SearchBar](./src/components/SearchBar.js)
-- contains search options: title, category, and favorites filter
+- contains search options: title, category
+- a 'favorites' filter switch will be present if a user is logged in 
 - search button searches recipes by criteria
-- 'view all' button pulls all recipes from the database
 
 [RecipeList](./src/components/RecipeList.js)
 - receives the currentUser object from RecipePage.js
@@ -87,3 +87,6 @@ DisplayNameModal
 - test and perfect error handling
 - search function execute on 'enter' key
 - add tutorial to replace 'no results' on entering recipes page
+- add button navigation
+- make navigation instructions bigger - not red?
+- "random" recipe button

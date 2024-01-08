@@ -1,7 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { Link } from 'react-router-dom';
-import { useTransition, animated, easings } from '@react-spring/web';
+import { useTransition, animated } from '@react-spring/web';
+import { slideUp } from '../utils/animations';
 import '../css/landing-page.css';
 
 export default function LandingScreen() {
@@ -10,16 +11,10 @@ export default function LandingScreen() {
     localStorage.setItem('question-answered', true);
   }
 
-  const transition = useTransition(true, {
-    from: { opacity: 0, transform: 'translate3d(0, 40vh, 0)' },
-    enter: { opacity: 1, transform: 'translate3d(0, 0, 0)' },
-    leave: { opacity: 0, transform: 'translate3d(0, -40vh, 0)' },
-    config: { duration: 500, easing: easings.easeOutSine },
-    exitBeforeEnter: true
-  });
+  const transition = useTransition(true, slideUp);
 
   return transition((style, item) => 
-    item && (<div className='landing-container'>
+    item && (<div className='background'>
       <animated.div style={style} className='text-container'>
         <div className='title-container'>
           <FontAwesomeIcon icon={faHeart} size='xs' />

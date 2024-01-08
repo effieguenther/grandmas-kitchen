@@ -1,31 +1,3 @@
-.landing-container {
-    background-color: rgb(255, 249, 250);
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    background-color: #fff;
-    opacity: 0.8;
-    background-image:  
-    repeating-linear-gradient(
-        45deg, 
-        #ecf7fc 25%, 
-        transparent 25%, 
-        transparent 75%, 
-        #ecf7fc 75%, 
-        #ecf7fc), 
-    repeating-linear-gradient(
-        45deg, 
-        #ecf7fc 25%, 
-        rgb(207, 233, 246) 25%, 
-        rgb(207, 233, 246) 75%,
-        #ecf7fc 75%, 
-        #ecf7fc);
-    /* to keep checkerboard pattern, bkg position = half bkg size */
-    background-position: 0 0, 25px 25px;
-    background-size: 50px 50px;
-    
-}
-
 .text-container {
     background-color: #ffffffc5;
     margin: 3em 2em;

@@ -20,7 +20,7 @@ export default function RecipePage() {
   : isError
   ? (<p>{error}</p>)
   : (
-    <div className='recipe-page-container'>
+    <div className='background'>
         <Header currentUser={currentUser} />
         <RecipeList currentUser={currentUser} />
     </div>

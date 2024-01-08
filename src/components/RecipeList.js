@@ -1,22 +1,25 @@
 import { useEffect, useState } from 'react';
 import { Container } from 'reactstrap';
 import { useTransition, animated } from "@react-spring/web";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { post } from '../utils/fetch';
+import { slideUp, cardSwipe } from '../utils/animations';
 import Recipe from './Recipe';
 import SearchBar from './SearchBar';
 import Loading from './Loading';
 import '../css/search.css';
 
 export default function RecipeList({ currentUser }) {
-  //holds all the recipes from the search function
   const [recipes, setRecipes] = useState([]);
-  //holds the current recipe in an array
   const [activeRecipes, setActiveRecipes] = useState([]);
-  //holds the current recipe's index in recipes array
   const [activeIndex, setActiveIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
   const [startX, setStartX] = useState(null);
+  const [tutorial, setTutorial] = useState(true);
+  const slideUpAnimation = useTransition(true, slideUp);
+  const cardAnimation = useTransition(activeRecipes, cardSwipe);
   let timerId = undefined;
 
   //whenever recipes array changes, set the active recipe to first recipe
@@ -26,10 +29,12 @@ export default function RecipeList({ currentUser }) {
     setIsLoading(false);
   }, [recipes]);
 
+  //when activeIndex changes, set activeRecipes
   useEffect(() => {
     setActiveRecipes(recipes[activeIndex])
   }, [activeIndex]);
 
+  //prevents rapid fire state updates with throttling
   const handleNav = (direction) => {
     console.log("handle nav");
     if (timerId) { return }
@@ -63,8 +68,7 @@ export default function RecipeList({ currentUser }) {
     };
 
     document.addEventListener('keydown', handleKeyPress);
-
-    // Cleanup the event listener on component unmount
+    
     return () => {
       document.removeEventListener('keydown', handleKeyPress);
     };
@@ -102,6 +106,7 @@ export default function RecipeList({ currentUser }) {
   const search = async (search_criteria) => {
     setError("");
     setIsLoading(true);
+    setTutorial(false);
     try {
       const recipe_data = await post('recipes/search', search_criteria);
       setRecipes(recipe_data.recipes);
@@ -111,21 +116,35 @@ export default function RecipeList({ currentUser }) {
     }
   }
 
-  const cardAnimation = useTransition(activeRecipes, {
-    from: { opacity: 0, transform: "scaleX(0) translateZ(10px)" },
-    enter: { opacity: 1, transform: "scaleX(1) translateZ(0px)" },
-    leave: { opacity: 0, transform: "scaleX(0) translateZ(10px)" },
-    exitBeforeEnter: true,
-    config: { duration: 200 }
-  });
-
   return (
     <Container className='mt-4'>
       <SearchBar searchFunction={search} currentUser={currentUser}/>
         {
-          recipes && recipes?.length !== 0
-          ? (<p className='search-results'>{activeIndex + 1} of {recipes.length}</p>)
-          : (<p className='search-results'>no results</p>)
+          tutorial
+          ? slideUpAnimation((style, item) => 
+            item && (
+              <animated.div className='tutorial' style={style}>
+                <p>Welcome!</p>
+                <p>
+                  To get started, type a word or select a category above and click "Search." 
+                  To go through the recipes, use the arrow keys or swipe left and right. 
+                </p>
+              </animated.div>
+            )
+          )
+          : recipes?.length !== 0
+          ? !isLoading && (
+            <div className='search-results'>
+              <button className='blue-btn arrow-btn left-arrow' onClick={() => handleNav('prev')}>
+                <FontAwesomeIcon icon={faArrowLeft} />
+              </button>
+              <p className=''>{activeIndex + 1} of {recipes.length}</p>
+              <button className='blue-btn arrow-btn right-arrow' onClick={() => handleNav('next')}>
+                <FontAwesomeIcon icon={faArrowRight} />
+              </button>
+            </div>
+          )
+          : !isLoading && (<p className='search-results'>no results</p>)
         }
         {
           isLoading 
