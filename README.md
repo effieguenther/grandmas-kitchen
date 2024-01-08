@@ -86,7 +86,4 @@ DisplayNameModal
 - print button not working on mobile?
 - test and perfect error handling
 - search function execute on 'enter' key
-- add tutorial to replace 'no results' on entering recipes page
-- add button navigation
-- make navigation instructions bigger - not red?
 - "random" recipe button

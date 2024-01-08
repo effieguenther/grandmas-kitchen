@@ -144,7 +144,7 @@ export default function RecipeList({ currentUser }) {
               </button>
             </div>
           )
-          : !isLoading && (<p className='search-results'>no results</p>)
+          : !isLoading && (<p className='search-results'>No results! Try a broader search?</p>)
         }
         {
           isLoading 

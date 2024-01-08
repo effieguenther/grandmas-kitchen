@@ -43,9 +43,9 @@ export default function Header({ currentUser }) {
       <Row>
         <div className='header'>
           <div className='title-container'>
-            <FontAwesomeIcon icon={faHeart} size='xs' />
+            {/* <FontAwesomeIcon icon={faHeart} size='xs' />
             <p className='title'>Grandma Sandy's Kitchen</p>
-            <FontAwesomeIcon icon={faHeart} size='xs' />
+            <FontAwesomeIcon icon={faHeart} size='xs' /> */}
           </div>
           {
             currentUser ? (
@@ -60,7 +60,7 @@ export default function Header({ currentUser }) {
             </Dropdown>
             ) : (
               <Link to='/login'>
-                <button className='pink-btn'>Log in</button>
+                <button className='pink-btn my-2'>Log in</button>
               </Link>
             )
           }

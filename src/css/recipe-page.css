@@ -10,7 +10,7 @@ div.tutorial {
     text-align: center;
 }
 
-div.search-results {
+.search-results {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -38,4 +38,30 @@ div.search-results .left-arrow {
 div.search-results .right-arrow {
     margin-left: auto;
     margin-right: 1em;
+}
+
+img.recipe-gma-pic {
+    width: 50%;
+    border-radius: 0.25em;
+    box-shadow: 0px 5px 15px #d7d7d7;
+    margin: 1em 0em;
+}
+
+div.banner {
+    margin-top: 0em;
+    padding-top: 3em;
+    padding: 0;
+    background-color: #ffffffca;
+    color: rgb(241, 87, 87);
+    border-bottom: 1px solid black;
+}
+
+div.img-container {
+    display: flex;
+    justify-content: center;
+}
+
+p.title {
+    font-size: 2em;
+    text-align: center;
 }

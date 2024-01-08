@@ -1,9 +1,8 @@
 div.header {
   text-align: center;
   align-items: center;
-  font-size: 0.75em;
-  border-bottom: 1px solid #000;
-  color: #000;
+  font-size: medium;
+  border-bottom: 1px solid #d2d2d2;
   background-color: #fff;
   width: 100%;
   display: flex;
@@ -41,7 +40,5 @@ p.title {
   padding: 0.2em 0.7em;
   border-radius: 5em;
   cursor: pointer;
-  position:absolute;
-  right: -20%;
-  top: -16px;
+  margin: 0.5em 0;
 }
