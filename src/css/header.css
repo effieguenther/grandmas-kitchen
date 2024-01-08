@@ -1,7 +1,7 @@
 div.header {
   text-align: center;
   align-items: center;
-  font-size: 18px;
+  font-size: 0.75em;
   border-bottom: 1px solid #000;
   color: #000;
   background-color: #fff;
@@ -10,9 +10,9 @@ div.header {
 }
 
 p.title {
-  font-size: x-large;
+  font-size: 1.25em;
   display: inline;
-  margin: 0em 0.5em;
+  margin: 0.25em 0.5em;
 }
 
 .nav-links a {
@@ -43,23 +43,5 @@ p.title {
   cursor: pointer;
   position:absolute;
   right: -20%;
-  top: -15px;
-}
-
-div.instructions {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  padding: 0.25em 1em;
-  font-size: small;
-  font-style: italic;
-  background-color: rgb(255, 247, 248, 0.75);
-  border-bottom: 1px solid rgb(241, 87, 87, 0.5);
-  color: rgb(241, 87, 87);
-}
-  
-div.instructions p {
-  margin-bottom: 0em;
-  margin-left: 0.5em;
+  top: -16px;
 }

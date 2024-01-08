@@ -46,7 +46,7 @@ span.bold {
 }
 
 .loading {
-  font-size: x-large;
+  font-size: medium;
   text-align: center;
   margin-top: 5em;
   color: rgb(226, 135, 135);

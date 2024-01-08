@@ -66,12 +66,6 @@ export default function Header({ currentUser }) {
           }
         </div>
       </Row>
-      <Row>
-        <div className='instructions'>
-          <FontAwesomeIcon icon={faLightbulb} />
-          <p>Use arrow keys or swipe to navigate</p>
-        </div>
-      </Row>
       <DisplayNameModal name={name} setIsOpen={setModalIsOpen} isOpen={modalIsOpen} />
     </Container>
   )
