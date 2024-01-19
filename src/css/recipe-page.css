@@ -1,3 +1,31 @@
+div.banner {
+    margin-top: 0em;
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+    background-color: #ffffffca;
+    color: #f15757;
+    border-bottom: 1px solid rgb(118, 118, 118);
+    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.15);
+    width: 100vw;
+}
+
+div.img-container {
+    display: flex;
+    justify-content: center;
+}
+
+p.title {
+    font-size: 2em;
+    text-align: center;
+}
+
+img.recipe-gma-pic {
+    width: 50%;
+    border-radius: 0.25em;
+    box-shadow: 0px 5px 15px #d7d7d7;
+    margin: 1em 0em;
+}
+
 div.tutorial {
     background-color: white;
     border-radius: 1em;
@@ -38,30 +66,4 @@ div.search-results .left-arrow {
 div.search-results .right-arrow {
     margin-left: auto;
     margin-right: 1em;
-}
-
-img.recipe-gma-pic {
-    width: 50%;
-    border-radius: 0.25em;
-    box-shadow: 0px 5px 15px #d7d7d7;
-    margin: 1em 0em;
-}
-
-div.banner {
-    margin-top: 0em;
-    padding-top: 3em;
-    padding: 0;
-    background-color: #ffffffca;
-    color: rgb(241, 87, 87);
-    border-bottom: 1px solid black;
-}
-
-div.img-container {
-    display: flex;
-    justify-content: center;
-}
-
-p.title {
-    font-size: 2em;
-    text-align: center;
 }

@@ -1,11 +1,8 @@
 div.header {
-  text-align: center;
-  align-items: center;
   font-size: medium;
   border-bottom: 1px solid #d2d2d2;
-  background-color: #fff;
-  width: 100%;
-  display: flex;
+  background-color: hsl(0, 0%, 100%);
+  width: 100vw;
 }
 
 p.title {
@@ -17,14 +14,6 @@ p.title {
 .nav-links a {
   margin: 0em 0.75em;
   font-size: small;
-}
-
-.title-container {
-  padding: 0.75em 0.25em;
-  display: flex;
-  align-items: center;
-  position: relative;
-  margin: auto;
 }
 
 .initial-container {

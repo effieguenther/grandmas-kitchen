@@ -1,6 +1,6 @@
 import { 
-  Row, 
-  Container, 
+  Row,
+  Col,
   Dropdown, 
   DropdownItem, 
   DropdownToggle,
@@ -9,8 +9,6 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { post } from '../utils/fetch';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faLightbulb } from '@fortawesome/free-regular-svg-icons';
 import DisplayNameModal from './DisplayNameModal';
 import '../css/header.css';
 
@@ -39,34 +37,25 @@ export default function Header({ currentUser }) {
   }
 
   return (
-    <Container fluid >
-      <Row>
-        <div className='header'>
-          <div className='title-container'>
-            {/* <FontAwesomeIcon icon={faHeart} size='xs' />
-            <p className='title'>Grandma Sandy's Kitchen</p>
-            <FontAwesomeIcon icon={faHeart} size='xs' /> */}
-          </div>
+    <Col className='d-flex justify-content-end'>
           {
             currentUser ? (
               <Dropdown isOpen={dropdownIsOpen} toggle={() => setDropdownIsOpen(!dropdownIsOpen)}>
-              <DropdownToggle className='toggle'>{initial}</DropdownToggle>
-              <DropdownMenu>
-                <DropdownItem className='edit-name' onClick={() => setModalIsOpen(true) }>
-                  {name}
-                </DropdownItem>
-                <DropdownItem onClick={logout}>logout</DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
+                <DropdownToggle className='toggle'>{initial}</DropdownToggle>
+                <DropdownMenu>
+                  <DropdownItem className='edit-name' onClick={() => setModalIsOpen(true) }>
+                    {name}
+                  </DropdownItem>
+                  <DropdownItem onClick={logout}>logout</DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
             ) : (
               <Link to='/login'>
                 <button className='pink-btn my-2'>Log in</button>
               </Link>
             )
           }
-        </div>
-      </Row>
-      <DisplayNameModal name={name} setIsOpen={setModalIsOpen} isOpen={modalIsOpen} />
-    </Container>
+        <DisplayNameModal name={name} setIsOpen={setModalIsOpen} isOpen={modalIsOpen} />
+    </Col>
   )
 }
