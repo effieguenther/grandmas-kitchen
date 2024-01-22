@@ -5,18 +5,22 @@ import {
     ModalBody } from 'reactstrap';
 import { useState, useEffect } from 'react';
 import { useQueryClient, useQuery } from 'react-query';
+import { useSpring, animated } from '@react-spring/web';
 import { put, post } from '../utils/fetch';
 import { validate } from '../utils/formValidation';
+import { slideRight } from '../utils/animations';
 import Loading from './Loading';
 
 export default function DisplayNameModal({ setIsOpen, isOpen }) {
+    const queryClient = useQueryClient();
     const { data } = useQuery('currentUser', () => post('users'));
     const [name, setName] = useState('');
     const [formErr, setFormErr] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
+    const [success, setSuccess] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
-    const queryClient = useQueryClient();
+    const slide = useSpring(slideRight);
 
     useEffect(() => {
         if (data.user) {
@@ -28,11 +32,23 @@ export default function DisplayNameModal({ setIsOpen, isOpen }) {
       const error = validate(3, 30, name);
       if (error.msg) {
         setFormErr(error.msg);
-        console.log('message received')
       } else {
         setFormErr("");
       }
     }, [name])
+
+    useEffect(() => {
+      if (success) {
+        console.log(success);
+        const timer = setTimeout(() => {
+          toggle();
+          setSuccess(false);
+        }, 1200)
+
+        return () => { clearTimeout(timer) }
+      }
+
+    }, [success])
 
     const handleSave = async () => {
         setError('');
@@ -41,7 +57,7 @@ export default function DisplayNameModal({ setIsOpen, isOpen }) {
             const response = await put('users/changeDisplayName', { name: name });
             if (response.success) {
               queryClient.invalidateQueries('currentUser');
-              toggle();
+              setSuccess(true);
               setIsLoading(false);
             } else {
               setError(response.message + ' :(')
@@ -67,6 +83,10 @@ export default function DisplayNameModal({ setIsOpen, isOpen }) {
           {
             isLoading
             ? (<Loading />)
+            : success
+            ? (
+                <animated.div style={slide} className='success'>Success!</animated.div>
+              )
             : (
               <>
                 {

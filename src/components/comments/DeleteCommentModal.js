@@ -4,7 +4,7 @@ import {
   ModalHeader,
   ModalBody } from 'reactstrap';
 import { useQueryClient } from 'react-query';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { put } from '../../utils/fetch';
 import '../../css/modals.css';
 import Loading from '../Loading';
@@ -15,6 +15,20 @@ export default function DeleteCommentModal({ isOpen, setIsOpen, commentId, recip
   const toggle = () => setIsOpen(!isOpen);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+    if (success) {
+      console.log(success);
+      const timer = setTimeout(() => {
+        toggle();
+        setSuccess(false);
+      }, 1200)
+
+      return () => { clearTimeout(timer) }
+    }
+
+  }, [success])
 
   const deleteComment = async () => {
     setError('');
@@ -23,9 +37,8 @@ export default function DeleteCommentModal({ isOpen, setIsOpen, commentId, recip
       const response = await put(`comments/delete/${commentId}`);
       if (response.success) {
         queryClient.invalidateQueries(['comments', recipeId]);
-        toggle()
         setIsLoading(false);
-        console.log('comment delted!')
+        setSuccess(true);
       } else {
         setError(response.message + ' :(')
         setIsLoading(false);
@@ -45,6 +58,10 @@ export default function DeleteCommentModal({ isOpen, setIsOpen, commentId, recip
           ? (<div className='delete'>
               <Loading />
             </div>)
+          : success
+          ? (
+              <div className='success'>Success!</div>
+            )
           : (
             <>
               {

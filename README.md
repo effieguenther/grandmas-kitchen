@@ -3,6 +3,30 @@
 In honor of our grandma who passed in 2023, Sandy Daniel, this is a digitized version of her coveted recipe box. There are over 200 tried and tested meals that we grew up eating our whole lives. Some are her own creation, and others were shared through her community and church. 
 
 View the site [here](https://grandma-8ed4c.web.app/)
+View the backend [here]()
+
+### Technologies implemented
+
+#### Frontend
+- React Framework
+- React Query asynchronous state management
+- React Router navigation
+    - loader functions that execute before pages render
+- Bootstrap/Reactstrap grid
+- React Spring animations
+- API integration
+- Form validation (custom function)
+- Throttling with setTimeout
+- 
+
+#### Backend
+- Express Framework
+- Mongoose/MongoDb
+- Oauth 2.0 authorization with passport
+- Session support
+- Cookies
+- CRUD functions
+- PDF generation
 
 When building this I had a few main goals in mind
 - With a direct and singular purpose of giving the whole family quick access to the recipe box, the interface is simple. Outside of the landing/login pages, all features are availalbe from a single 'recipes' page
@@ -82,10 +106,14 @@ DisplayNameModal
 
 ### TO DO
 
-- form validation!!!
-- print button not working on mobile?
-- test and perfect error handling
-- add success messages for edit/delete/post comments
+- print button not working on mobile? 
+- pdfs are not generating in the right format
+- add prompts to login when clicking the favorite/comment buttons
+- animate success messages for edit/delete/post comments
 - search function execute on 'enter' key
+- add substitutions guide at the bottom of recipes page
+- add option to delete account
+- add email notifications when someone comments on a recipe?
+- add option to comment as a guest?? 
 - "random" recipe button
 - option to add pictures to comments? if so, have all pictures display near top of recipe

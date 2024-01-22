@@ -17,6 +17,7 @@ export default function EditCommentModal({ isOpen, setIsOpen, commentText, comme
     const [formErr, setFormErr] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
+    const [success, setSuccess] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
     const queryClient = useQueryClient();
 
@@ -29,6 +30,19 @@ export default function EditCommentModal({ isOpen, setIsOpen, commentText, comme
       }
     }, [text])
 
+    useEffect(() => {
+      if (success) {
+        console.log(success);
+        const timer = setTimeout(() => {
+          toggle();
+          setSuccess(false);
+        }, 1200)
+
+        return () => { clearTimeout(timer) }
+      }
+
+    }, [success])
+
     const handleSave = async () => {
       setError('');
       setIsLoading(true);
@@ -36,8 +50,8 @@ export default function EditCommentModal({ isOpen, setIsOpen, commentText, comme
             const response = await put(`comments/${commentId}`, { text: text });
             if (response.success) {
                 queryClient.invalidateQueries(['comments', recipeId]);
-                toggle()
                 setIsLoading(false);
+                setSuccess(true);
             } else {
                 setError(response.message + ' :(')
                 setIsLoading(false);
@@ -63,6 +77,10 @@ export default function EditCommentModal({ isOpen, setIsOpen, commentText, comme
             {
               isLoading
               ? (<Loading />)
+              : success
+              ? (
+                  <div className='success'>Success!</div>
+                )
               : (
                 <>
                   {

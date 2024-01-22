@@ -15,6 +15,7 @@ export default function CommentModal({ recipeId, setIsOpen, isOpen }) {
     const [text, setText] = useState('');
     const [formErr, setFormErr] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [success, setSuccess] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
     const queryClient = useQueryClient();
 
@@ -27,6 +28,19 @@ export default function CommentModal({ recipeId, setIsOpen, isOpen }) {
       }
     }, [text]);
 
+    useEffect(() => {
+      if (success) {
+        console.log(success);
+        const timer = setTimeout(() => {
+          toggle();
+          setSuccess(false);
+        }, 1200)
+
+        return () => { clearTimeout(timer) }
+      }
+
+    }, [success])
+
     const handleSave = async () => {
       setIsLoading(true);
       try {
@@ -37,9 +51,8 @@ export default function CommentModal({ recipeId, setIsOpen, isOpen }) {
           });
           if (response.success) {
               queryClient.invalidateQueries(['comments', recipeId]);
-              toggle()
-              console.log('comment posted!')
               setIsLoading(false);
+              setSuccess(true);
           } else {
               console.log('comment not posted :(')
               setIsLoading(false);
@@ -65,6 +78,10 @@ export default function CommentModal({ recipeId, setIsOpen, isOpen }) {
           {
             isLoading
             ? (<Loading />)
+            : success
+            ? (
+                <div className='success'>Success!</div>
+              )
             : (
               <div className='yes-no-btns'>
                 <Button onClick={handleSave} className='pink-btn' disabled={formErr}>Save</Button>

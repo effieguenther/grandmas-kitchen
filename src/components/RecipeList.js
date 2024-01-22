@@ -18,7 +18,6 @@ export default function RecipeList() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
-  const [startX, setStartX] = useState(null);
   const [tutorial, setTutorial] = useState(true);
   const slideUpAnimation = useTransition(true, slideUp);
   const cardAnimation = useTransition(activeRecipes, cardSwipe);
@@ -59,56 +58,6 @@ export default function RecipeList() {
     return;
   }
 
-  //navigate through list with arrow keys
-  useEffect(() => {
-    const handleKeyPress = (e) => {
-      switch (e.key) {
-        case 'ArrowLeft':
-          handleNav('prev');
-          break;
-        case 'ArrowRight':
-          handleNav('next');
-          break;
-        default:
-          break;
-      }
-    };
-
-    document.addEventListener('keydown', handleKeyPress);
-    
-    return () => {
-      document.removeEventListener('keydown', handleKeyPress);
-    };
-  }, [handleNav]);
-
-  //navigate through list with swiping
-  const handleTouchStart = (e) => {
-    setStartX(e.touches[0].clientX);
-  };
-
-  const handleTouchMove = (e) => {
-    if (!startX) return;
-
-    const currentX = e.touches[0].clientX;
-    const deltaX = currentX - startX;
-
-    if (Math.abs(deltaX) > 50) {
-      if (deltaX > 0) {
-        //swiped right
-        handleNav('prev');
-      } else {
-        //swiped left
-        handleNav('next');
-      }
-      // Reset startX to prevent continuous swipes
-      setStartX(null);
-    }
-  };
-
-  const handleTouchEnd = () => {
-    setStartX(null);
-  };
-
   //search with keywords
   const search = async (search_criteria) => {
     setError("");
@@ -135,7 +84,6 @@ export default function RecipeList() {
                 <p>Welcome!</p>
                 <p>
                   To get started, type a word or select a category above and click "Search." 
-                  To go through the recipes, use the arrow keys or swipe left and right. 
                 </p>
               </animated.div>
             )
@@ -170,9 +118,6 @@ export default function RecipeList() {
           : recipes 
           ? cardAnimation((style, recipe) => (
             <animated.div 
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
               style={{...style, width: '100%'}}
             >
               <Recipe recipe={recipe} currentUser={data.user} />
