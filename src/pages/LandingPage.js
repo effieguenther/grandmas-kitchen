@@ -31,7 +31,7 @@ export default function LandingScreen() {
               </div>
               <hr />
               <p className='intro'>
-                In honor of our grandma, Sandy Daniel, this is a digitized version of her coveted recipe box. There are over 200 tried and tested meals that we grew up eating our whole lives. Some are her own creation, and others were shared through her community and church. As a devout Christian, she would want you to ask yourself this question:
+                In honor of our grandma, Sandy Daniel, this is a digitized version of her coveted recipe box. There are over 250 tried and tested meals that we grew up eating our whole lives. Some are her own creation, and others were shared through her community and church. As a devout Christian, she would want you to ask yourself this question:
               </p>
               <p className='question'>If God had a refrigerator, would your picture be on it?</p>
               <div className='yes-no'>

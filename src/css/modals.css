@@ -41,6 +41,12 @@ p.err-msg {
     color: red;
 }
 
+p.form-err {
+    margin-top: 0.5em;
+    color: grey;
+    padding-left: 0.5em;
+}
+
 
 
 

@@ -37,9 +37,7 @@ export default function RecipePage() {
           <img src={grandmaPic} className='recipe-gma-pic' />
         </Col>
       </Row>
-      <Row>
-        <RecipeList currentUser={currentUser} />
-      </Row>
+      <RecipeList currentUser={currentUser} />
     </Container>
   )
 }

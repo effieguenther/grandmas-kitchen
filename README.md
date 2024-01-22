@@ -85,5 +85,7 @@ DisplayNameModal
 - form validation!!!
 - print button not working on mobile?
 - test and perfect error handling
+- add success messages for edit/delete/post comments
 - search function execute on 'enter' key
 - "random" recipe button
+- option to add pictures to comments? if so, have all pictures display near top of recipe

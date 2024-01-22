@@ -4,19 +4,30 @@ import {
     Modal,
     ModalHeader,
     ModalBody } from 'reactstrap';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useQueryClient } from 'react-query';
 import { put } from '../../utils/fetch';
+import { validate } from '../../utils/formValidation';
 import '../../css/modals.css';
 import Loading from '../Loading';
 
 export default function EditCommentModal({ isOpen, setIsOpen, commentText, commentId, recipeId }) {
     
     const [text, setText] = useState(commentText);
+    const [formErr, setFormErr] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
     const toggle = () => setIsOpen(!isOpen);
     const queryClient = useQueryClient();
+
+    useEffect(() => {
+      const error = validate(3, 500, text);
+      if (error.msg) {
+        setFormErr(error.msg);
+      } else {
+        setFormErr("");
+      }
+    }, [text])
 
     const handleSave = async () => {
       setError('');
@@ -42,9 +53,13 @@ export default function EditCommentModal({ isOpen, setIsOpen, commentText, comme
           <ModalHeader>Edit Comment</ModalHeader>
           <ModalBody>
             <Input 
+              type='textarea'
               value={text}
               onChange={(e) => { setText(e.target.value) }}
             />
+            {
+              formErr && <p className='form-err'>{formErr}</p>
+            }
             {
               isLoading
               ? (<Loading />)

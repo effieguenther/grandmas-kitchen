@@ -6,11 +6,13 @@ import {
 import { useState, useEffect } from 'react';
 import { useQueryClient, useQuery } from 'react-query';
 import { put, post } from '../utils/fetch';
+import { validate } from '../utils/formValidation';
 import Loading from './Loading';
 
 export default function DisplayNameModal({ setIsOpen, isOpen }) {
     const { data } = useQuery('currentUser', () => post('users'));
     const [name, setName] = useState('');
+    const [formErr, setFormErr] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
     const toggle = () => setIsOpen(!isOpen);
@@ -21,6 +23,16 @@ export default function DisplayNameModal({ setIsOpen, isOpen }) {
           setName(data.user.display_name);
         }
       }, [data]) 
+    
+    useEffect(() => {
+      const error = validate(3, 30, name);
+      if (error.msg) {
+        setFormErr(error.msg);
+        console.log('message received')
+      } else {
+        setFormErr("");
+      }
+    }, [name])
 
     const handleSave = async () => {
         setError('');
@@ -49,6 +61,9 @@ export default function DisplayNameModal({ setIsOpen, isOpen }) {
             value={name}
             onChange={(e) => { setName(e.target.value) }}
           />
+          {
+            formErr && <p className='form-err'>{formErr}</p>
+          }
           {
             isLoading
             ? (<Loading />)
