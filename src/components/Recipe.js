@@ -3,13 +3,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPrint, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faComment } from '@fortawesome/free-regular-svg-icons';
 import { useState, useEffect } from 'react';
-import { useQueryClient } from 'react-query';
+import { useQueryClient, useQuery } from 'react-query';
 import '../css/recipe.css';
 import { put, post } from '../utils/fetch';
 import CommentModal from './comments/CommentModal';
 import CommentList from './comments/CommentList';
 
-export default function Recipe({ recipe, currentUser }) {
+export default function Recipe({ recipe }) {
+    const { data } = useQuery('currentUser', () => post('users'));
     const title = recipe.title ? recipe.title.toUpperCase() : '';
     const source = recipe.source || '';
     const category = recipe.category || '';
@@ -51,11 +52,11 @@ export default function Recipe({ recipe, currentUser }) {
     }, [favorite])
 
     useEffect(() => {
-        if (currentUser) {
-            const inFavorites = currentUser.favorites.includes(id);
+        if (data.user) {
+            const inFavorites = data.user.favorites.includes(id);
             setFavorite(inFavorites);
         }
-    }, [currentUser, id])
+    }, [data, id])
 
     return (
         <>
@@ -69,7 +70,7 @@ export default function Recipe({ recipe, currentUser }) {
                         <button onClick={downloadPdf} className='blue-btn'>
                             <FontAwesomeIcon icon={faPrint} />
                         </button>
-                        <button onClick={() => setIsOpen(true)} className='blue-btn' disabled={currentUser ? false : true}>
+                        <button onClick={() => setIsOpen(true)} className='blue-btn' disabled={data.user ? false : true}>
                             <FontAwesomeIcon icon={faComment} />
                         </button>
                         {
@@ -80,7 +81,7 @@ export default function Recipe({ recipe, currentUser }) {
                                 </button>
                             )
                             : (
-                                <button className={favorite ? 'pink-btn' : 'blue-btn'} onClick={addToFavorites} disabled={currentUser ? false : true}>
+                                <button className={favorite ? 'pink-btn' : 'blue-btn'} onClick={addToFavorites} disabled={data.user ? false : true}>
                                     <FontAwesomeIcon icon={faHeart} />
                                 </button>
                             )
@@ -134,9 +135,9 @@ export default function Recipe({ recipe, currentUser }) {
                     </Col>
                 </Row>
             </Container>
-            <CommentModal userId={currentUser?._id} recipeId={id} isOpen={isOpen} setIsOpen={setIsOpen}/>
+            <CommentModal recipeId={id} isOpen={isOpen} setIsOpen={setIsOpen}/>
         </Card>
-        <CommentList recipeId={id} currentUserId={currentUser?._id}/>
+        <CommentList recipeId={id} />
         </>
   )
 }

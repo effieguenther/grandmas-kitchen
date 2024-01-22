@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
 import { Container } from 'reactstrap';
 import { useTransition, animated } from "@react-spring/web";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,7 +11,8 @@ import SearchBar from './SearchBar';
 import Loading from './Loading';
 import '../css/search.css';
 
-export default function RecipeList({ currentUser }) {
+export default function RecipeList() {
+  const { data } = useQuery('currentUser', () => post('users'));
   const [recipes, setRecipes] = useState([]);
   const [activeRecipes, setActiveRecipes] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -118,7 +120,7 @@ export default function RecipeList({ currentUser }) {
 
   return (
     <Container className='mt-4'>
-      <SearchBar searchFunction={search} currentUser={currentUser}/>
+      <SearchBar searchFunction={search} />
         {
           tutorial
           ? slideUpAnimation((style, item) => 
@@ -159,7 +161,7 @@ export default function RecipeList({ currentUser }) {
               onTouchEnd={handleTouchEnd}
               style={{...style, width: '100%'}}
             >
-              <Recipe recipe={recipe} currentUser={currentUser} />
+              <Recipe recipe={recipe} currentUser={data.user} />
             </animated.div>
           ))
           : (<p className='text-center mt-4'>no results</p>)

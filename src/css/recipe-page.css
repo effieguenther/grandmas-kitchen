@@ -4,7 +4,6 @@ div.banner {
     padding-bottom: 1.5em;
     background-color: #ffffffca;
     color: #f15757;
-    border-bottom: 1px solid rgb(118, 118, 118);
     box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.15);
     width: 100vw;
 }

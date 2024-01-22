@@ -4,28 +4,29 @@ import {
     ModalHeader,
     ModalBody } from 'reactstrap';
 import { useState, useEffect } from 'react';
-import { useQueryClient } from 'react-query';
-import { put } from '../utils/fetch';
+import { useQueryClient, useQuery } from 'react-query';
+import { put, post } from '../utils/fetch';
 import Loading from './Loading';
 
-export default function DisplayNameModal({ name, setIsOpen, isOpen }) {
-    const [newName, setNewName] = useState('');
+export default function DisplayNameModal({ setIsOpen, isOpen }) {
+    const { data } = useQuery('currentUser', () => post('users'));
+    const [name, setName] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
     const toggle = () => setIsOpen(!isOpen);
     const queryClient = useQueryClient();
 
     useEffect(() => {
-        if (name) {
-          setNewName(name);
+        if (data.user) {
+          setName(data.user.display_name);
         }
-      }, [name]) 
+      }, [data]) 
 
     const handleSave = async () => {
         setError('');
         setIsLoading(true);
         try {
-            const response = await put('users/changeDisplayName', { name: newName });
+            const response = await put('users/changeDisplayName', { name: name });
             if (response.success) {
               queryClient.invalidateQueries('currentUser');
               toggle();
@@ -45,8 +46,8 @@ export default function DisplayNameModal({ name, setIsOpen, isOpen }) {
         <ModalHeader>Edit display name</ModalHeader>
         <ModalBody>
           <Input 
-            value={newName}
-            onChange={(e) => { setNewName(e.target.value) }}
+            value={name}
+            onChange={(e) => { setName(e.target.value) }}
           />
           {
             isLoading

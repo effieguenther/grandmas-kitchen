@@ -2,8 +2,11 @@ import { Input, Row, Col } from 'reactstrap';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { useQuery } from 'react-query';
+import { post } from '../utils/fetch';
 
-export default function SearchBar({ searchFunction, currentUser }) {
+export default function SearchBar({ searchFunction }) {
+    const { data } = useQuery('currentUser', () => post('users'));
     const [title, setTitle] = useState("");
     const [category, setCategory] = useState("");
     const [favorites, setFavorites] = useState(false);
@@ -43,7 +46,7 @@ export default function SearchBar({ searchFunction, currentUser }) {
         </Col>
         <Col className='search-btns'>
             {
-                currentUser && (
+                data.user && (
                     <label check className='switch'>
                         <input 
                             type="checkbox" 

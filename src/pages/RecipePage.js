@@ -6,7 +6,6 @@ import RecipeList from '../components/RecipeList';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
 import grandmaPic from '../images/grandma.jpeg';
-import heart from '../images/heart.svg';
 import '../css/recipe-page.css';
 
 export default function RecipePage() {
@@ -25,7 +24,7 @@ export default function RecipePage() {
   : (
     <Container fluid className='background'>
       <Row className='header'>
-        <Header currentUser={currentUser} />
+        <Header />
       </Row>
       <Row className='banner'>
         <Col className='d-flex flex-column align-items-center justify-content-center mb-2'>

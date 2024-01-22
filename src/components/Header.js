@@ -6,14 +6,16 @@ import {
   DropdownToggle,
   DropdownMenu } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { useQuery } from 'react-query';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { post } from '../utils/fetch';
 import DisplayNameModal from './DisplayNameModal';
 import '../css/header.css';
 
-export default function Header({ currentUser }) {
+export default function Header() {
 
+  const { data } = useQuery('currentUser', () => post('users'));
   const [initial, setInitial] = useState("");
   const [name, setName] = useState('');
   const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
@@ -21,12 +23,12 @@ export default function Header({ currentUser }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (currentUser) {
-      const firstInitial = currentUser.display_name[0];
-      setName(currentUser.display_name);
+    if (data.user) {
+      const firstInitial = data.user.display_name[0];
+      setName(data.user.display_name);
       setInitial(firstInitial.toUpperCase());
     }
-  }, [currentUser])    
+  }, [data])    
 
   const logout = async () => {
     const response = await post('users/logout');
@@ -39,7 +41,7 @@ export default function Header({ currentUser }) {
   return (
     <Col className='d-flex justify-content-end'>
           {
-            currentUser ? (
+            data.user ? (
               <Dropdown isOpen={dropdownIsOpen} toggle={() => setDropdownIsOpen(!dropdownIsOpen)}>
                 <DropdownToggle className='toggle'>{initial}</DropdownToggle>
                 <DropdownMenu>

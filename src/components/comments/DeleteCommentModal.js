@@ -25,6 +25,7 @@ export default function DeleteCommentModal({ isOpen, setIsOpen, commentId, recip
         queryClient.invalidateQueries(['comments', recipeId]);
         toggle()
         setIsLoading(false);
+        console.log('comment delted!')
       } else {
         setError(response.message + ' :(')
         setIsLoading(false);
