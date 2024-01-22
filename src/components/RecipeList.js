@@ -38,15 +38,20 @@ export default function RecipeList() {
 
   //prevents rapid fire state updates with throttling
   const handleNav = (direction) => {
-    console.log("handle nav");
     if (timerId) { return }
 
     timerId = setTimeout(() => {
       if (direction === 'next') {
-        if (activeIndex === recipes.length - 1) { return }
+        if (activeIndex === recipes.length - 1) { 
+          timerId = undefined;
+          return;
+        }
         setActiveIndex(prevIndex => prevIndex + 1);
       } else if (direction === 'prev') {
-        if (activeIndex === 0) { return }
+        if (activeIndex === 0) {
+          timerId = undefined;
+          return 
+        }
         setActiveIndex(prevIndex => prevIndex - 1);
       }
       timerId = undefined
@@ -119,8 +124,9 @@ export default function RecipeList() {
   }
 
   return (
-    <Container className='mt-4'>
+    <>
       <SearchBar searchFunction={search} />
+      <Container>
         {
           tutorial
           ? slideUpAnimation((style, item) => 
@@ -137,11 +143,19 @@ export default function RecipeList() {
           : recipes?.length !== 0
           ? !isLoading && (
             <div className='search-results'>
-              <button className='blue-btn arrow-btn left-arrow' onClick={() => handleNav('prev')}>
+              <button 
+                className='white-btn arrow-btn left-arrow' 
+                onClick={() => handleNav('prev')}
+                disabled={activeIndex === 0}
+              >
                 <FontAwesomeIcon icon={faArrowLeft} />
               </button>
               <p className=''>{activeIndex + 1} of {recipes.length}</p>
-              <button className='blue-btn arrow-btn right-arrow' onClick={() => handleNav('next')}>
+              <button 
+                className='white-btn arrow-btn right-arrow' 
+                onClick={() => handleNav('next')}
+                disabled={activeIndex === recipes.length - 1}
+              >
                 <FontAwesomeIcon icon={faArrowRight} />
               </button>
             </div>
@@ -166,6 +180,7 @@ export default function RecipeList() {
           ))
           : (<p className='text-center mt-4'>no results</p>)
         }
-    </Container>
+      </Container>
+    </>
     )
 }

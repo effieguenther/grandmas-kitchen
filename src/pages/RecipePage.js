@@ -4,6 +4,7 @@ import { useQuery } from 'react-query';
 import { post } from '../utils/fetch';
 import RecipeList from '../components/RecipeList';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import Loading from '../components/Loading';
 import grandmaPic from '../images/grandma.jpeg';
 import '../css/recipe-page.css';
@@ -31,13 +32,17 @@ export default function RecipePage() {
           <div className='d-flex align-items-center'>
             <p className='title'>Grandma Sandy's Kitchen</p>
           </div>
-          <hr width='75%' />
+          {/* <hr width='75%' /> */}
+          <p className='subtitle'>Over 250 recipes memorialized in honor of Sandy Daniel</p>
         </Col>
         <Col xs='12' md='5' className='img-container'>
           <img src={grandmaPic} className='recipe-gma-pic' />
         </Col>
       </Row>
       <RecipeList currentUser={currentUser} />
+      <Row className='footer'>
+        <Footer />
+      </Row>
     </Container>
   )
 }

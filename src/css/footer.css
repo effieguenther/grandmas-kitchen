@@ -1,0 +1,13 @@
+div.footer {
+    margin-top: 5em;
+    padding-top: 2em;
+    padding-bottom: 3em;
+    background-color: rgb(241, 87, 87);
+    color: white;
+    width: 100vw;
+    text-align: center;
+}
+
+div.footer a {
+    color: rgb(1, 85, 164);
+}

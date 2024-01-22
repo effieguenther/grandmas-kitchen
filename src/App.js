@@ -9,6 +9,7 @@ import RecipePage from './pages/RecipePage';
 import LoginPage from './pages/LoginPage';
 import Error from './components/Error';
 import './App.css';
+import './css/footer.css';
 
 const router = createBrowserRouter([
   {

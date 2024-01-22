@@ -88,10 +88,14 @@ export default function Recipe({ recipe }) {
                         }
                     </Col>
                 </Row>
-                <div className='subtitle'>
-                    <p><span className='bold'>source: </span>{source}</p>
-                    <p><span className='bold'>category: </span> {category}</p>
-                </div>
+                <Row className='subtitle'>
+                    <Col xs='12'>
+                        <p><span className='bold'>source: </span>{source}</p>
+                    </Col>
+                    <Col>
+                        <p><span className='bold'>category: </span> {category}</p>
+                    </Col>
+                </Row>
             </CardTitle>    
             <Container fluid>
                 <hr />
