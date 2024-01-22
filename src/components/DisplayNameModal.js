@@ -75,7 +75,7 @@ export default function DisplayNameModal({ setIsOpen, isOpen }) {
                   )
                 }
                 <div className='yes-no-btns'>
-                  <button onClick={handleSave} className='pink-btn'>Save</button>
+                  <button onClick={handleSave} className='pink-btn' disabled={formErr}>Save</button>
                   <button onClick={toggle} className='grey-btn'>Cancel</button>
                 </div>
               </>

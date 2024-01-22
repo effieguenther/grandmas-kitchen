@@ -67,7 +67,7 @@ export default function CommentModal({ recipeId, setIsOpen, isOpen }) {
             ? (<Loading />)
             : (
               <div className='yes-no-btns'>
-                <Button onClick={handleSave} className='pink-btn'>Save</Button>
+                <Button onClick={handleSave} className='pink-btn' disabled={formErr}>Save</Button>
                 <Button onClick={toggle} className='grey-btn'>Cancel</Button>
               </div>
             )

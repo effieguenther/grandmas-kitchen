@@ -71,7 +71,7 @@ export default function EditCommentModal({ isOpen, setIsOpen, commentText, comme
                     )
                   }
                   <div className='yes-no-btns'>
-                    <Button className='pink-btn' onClick={handleSave}>Save</Button>
+                    <Button className='pink-btn' onClick={handleSave} disabled={formErr}>Save</Button>
                     <Button className='grey-btn' onClick={toggle}>Cancel</Button>
                   </div>
                 </>
