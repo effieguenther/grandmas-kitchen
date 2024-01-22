@@ -1,5 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { Link } from 'react-router-dom';
 import { Row, Col, Container } from 'reactstrap';
 import { useTransition, animated } from '@react-spring/web';
@@ -23,11 +21,9 @@ export default function LandingScreen() {
             <Col xs='12' md='5' className='d-flex justify-content-center align-items-center'>
               <img src={grandmaPic} className='grandma-pic'/>
             </Col>
-            <Col className=''>
+            <Col className='d-flex flex-column justify-content-center'>
               <div className='title-container'>
-                <FontAwesomeIcon icon={faHeart} size='xs' />
                 <p className='title'>Grandma Sandy's Kitchen</p>
-                <FontAwesomeIcon icon={faHeart} size='xs' />
               </div>
               <hr />
               <p className='intro'>

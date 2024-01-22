@@ -1,11 +1,14 @@
 .text-container {
     background-color: #ffffffc5;
     margin: 3em 2em;
+    padding-top: 1em;
     padding-bottom: 2em;
     padding-right: 2em;
     padding-left: 2em;
     border-radius: 0.5em;
     color: black;
+    text-align: center;
+    align-items: center;
 }
 
 img.grandma-pic {
@@ -17,6 +20,8 @@ img.grandma-pic {
 
 .title-container {
     justify-content: center;
+    padding-top: 1em;
+    padding-bottom: 1em;
 }
 
 .title {
