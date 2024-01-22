@@ -59,89 +59,93 @@ export default function Recipe({ recipe }) {
     }, [data, id])
 
     return (
-        <>
-        <Card className='recipe-card'>
-            <CardTitle>
-                <Row className='mb-1'>
-                    <Col xs='6' sm='7' md='8' lg='9' xl='10'>
-                        {title}
-                    </Col>
-                    <Col className='recipe-btns'>
-                        <button onClick={downloadPdf} className='blue-btn'>
-                            <FontAwesomeIcon icon={faPrint} />
-                        </button>
-                        <button onClick={() => setIsOpen(true)} className='blue-btn' disabled={data.user ? false : true}>
-                            <FontAwesomeIcon icon={faComment} />
-                        </button>
-                        {
-                            favIsLoading
-                            ? (
-                                <button disabled className={favorite ? 'pink-btn' : 'blue-btn'}>
-                                    <FontAwesomeIcon icon={faHeart} beat className="loader" />
+        <Row>
+            <Col xs='12' lg='7'>
+                <Card className='recipe-card'>
+                    <CardTitle>
+                        <Row className='mb-1'>
+                            <Col xs='6' sm='7' md='8'>
+                                {title}
+                            </Col>
+                            <Col className='recipe-btns'>
+                                <button onClick={downloadPdf} className='blue-btn'>
+                                    <FontAwesomeIcon icon={faPrint} />
                                 </button>
-                            )
-                            : (
-                                <button className={favorite ? 'pink-btn' : 'blue-btn'} onClick={addToFavorites} disabled={data.user ? false : true}>
-                                    <FontAwesomeIcon icon={faHeart} />
+                                <button onClick={() => setIsOpen(true)} className='blue-btn' disabled={data.user ? false : true}>
+                                    <FontAwesomeIcon icon={faComment} />
                                 </button>
-                            )
-                        }
-                    </Col>
-                </Row>
-                <Row className='subtitle'>
-                    <Col xs='12'>
-                        <p><span className='bold'>source: </span>{source}</p>
-                    </Col>
-                    <Col>
-                        <p><span className='bold'>category: </span> {category}</p>
-                    </Col>
-                </Row>
-            </CardTitle>    
-            <Container fluid>
-                <hr />
-                <Row>
-                {
-                    ingredient_groups.map((group, idx) => (
-                        <Col key={idx}>
-                            {ingredient_groups.length > 1 && <p className='group-title'>{group.title}</p>}
-                            <ul>
                                 {
-                                    group.ingredients.map((ingredient, idx) => (
-                                        <li key={idx}>{ingredient}</li>
-                                    ))
+                                    favIsLoading
+                                    ? (
+                                        <button disabled className={favorite ? 'pink-btn' : 'blue-btn'}>
+                                            <FontAwesomeIcon icon={faHeart} beat className="loader" />
+                                        </button>
+                                    )
+                                    : (
+                                        <button className={favorite ? 'pink-btn' : 'blue-btn'} onClick={addToFavorites} disabled={data.user ? false : true}>
+                                            <FontAwesomeIcon icon={faHeart} />
+                                        </button>
+                                    )
                                 }
-                            </ul>
-                        </Col>
-                    ))
-                }
-                { equipment.length > 0 && (
-                    <ul className='equipment'>
-                        <li>
-                            <span className='bold'>equipment: </span>
+                            </Col>
+                        </Row>
+                        <Row className='subtitle'>
+                            <Col xs='12'>
+                                <p><span className='bold'>source: </span>{source}</p>
+                            </Col>
+                            <Col>
+                                <p><span className='bold'>category: </span> {category}</p>
+                            </Col>
+                        </Row>
+                    </CardTitle>    
+                    <Container fluid>
+                        <hr />
+                        <Row>
                         {
-                            equipment.map((equipment, idx) => (
-                                <span key={idx}>{equipment}</span>
+                            ingredient_groups.map((group, idx) => (
+                                <Col key={idx}>
+                                    {ingredient_groups.length > 1 && <p className='group-title'>{group.title}</p>}
+                                    <ul>
+                                        {
+                                            group.ingredients.map((ingredient, idx) => (
+                                                <li key={idx}>{ingredient}</li>
+                                            ))
+                                        }
+                                    </ul>
+                                </Col>
                             ))
                         }
-                        </li>
-                    </ul>
-                )}
-                </Row>
-                <Row>
-                    <Col>
-                        <ul>
-                            {
-                                recipe.directions.map((direction, idx) => (
-                                    <li key={idx}>{direction}</li>
-                                ))
-                            }
-                        </ul>
-                    </Col>
-                </Row>
-            </Container>
-            <CommentModal recipeId={id} isOpen={isOpen} setIsOpen={setIsOpen}/>
-        </Card>
-        <CommentList recipeId={id} />
-        </>
+                        { equipment.length > 0 && (
+                            <ul className='equipment'>
+                                <li>
+                                    <span className='bold'>equipment: </span>
+                                {
+                                    equipment.map((equipment, idx) => (
+                                        <span key={idx}>{equipment}</span>
+                                    ))
+                                }
+                                </li>
+                            </ul>
+                        )}
+                        </Row>
+                        <Row>
+                            <Col>
+                                <ul>
+                                    {
+                                        recipe.directions.map((direction, idx) => (
+                                            <li key={idx}>{direction}</li>
+                                        ))
+                                    }
+                                </ul>
+                            </Col>
+                        </Row>
+                    </Container>
+                    <CommentModal recipeId={id} isOpen={isOpen} setIsOpen={setIsOpen}/>
+                </Card>
+            </Col>
+            <Col>
+                <CommentList recipeId={id} />
+            </Col>
+        </Row>
   )
 }

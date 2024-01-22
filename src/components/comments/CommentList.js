@@ -22,6 +22,7 @@ export default function CommentList({ recipeId }) {
     : (
         <div className='comment-list'>
             <p className='comment-section-header'>Comments</p>
+            <hr />
             {
                 comments && (comments.length !== 0)
                 ? (comments.map((comment, idx) => comment.authorId?.display_name && (

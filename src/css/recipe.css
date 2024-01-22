@@ -2,9 +2,9 @@ div.recipe-card {
     margin-bottom: 2em;
     padding: 1.75em 0.5em;
     position: relative;
-    background: linear-gradient(140deg, rgb(254, 252, 249) 21%, rgba(237,230,215,1) 100%);
-    color: rgb(0, 0, 0);
-    box-shadow: 0px 2px 10px #bebebe;
+    background: linear-gradient(140deg, rgb(255, 253, 250) 21%, rgb(252, 250, 245) 100%);
+    color: rgb(30, 30, 30);
+    box-shadow: 0px 2px 10px #edd6d6;
     border: none;
     font-family: 'Sandy-Daniel';
     width: 100%;
@@ -15,21 +15,8 @@ div.recipe-card {
     font-size: normal;
     margin-bottom: 0.25em;
     margin-left: 0.5em;
-    font-weight: bold;
+    font-weight: bolder;
   }
-
-  @media (min-width: 576px) {
-    div.card-title {
-      font-size: 1.25em;
-    }
-  }
-
-  @media (min-width: 992px) {
-    div.card-title {
-      font-size: 1.5em;
-    }
-  }
-  
 
   div.recipe-card .subtitle {
     font-size: 0.6em;
@@ -61,7 +48,7 @@ div.recipe-card {
   }
   
   div.recipe-card .group-title {
-    font-weight: bold;
+    font-size: 0.8em;
   }
   
   div.recipe-card .equipment {
@@ -71,23 +58,37 @@ div.recipe-card {
   div.recipe-card ul {
     list-style: none;
     font-size: x-small;
-    padding-left: 0em;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
   }
 
   @media (min-width: 576px) {
     div.recipe-card ul {
       font-size: 0.8em;
     }
-  }
-
-  @media (min-width: 992px) {
-    div.recipe-card ul {
+    div.card-title {
+      font-size: 1.25em;
+    }
+    div.recipe-card .group-title {
       font-size: 1em;
     }
   }
-  
+
+  /* @media (min-width: 992px) {
+    div.recipe-card ul {
+      font-size: 1em;
+    }
+    div.card-title {
+      font-size: 1.5em;
+    }
+    div.recipe-card .group-title {
+      font-size: 1.25em;
+    }
+  } */
+
   
   div.recipe-card li {
-    border-bottom: 1px solid rgb(191, 207, 233);
+    border-bottom: 1px solid rgb(227, 235, 251);
     padding-top: 0.3em;
+    padding-bottom: 0.1em;
   }

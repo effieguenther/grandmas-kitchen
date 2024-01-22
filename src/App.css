@@ -12,18 +12,18 @@
   background-image:  
   repeating-linear-gradient(
       45deg, 
-      #ecf7fc 25%, 
+      #ffebeb 25%, 
       transparent 25%, 
       transparent 75%, 
-      #ecf7fc 75%, 
-      #ecf7fc), 
+      #ffebeb 75%, 
+      #ffebeb), 
   repeating-linear-gradient(
       45deg, 
-      #ecf7fc 25%, 
-      rgb(207, 233, 246) 25%, 
-      rgb(207, 233, 246) 75%,
-      #ecf7fc 75%, 
-      #ecf7fc);
+      #ffebeb 25%, 
+      rgb(255, 248, 248) 25%, 
+      rgb(255, 248, 248)  75%,
+      #ffebeb 75%, 
+      #ffebeb);
   /* to keep checkerboard pattern, bkg position = half bkg size */
   background-position: 0 0, 25px 25px;
   background-size: 50px 50px;

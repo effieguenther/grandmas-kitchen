@@ -21,49 +21,58 @@ export default function SearchBar({ searchFunction }) {
         searchFunction(search_criteria);
     }
 
+    const SearchBtns = () => {
+        return (
+            <div className='search-btns'>
+                {
+                    data.user && (
+                        <label check className='switch'>
+                            <input 
+                                type="checkbox" 
+                                checked={favorites}
+                                onChange={() => { 
+                                    setFavorites(!favorites);
+                                }}/>
+                            <span className="slider round">
+                                <FontAwesomeIcon icon={faHeart} />
+                            </span>
+                        </label>
+                    )
+                }
+                <button onClick={handleSearch} className='me-1 pink-btn'>
+                    <FontAwesomeIcon icon={faSearch} className='me-2'/>
+                    Search
+                </button>
+            </div>
+        )
+    }
+
     return (
       <Row className='search-bar'>
-        <Col xs='12' md='4' className='search-input'>
-              <Input 
-                  placeholder='title'
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-              />
+        <Col xs='12' className='search-input d-block d-md-flex align-items-center'>
+            <Input 
+                placeholder='title'
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+            />
+            <Input 
+                type='select' 
+                value={category} 
+                onChange={(e) => setCategory(e.target.value)}
+            >
+                <option value="">no category</option>
+                {
+                    categories.map((cat, idx) => (
+                        <option key={idx} value={cat}>{cat}</option>
+                    ))
+                }
+            </Input>
+            <div className='d-none d-md-block'>
+                <SearchBtns />
+            </div>
         </Col>
-        <Col xs='12' md='4' className='search-input'>
-              <Input 
-                  type='select' 
-                  value={category} 
-                  onChange={(e) => setCategory(e.target.value)}
-              >
-                  <option value="">no category</option>
-                  {
-                      categories.map((cat, idx) => (
-                          <option key={idx} value={cat}>{cat}</option>
-                      ))
-                  }
-              </Input>
-        </Col>
-        <Col className='search-btns'>
-            {
-                data.user && (
-                    <label check className='switch'>
-                        <input 
-                            type="checkbox" 
-                            checked={favorites}
-                            onChange={() => { 
-                                setFavorites(!favorites);
-                            }}/>
-                        <span className="slider round">
-                            <FontAwesomeIcon icon={faHeart} />
-                        </span>
-                    </label>
-                )
-            }
-            <button onClick={handleSearch} className='me-1 pink-btn'>
-                <FontAwesomeIcon icon={faSearch} className='me-2'/>
-                Search
-            </button>
+        <Col className='d-block d-md-none'>
+            <SearchBtns />
         </Col>
       </Row>
     )
