@@ -2,7 +2,7 @@ div.recipe-card {
     margin-bottom: 2em;
     padding: 1.75em 0.5em;
     position: relative;
-    background: linear-gradient(140deg, rgb(255, 253, 250) 21%, rgb(252, 250, 245) 100%);
+    background: linear-gradient(140deg, rgb(255, 253, 250) 21%, rgb(252, 248, 242) 100%);
     color: rgb(30, 30, 30);
     box-shadow: 0px 2px 10px #edd6d6;
     border: none;

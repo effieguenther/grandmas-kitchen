@@ -8,7 +8,6 @@ import '../css/recipe.css';
 import { put, post } from '../utils/fetch';
 import CommentModal from './comments/CommentModal';
 import CommentList from './comments/CommentList';
-import Blobs from './Blobs';
 
 export default function Recipe({ recipe }) {
     const { data } = useQuery('currentUser', () => post('users'));

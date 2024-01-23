@@ -114,6 +114,7 @@ backend
 - add email notifications when someone comments on a recipe
 - pdfs are not generating in the right format
 
+ 
 can do later
 - animate success messages for edit/delete/post comments
 - add substitutions guide at the bottom of recipes page?

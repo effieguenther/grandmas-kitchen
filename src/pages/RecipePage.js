@@ -6,6 +6,7 @@ import RecipeList from '../components/RecipeList';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Loading from '../components/Loading';
+import Conversions from '../components/Conversions';
 import grandmaPic from '../images/grandma.jpeg';
 import '../css/recipe-page.css';
 
@@ -40,6 +41,7 @@ export default function RecipePage() {
         </Col>
       </Row>
       <RecipeList currentUser={currentUser} />
+        <Conversions />
       <Row className='footer'>
         <Footer />
       </Row>
