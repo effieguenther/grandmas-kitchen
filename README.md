@@ -61,7 +61,6 @@ When building this I had a few main goals in mind
 - search button searches recipes by criteria
 
 [RecipeList](./src/components/RecipeList.js)
-- receives the currentUser object from RecipePage.js
 - holds the search functions, animation logic, and navigation through keys/swiping
 - results from search functions are stored in the recipes array
 - the activeRecipes array contains the recipe you see on the screen, only one at a time
@@ -69,7 +68,7 @@ When building this I had a few main goals in mind
 - useTransition from react-spring configures the animation pulling data from activeRecipes array
 
 [Recipe](./src/components/Recipe.js)
-- receives the recipe object and currentUser Object from RecipeList.js
+- receives the recipe object from RecipeList.js
 - displays all the recipe info
 - contains buttons for user to interact with the recipe
     - favorite: add or remove from favorites on click
@@ -78,17 +77,17 @@ When building this I had a few main goals in mind
 - CommentList component is rendered below recipe card
 
 [CommentList](./src/components/comments/CommentList.js)
-- receives the recipeId and currentUserId from Recipe.js
+- receives the recipeId from Recipe.js
 - fetches comments for the recipe on mount
     - unique Query for each recipe from react-query
     - using react-query cache data, the user can quickly flip back and forth through the recipes without waiting for a reload each time
 - fetched comments are stored in the comments array, which is mapped into Comment componen
 
 [Comment](./src/components/comments/Comment.js)
-- receives the comment object, currentUserId, and recipeId from CommentList
+- receives the comment object and recipeId from CommentList
 
 [CommentModal](./src/components/comments/CommentModal.js)
-- receives userId, recipeId, setIsOpen, and isOpen from Recipe.js
+- receives recipeId, setIsOpen, and isOpen from Recipe.js
 - receives text input from the user, and sends the info to the server
     - invalidates the comment query for the recipe so the comments are refreshed from the server
 
@@ -101,14 +100,8 @@ When building this I had a few main goals in mind
 - receives  isOpen, setIsOpen, commentText, commentId, and recipeId from Comment.js
 - lets the user edit a comment they posted
     - invalidates the comment query for the recipe so the comments are refreshed from the server
-DisplayNameModal
-- in design
 
 ### TO DO
-
-frontend
-- add prompts to login when clicking the favorite/comment buttons
-- add a 'my favorites' option to the user menu
 
 backend
 - add email notifications when someone comments on a recipe

@@ -21,28 +21,41 @@ export default function SearchBar({ searchFunction }) {
         searchFunction(search_criteria);
     }
 
+    const searchFavorites = () => {
+        const search_criteria = {
+            title: "",
+            category: "",
+            favorites: true
+        }
+        searchFunction(search_criteria);
+    }
+
     const SearchBtns = () => {
         return (
             <div className='search-btns'>
-                {
-                    data.user && (
-                        <label check className='switch'>
-                            <input 
-                                type="checkbox" 
-                                checked={favorites}
-                                onChange={() => { 
-                                    setFavorites(!favorites);
-                                }}/>
-                            <span className="slider round">
-                                <FontAwesomeIcon icon={faHeart} />
-                            </span>
-                        </label>
-                    )
-                }
                 <button onClick={handleSearch} className='me-1 pink-btn'>
                     <FontAwesomeIcon icon={faSearch} className='me-2'/>
                     Search
                 </button>
+                {
+                    data.user && (
+                        <button className='grey-btn' onClick={searchFavorites}>
+                            <FontAwesomeIcon icon={faHeart} className='me-2'/>
+                            My Favorites
+                        </button>
+                        // <label check className='switch'>
+                        //     <input 
+                        //         type="checkbox" 
+                        //         checked={favorites}
+                        //         onChange={() => { 
+                        //             setFavorites(!favorites);
+                        //         }}/>
+                        //     <span className="slider round">
+                        //         <FontAwesomeIcon icon={faHeart} />
+                        //     </span>
+                        // </label>
+                    )
+                }
             </div>
         )
     }
