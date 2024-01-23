@@ -54,11 +54,21 @@ export default function SearchBar({ searchFunction }) {
                 placeholder='title'
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                        handleSearch();
+                    }
+                }}
             />
             <Input 
                 type='select' 
                 value={category} 
                 onChange={(e) => setCategory(e.target.value)}
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                        handleSearch();
+                    }
+                }}
             >
                 <option value="">no category</option>
                 {

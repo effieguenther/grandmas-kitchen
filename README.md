@@ -106,14 +106,18 @@ DisplayNameModal
 
 ### TO DO
 
+frontend
 - print button not working on mobile? 
-- pdfs are not generating in the right format
 - add prompts to login when clicking the favorite/comment buttons
+
+backend
+- add email notifications when someone comments on a recipe
+- pdfs are not generating in the right format
+
+can do later
 - animate success messages for edit/delete/post comments
-- search function execute on 'enter' key
-- add substitutions guide at the bottom of recipes page
-- add option to delete account
-- add email notifications when someone comments on a recipe?
-- add option to comment as a guest?? 
-- "random" recipe button
+- add substitutions guide at the bottom of recipes page?
 - option to add pictures to comments? if so, have all pictures display near top of recipe
+- "random" recipe button
+- add option to comment as a guest?? 
+- add option to delete account

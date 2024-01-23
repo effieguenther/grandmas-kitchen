@@ -62,6 +62,18 @@ div.recipe-card {
     padding-right: 0.75em;
   }
 
+  div.recipe-card li {
+    border-bottom: 1px solid rgb(227, 235, 251);
+    padding-top: 0.3em;
+    padding-bottom: 0.1em;
+  }
+
+  div.blob {
+    background: radial-gradient(circle, rgba(100,51,5,0) 30%, rgba(100, 51, 5, 0.07) 100%);
+    border-radius: 2em;
+    position: absolute;
+  }
+
   @media (min-width: 576px) {
     div.recipe-card ul {
       font-size: 0.8em;
@@ -72,23 +84,4 @@ div.recipe-card {
     div.recipe-card .group-title {
       font-size: 1em;
     }
-  }
-
-  /* @media (min-width: 992px) {
-    div.recipe-card ul {
-      font-size: 1em;
-    }
-    div.card-title {
-      font-size: 1.5em;
-    }
-    div.recipe-card .group-title {
-      font-size: 1.25em;
-    }
-  } */
-
-  
-  div.recipe-card li {
-    border-bottom: 1px solid rgb(227, 235, 251);
-    padding-top: 0.3em;
-    padding-bottom: 0.1em;
   }

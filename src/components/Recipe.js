@@ -2,12 +2,13 @@ import { Card, CardTitle, Col, Row, Container } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPrint, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faComment } from '@fortawesome/free-regular-svg-icons';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useQueryClient, useQuery } from 'react-query';
 import '../css/recipe.css';
 import { put, post } from '../utils/fetch';
 import CommentModal from './comments/CommentModal';
 import CommentList from './comments/CommentList';
+import Blobs from './Blobs';
 
 export default function Recipe({ recipe }) {
     const { data } = useQuery('currentUser', () => post('users'));
@@ -21,6 +22,13 @@ export default function Recipe({ recipe }) {
     const [isOpen, setIsOpen] = useState(false);
     const [favIsLoading, setFavIsLoading] = useState(false);
     const queryClient = useQueryClient();
+    const blob1 = useRef();
+    const blob2 = useRef();
+    const blob3 = useRef();
+    const card = useRef();
+    const getRandomNumber = (min, max) => {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    };
 
     const addToFavorites = async () => {
         try {
@@ -58,9 +66,37 @@ export default function Recipe({ recipe }) {
         }
     }, [data, id])
 
+    useEffect(() => {   
+
+        // Random sizes
+        const randomSize1 = getRandomNumber(30, 60);
+        const randomSize2 = getRandomNumber(45, 75);
+        const randomSize3 = getRandomNumber(75, 100);
+
+        blob1.current.style.width = randomSize1 + 'px';
+        blob1.current.style.height = randomSize1 + 'px';
+        blob1.current.style.top = getRandomNumber(100, card.current.clientHeight - randomSize1) + 'px';
+        blob1.current.style.left = getRandomNumber(20, card.current.clientWidth - randomSize1) + 'px';
+        blob1.current.style.borderRadius = `${randomSize1}% ${randomSize2}% ${randomSize3}% 33%`
+
+        blob2.current.style.width = randomSize2 + 'px';
+        blob2.current.style.height = randomSize2 + 'px';
+        blob2.current.style.top = getRandomNumber(100, card.current.clientHeight - randomSize2) + 'px';
+        blob2.current.style.left = getRandomNumber(20, card.current.clientWidth - randomSize2) + 'px';
+        blob2.current.style.borderRadius = `${randomSize2}% ${randomSize1}% ${randomSize3}% 33%`
+
+        blob3.current.style.width = randomSize3 + 'px';
+        blob3.current.style.height = randomSize3 + 'px';
+        blob3.current.style.top = getRandomNumber(100, card.current.clientHeight - randomSize3) + 'px';
+        blob3.current.style.left = getRandomNumber(20, card.current.clientWidth - randomSize3) + 'px';
+        blob3.current.style.borderRadius = `${randomSize3}% ${randomSize1}% ${randomSize2}% 33%`
+
+    }, []);
+
     return (
         <Row>
             <Col xs='12' lg='7'>
+            <div ref={card}>
                 <Card className='recipe-card'>
                     <CardTitle>
                         <Row className='mb-1'>
@@ -142,6 +178,10 @@ export default function Recipe({ recipe }) {
                     </Container>
                     <CommentModal recipeId={id} isOpen={isOpen} setIsOpen={setIsOpen}/>
                 </Card>
+                <div className='blob' ref={blob1}></div>
+                <div className='blob' ref={blob2}></div>
+                <div className='blob' ref={blob3}></div>
+            </div>
             </Col>
             <Col>
                 <CommentList recipeId={id} />
