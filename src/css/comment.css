@@ -11,6 +11,12 @@ p.comment-section-header {
     padding: 1em 0.5em;
     font-size: large;
     color: #272727;
+    margin-bottom: 0;
+}
+
+button.comment-btn {
+    position: absolute;
+    right: 9%;
 }
 
 div.comment {

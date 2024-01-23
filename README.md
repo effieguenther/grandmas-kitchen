@@ -109,6 +109,7 @@ DisplayNameModal
 frontend
 - print button not working on mobile? 
 - add prompts to login when clicking the favorite/comment buttons
+- move comment button to comment section
 
 backend
 - add email notifications when someone comments on a recipe

@@ -6,7 +6,6 @@ import { useState, useEffect, useRef } from 'react';
 import { useQueryClient, useQuery } from 'react-query';
 import '../css/recipe.css';
 import { put, post } from '../utils/fetch';
-import CommentModal from './comments/CommentModal';
 import CommentList from './comments/CommentList';
 
 export default function Recipe({ recipe }) {
@@ -18,7 +17,6 @@ export default function Recipe({ recipe }) {
     const ingredient_groups = recipe.ingredients || [];
     const id = recipe._id || '';
     const [favorite, setFavorite] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
     const [favIsLoading, setFavIsLoading] = useState(false);
     const queryClient = useQueryClient();
     const blob1 = useRef();
@@ -67,7 +65,7 @@ export default function Recipe({ recipe }) {
 
     useEffect(() => {   
 
-        // Random sizes
+        // Randomized stains
         const randomSize1 = getRandomNumber(30, 60);
         const randomSize2 = getRandomNumber(45, 75);
         const randomSize3 = getRandomNumber(75, 100);
@@ -99,15 +97,12 @@ export default function Recipe({ recipe }) {
                 <Card className='recipe-card'>
                     <CardTitle>
                         <Row className='mb-1'>
-                            <Col xs='6' sm='7' md='8'>
+                            <Col xs='7' sm='9'>
                                 {title}
                             </Col>
                             <Col className='recipe-btns'>
                                 <button onClick={downloadPdf} className='blue-btn'>
                                     <FontAwesomeIcon icon={faPrint} />
-                                </button>
-                                <button onClick={() => setIsOpen(true)} className='blue-btn' disabled={data.user ? false : true}>
-                                    <FontAwesomeIcon icon={faComment} />
                                 </button>
                                 {
                                     favIsLoading
@@ -175,7 +170,6 @@ export default function Recipe({ recipe }) {
                             </Col>
                         </Row>
                     </Container>
-                    <CommentModal recipeId={id} isOpen={isOpen} setIsOpen={setIsOpen}/>
                 </Card>
                 <div className='blob' ref={blob1}></div>
                 <div className='blob' ref={blob2}></div>
