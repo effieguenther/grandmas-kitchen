@@ -1,4 +1,4 @@
-import { Card, CardTitle, Col, Row, Container, Modal } from 'reactstrap';
+import { Card, CardTitle, Col, Row, Container, Modal, Tooltip } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPrint, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect, useRef } from 'react';
@@ -21,6 +21,7 @@ export default function Recipe({ recipe }) {
     const [pdfIsLoading, setPdfIsLoading] = useState(false);
     const [pdfUrl, setPdfUrl] = useState('');
     const [isOpen, setIsOpen] = useState(false);
+    const [tooltipOpen, setTooltipOpen] = useState(false);
     const queryClient = useQueryClient();
     const blob1 = useRef();
     const blob2 = useRef();
@@ -114,16 +115,35 @@ export default function Recipe({ recipe }) {
                                 </button>
                                 {
                                     favIsLoading
+                                    //loading symbol to display while add/remove from favorites
                                     ? (
                                         <button disabled className={favorite ? 'pink-btn' : 'blue-btn'}>
                                             <FontAwesomeIcon icon={faHeart} beat className="loader" />
                                         </button>
                                     )
+                                    //favorites button
                                     : (
-                                        <button className={favorite ? 'pink-btn' : 'blue-btn'} onClick={addToFavorites} disabled={data.user ? false : true}>
+                                        <button 
+                                            className={favorite ? 'pink-btn' : 'blue-btn'} 
+                                            onClick={addToFavorites} 
+                                            disabled={data.user ? false : true}
+                                            id='favoriteBtn'
+                                        >
                                             <FontAwesomeIcon icon={faHeart} />
                                         </button>
                                     )
+                                }
+                                {
+                                    //tooltip to display on favorite button when user is not logged in
+                                    !data.user && <Tooltip
+                                        isOpen={tooltipOpen}
+                                        target='favoriteBtn'
+                                        toggle={() => setTooltipOpen(!tooltipOpen)}
+                                        placement='bottom'
+                                    >
+                                        Log in to favorite
+                                    </Tooltip>
+
                                 }
                             </Col>
                         </Row>
