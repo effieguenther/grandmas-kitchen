@@ -107,19 +107,19 @@ DisplayNameModal
 ### TO DO
 
 frontend
-- print button not working on mobile? 
 - add prompts to login when clicking the favorite/comment buttons
-- move comment button to comment section
+- add a 'my favorites' option to the user menu
 
 backend
 - add email notifications when someone comments on a recipe
-- pdfs are not generating in the right format
 
  
-can do later
+#### Future Features
+- add 'edit recipe' admin interface
 - animate success messages for edit/delete/post comments
 - add substitutions guide at the bottom of recipes page?
 - option to add pictures to comments? if so, have all pictures display near top of recipe
 - "random" recipe button
 - add option to comment as a guest?? 
 - add option to delete account
+- order recipes by number of favorites?

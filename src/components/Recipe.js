@@ -1,12 +1,12 @@
-import { Card, CardTitle, Col, Row, Container } from 'reactstrap';
+import { Card, CardTitle, Col, Row, Container, Modal } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPrint, faHeart } from '@fortawesome/free-solid-svg-icons';
-import { faComment } from '@fortawesome/free-regular-svg-icons';
 import { useState, useEffect, useRef } from 'react';
 import { useQueryClient, useQuery } from 'react-query';
 import '../css/recipe.css';
 import { put, post } from '../utils/fetch';
 import CommentList from './comments/CommentList';
+import Loading from './Loading';
 
 export default function Recipe({ recipe }) {
     const { data } = useQuery('currentUser', () => post('users'));
@@ -18,6 +18,9 @@ export default function Recipe({ recipe }) {
     const id = recipe._id || '';
     const [favorite, setFavorite] = useState(false);
     const [favIsLoading, setFavIsLoading] = useState(false);
+    const [pdfIsLoading, setPdfIsLoading] = useState(false);
+    const [pdfUrl, setPdfUrl] = useState('');
+    const [isOpen, setIsOpen] = useState(false);
     const queryClient = useQueryClient();
     const blob1 = useRef();
     const blob2 = useRef();
@@ -41,12 +44,17 @@ export default function Recipe({ recipe }) {
     }
 
     const downloadPdf = async () => {
+
+        setPdfIsLoading(true);
+        setIsOpen(true);
+
         try {
             const response = await post(`recipes/pdf/${id}`, {}, 'blob');
             console.log('response blob', response)
             const pdfBlob = new Blob([response], { type: 'application/pdf' });
             const pdfUrl = URL.createObjectURL(pdfBlob);
-            window.open(pdfUrl, '_blank');    
+            setPdfUrl(pdfUrl);
+            setPdfIsLoading(false);   
         } catch (err) {
             console.error(err)
         }
@@ -179,6 +187,20 @@ export default function Recipe({ recipe }) {
             <Col>
                 <CommentList recipeId={id} />
             </Col>
+            <Modal isOpen={isOpen} toggle={() => setIsOpen(!isOpen)}>
+                {
+                    pdfIsLoading
+                    ? (
+                        <Loading />
+                    )
+                    : (
+                        <div className='d-flex align-items-center justify-content-center py-5'>
+                            <a href={pdfUrl} target='_blank' className='me-3' rel='noreferrer'>Open PDF</a>
+                            <button className='grey-btn ms-4' onClick={() => setIsOpen(false)}>Go Back</button>
+                        </div>
+                    )
+                }
+            </Modal>
         </Row>
   )
 }
