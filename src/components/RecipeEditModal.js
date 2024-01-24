@@ -1,5 +1,7 @@
 import { Modal, ModalHeader, ModalBody, Label, Input } from "reactstrap"
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { put } from "../utils/fetch";
+import Loading from "./Loading";
 
 export default function RecipeEditModal({ isOpen, setIsOpen, recipe }) {
     const id = recipe._id;
@@ -10,6 +12,42 @@ export default function RecipeEditModal({ isOpen, setIsOpen, recipe }) {
     const [ingredientGroups, setIngredientGroups] = useState(recipe.ingredients);
     const [directions, setDirections] = useState(recipe.directions);
     const categories = ["Appetizers", "Breakfast", "Breads", "Cakes", "Candy", "Casseroles", "Canning", "Cookies", "Desserts", "Drinks", "Fish", "Frosting", "Ice Cream", "Meat", "Pasta", "Pie", "Poultry", "Pudding", "Salads", "Soups", "Vegetables"]; 
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState(false);
+
+    const handleSave = async () => {
+        setIsLoading(true);
+        const recipe = {
+            title: title,
+            source: source,
+            category: category,
+            equipment: equipment,
+            ingredients: ingredientGroups,
+            directions: directions
+        }
+        try {
+            const response = await put(`recipes/${id}`, recipe);
+            setIsLoading(false);
+            setSuccess(true);
+        } catch (err) {
+            setError(err);
+            setIsLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        if (success) {
+          const timer = setTimeout(() => {
+            setIsOpen(false);
+            setSuccess(false);
+          }, 1200)
+  
+          return () => { clearTimeout(timer) }
+        }
+  
+      }, [success])
 
     return (
         <Modal isOpen={isOpen} toggle={() => setIsOpen(!isOpen)} className='edit-recipe'>
@@ -22,7 +60,7 @@ export default function RecipeEditModal({ isOpen, setIsOpen, recipe }) {
                 <Input id='source' value={source} onChange={(e) => setSource(e.target.value)} />
 
                 <Label for='category'>Category</Label>
-                <Input id='category' type='select' value={category} onChange={(e) => setSource(e.target.value)}>
+                <Input id='category' type='select' value={category} onChange={(e) => setCategory(e.target.value)}>
                 {
                     categories.map((cat, idx) => (
                         <option key={idx} value={cat}>{cat}</option>
@@ -30,44 +68,46 @@ export default function RecipeEditModal({ isOpen, setIsOpen, recipe }) {
                 }
                 </Input>
 
-                <Label>Equipment</Label>
-                {
-                    equipment.map((item, idx) => (
-                        <div className='d-flex align-items-center'>
-                            <Input 
-                                key={idx} 
-                                value={equipment[idx]}
-                                onChange={(e) => {
-                                    const copy = [...equipment];
-                                    copy[idx] = e.target.value;
-                                    setEquipment(copy);
-                                }} 
-                            />
-                            <button
-                                className='blue-btn mb-3'
-                                onClick={() => {
-                                    const copy = [...equipment];
-                                    copy.splice(idx, 1);
-                                    setEquipment(copy);
-                                }}
-                            >
-                                -
-                            </button>
-                        </div>
-                    ))
-                }
-                <button className='pink-btn d-block mb-2' onClick={() => setEquipment([...equipment, ''])}>
-                    + equipment
-                </button>
+                <p className='group-title'>Equipment</p>
+                <div className='group'>
+                    {
+                        equipment.map((item, idx) => (
+                            <div className='d-flex align-items-center'>
+                                <Input 
+                                    key={idx} 
+                                    value={equipment[idx]}
+                                    onChange={(e) => {
+                                        const copy = [...equipment];
+                                        copy[idx] = e.target.value;
+                                        setEquipment(copy);
+                                    }} 
+                                />
+                                <button
+                                    className='grey-btn mb-3'
+                                    onClick={() => {
+                                        const copy = [...equipment];
+                                        copy.splice(idx, 1);
+                                        setEquipment(copy);
+                                    }}
+                                >
+                                    -
+                                </button>
+                            </div>
+                        ))
+                    }
+                    <button className='blue-btn d-block mb-2' onClick={() => setEquipment([...equipment, ''])}>
+                        + equipment
+                    </button>
+                </div>
 
-                <Label>Ingredients</Label>
+                <p className='group-title'>Ingredients</p>
                 {
                     ingredientGroups.map((group, idx) => (
-                        <div key={idx}>
-                            <div className='d-flex align-items-center'>
-                                <p>{`Group ${idx + 1}`}</p>
+                        <div className='group' key={idx}>
+                            <div className='d-flex align-items-center py-2'>
+                                <p className='mb-0'>{`Group ${idx + 1}`}</p>
                                 <button 
-                                    className='blue-btn ms-auto'
+                                    className='grey-btn ms-auto'
                                     onClick={() => {
                                         const copy = [...ingredientGroups];
                                         copy.splice(idx, 1);
@@ -77,6 +117,7 @@ export default function RecipeEditModal({ isOpen, setIsOpen, recipe }) {
                                     Delete Group
                                 </button>
                             </div>
+                            <hr />
                             <Label>{`Title`}</Label>
                             <Input
                                 value={ingredientGroups[idx].title}
@@ -89,7 +130,7 @@ export default function RecipeEditModal({ isOpen, setIsOpen, recipe }) {
                             <Label>{`Ingredients`}</Label>
                             {
                                 group.ingredients.map((ingredient, ingredientIdx) => (
-                                    <div key={idx} className='d-flex align-items-center'>
+                                    <div key={idx + ingredientIdx} className='d-flex align-items-center'>
                                         <Input 
                                             key={idx} 
                                             value={ingredientGroups[idx].ingredients[ingredientIdx]}
@@ -100,7 +141,7 @@ export default function RecipeEditModal({ isOpen, setIsOpen, recipe }) {
                                             }} 
                                         />
                                         <button
-                                            className='blue-btn mb-3'
+                                            className='grey-btn mb-3'
                                             onClick={() => {
                                                 const copy = [...ingredientGroups];
                                                 copy[idx].ingredients.splice(ingredientIdx, 1);
@@ -113,7 +154,7 @@ export default function RecipeEditModal({ isOpen, setIsOpen, recipe }) {
                                 ))
                             }
                             <button 
-                                className='pink-btn mb-2'
+                                className='blue-btn mb-2'
                                 onClick={() => {
                                     const copy = [...ingredientGroups];
                                     copy[idx].ingredients.push('');
@@ -125,49 +166,69 @@ export default function RecipeEditModal({ isOpen, setIsOpen, recipe }) {
                         </div>
                     ))
                 }
-                <button className='pink-btn d-block mb-3'>+ Ingredient Group</button>
-                
-                <Label>Directions</Label>
-                {
-                    directions.map((item, idx) => (
-                        <div className='d-flex align-items-center'>
-                            <Input 
-                                key={idx} 
-                                value={directions[idx]}
-                                onChange={(e) => {
-                                    const copy = [...directions];
-                                    copy[idx] = e.target.value;
-                                    setDirections(copy);
-                                }} 
-                            />
-                            <button
-                                className='blue-btn mb-3'
-                                onClick={() => {
-                                    const copy = [...directions];
-                                    copy.splice(idx, 1);
-                                    setDirections(copy);
-                                }}
-                            >
-                                -
-                            </button>
-                        </div>
-                    ))
-                }
-                <button 
-                    className='pink-btn'
-                    onClick={() => {
-                        const copy = [...directions];
-                        copy.push('');
-                        setDirections(copy);
-                    }}
-                >
-                    + Direction
-                </button>
-
-                <div className='d-flex mt-4 justify-content-end'>
-                    <button className='pink-btn'>Save</button>
-                    <button className='grey-btn' onClick={() => setIsOpen(false)}>Cancel</button>
+                <div className='d-flex flex-column'>
+                    <button 
+                        className='blue-btn my-4'
+                        onClick={() => {
+                            const copy = [...ingredientGroups];
+                            copy.push({ title: '', ingredients: [''] })
+                            setIngredientGroups(copy);
+                        }}
+                    >
+                        + Ingredient Group
+                    </button>
                 </div>
+
+                <p className='group-title'>Directions</p>
+                <div className='group'>
+                    {
+                        directions.map((item, idx) => (
+                            <div className='d-flex align-items-center'>
+                                <Input 
+                                    key={idx + 100} 
+                                    value={directions[idx]}
+                                    onChange={(e) => {
+                                        const copy = [...directions];
+                                        copy[idx] = e.target.value;
+                                        setDirections(copy);
+                                    }} 
+                                />
+                                <button
+                                    className='blue-btn mb-3'
+                                    onClick={() => {
+                                        const copy = [...directions];
+                                        copy.splice(idx, 1);
+                                        setDirections(copy);
+                                    }}
+                                >
+                                    -
+                                </button>
+                            </div>
+                        ))
+                    }
+                    <button 
+                        className='blue-btn'
+                        onClick={() => {
+                            const copy = [...directions];
+                            copy.push('');
+                            setDirections(copy);
+                        }}
+                    >
+                        + Direction
+                    </button>
+                </div>
+                {
+                    isLoading
+                    ? (<Loading />)
+                    : success
+                    ? (<div className='success'>Success!</div>)
+                    : (
+                        <div className='d-flex mt-4 justify-content-end'>
+                            <button className='pink-btn' onClick={handleSave}>Save</button>
+                            <button className='grey-btn' onClick={() => setIsOpen(false)}>Cancel</button>
+                        </div>
+                    )
+                }
 
             </ModalBody>
         </Modal>

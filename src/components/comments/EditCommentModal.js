@@ -32,7 +32,6 @@ export default function EditCommentModal({ isOpen, setIsOpen, commentText, comme
 
     useEffect(() => {
       if (success) {
-        console.log(success);
         const timer = setTimeout(() => {
           toggle();
           setSuccess(false);

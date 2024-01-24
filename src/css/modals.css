@@ -53,12 +53,32 @@ div.success {
     color: rgb(12, 146, 12);
 }
 
+/* EDIT RECIPE MODAL */
+
 div.edit-recipe input {
     margin-bottom: 1em;
 }
 
 div.edit-recipe select {
     margin-bottom: 1em;
+}
+
+div.edit-recipe label {
+    font-size: small;
+    color: grey;
+}
+
+div.edit-recipe p.group-title {
+    margin-top: 2em;
+    font-weight: bold;
+}
+
+div.edit-recipe div.group {
+    background-color: rgb(242, 242, 242);
+    padding: 1em;
+    border-radius: 0.25em;
+    display: flex;
+    flex-direction: column;
 }
 
 
