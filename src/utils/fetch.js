@@ -58,3 +58,20 @@ export const put = async (path, body) => {
         return err
     }
 }
+
+export const del = async (path) => {
+    try {
+        const response = await fetch(
+            baseUrl + path, {
+                method: 'DELETE',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            const data = await response.json();
+            return data;
+    } catch (err) {
+        return err
+    }
+}

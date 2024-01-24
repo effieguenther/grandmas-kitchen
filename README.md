@@ -72,19 +72,20 @@ When building this I had a few main goals in mind
 - displays all the recipe info
 - contains buttons for user to interact with the recipe
     - favorite: add or remove from favorites on click
-    - comment: opens a modal to add a comment to the recipe
     - print: generates a printer-friendly pdf of the recipe
 - CommentList component is rendered below recipe card
 
 [CommentList](./src/components/comments/CommentList.js)
 - receives the recipeId from Recipe.js
+- comment button: opens a modal to add a comment to the recipe
 - fetches comments for the recipe on mount
     - unique Query for each recipe from react-query
     - using react-query cache data, the user can quickly flip back and forth through the recipes without waiting for a reload each time
-- fetched comments are stored in the comments array, which is mapped into Comment componen
+- fetched comments are stored in the comments array, which is mapped into Comment component
 
 [Comment](./src/components/comments/Comment.js)
 - receives the comment object and recipeId from CommentList
+- has edit/delete buttons if the current user is the author of the comment
 
 [CommentModal](./src/components/comments/CommentModal.js)
 - receives recipeId, setIsOpen, and isOpen from Recipe.js
@@ -102,8 +103,6 @@ When building this I had a few main goals in mind
     - invalidates the comment query for the recipe so the comments are refreshed from the server
 
 ### TO DO
-- add 'edit recipe' admin interface
-
  
 #### Future Features
 - animate success messages for edit/delete/post comments

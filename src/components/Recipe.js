@@ -1,4 +1,4 @@
-import { Card, CardTitle, Col, Row, Container, Modal, Tooltip } from 'reactstrap';
+import { Card, CardTitle, Col, Row, Container, Modal, Tooltip, ModalHeader } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPrint, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect, useRef } from 'react';
@@ -7,6 +7,7 @@ import '../css/recipe.css';
 import { put, post } from '../utils/fetch';
 import CommentList from './comments/CommentList';
 import RecipeEditModal from './RecipeEditModal';
+import DeleteRecipeModal from './DeleteRecipeModal';
 import Loading from './Loading';
 
 export default function Recipe({ recipe }) {
@@ -27,6 +28,7 @@ export default function Recipe({ recipe }) {
     const [modalOpen, setModalOpen] = useState(false);
     const [tooltipOpen, setTooltipOpen] = useState(false);
     const [editOpen, setEditOpen] = useState(false);
+    const [deleteOpen, setDeleteOpen] = useState(false);
 
     const blob1 = useRef();
     const blob2 = useRef();
@@ -205,10 +207,12 @@ export default function Recipe({ recipe }) {
                         <Row>
                             {
                                 data.user?.email === 'effiegguenther@gmail.com' && (
-                                    <>
-                                        <button className='blue-btn' onClick={() => setEditOpen(!editOpen)}>Edit</button>
+                                    <div className='d-flex justify-content-center'>
+                                        <button className='blue-btn me-2' onClick={() => setEditOpen(!editOpen)}>Edit</button>
+                                        <button className='grey-btn' onClick={() => setDeleteOpen(!deleteOpen)}>Delete</button>
                                         <RecipeEditModal isOpen={editOpen} setIsOpen={setEditOpen} recipe={recipe} />
-                                    </>
+                                        <DeleteRecipeModal isOpen={deleteOpen} setIsOpen={setDeleteOpen} recipeId={id} />
+                                    </div>
                                 )
                             }
                         </Row>

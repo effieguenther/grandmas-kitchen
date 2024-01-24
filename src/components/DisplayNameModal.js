@@ -42,7 +42,6 @@ export default function DisplayNameModal({ setIsOpen, isOpen }) {
 
     useEffect(() => {
       if (success) {
-        console.log(success);
         const timer = setTimeout(() => {
           toggle();
           setSuccess(false);
