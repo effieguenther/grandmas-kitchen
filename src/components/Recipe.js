@@ -6,23 +6,28 @@ import { useQueryClient, useQuery } from 'react-query';
 import '../css/recipe.css';
 import { put, post } from '../utils/fetch';
 import CommentList from './comments/CommentList';
+import RecipeEditModal from './RecipeEditModal';
 import Loading from './Loading';
 
 export default function Recipe({ recipe }) {
-    const { data } = useQuery('currentUser', () => post('users'));
     const title = recipe.title ? recipe.title.toUpperCase() : '';
     const source = recipe.source || '';
     const category = recipe.category || '';
     const equipment = recipe.equipment || [];
     const ingredient_groups = recipe.ingredients || [];
     const id = recipe._id || '';
+
+    const { data } = useQuery('currentUser', () => post('users'));
+    const queryClient = useQueryClient();
+
     const [favorite, setFavorite] = useState(false);
     const [favIsLoading, setFavIsLoading] = useState(false);
     const [pdfIsLoading, setPdfIsLoading] = useState(false);
     const [pdfUrl, setPdfUrl] = useState('');
-    const [isOpen, setIsOpen] = useState(false);
+    const [modalOpen, setModalOpen] = useState(false);
     const [tooltipOpen, setTooltipOpen] = useState(false);
-    const queryClient = useQueryClient();
+    const [editOpen, setEditOpen] = useState(false);
+
     const blob1 = useRef();
     const blob2 = useRef();
     const blob3 = useRef();
@@ -47,7 +52,7 @@ export default function Recipe({ recipe }) {
     const downloadPdf = async () => {
 
         setPdfIsLoading(true);
-        setIsOpen(true);
+        setModalOpen(true);
 
         try {
             const response = await post(`recipes/pdf/${id}`, {}, 'blob');
@@ -197,6 +202,17 @@ export default function Recipe({ recipe }) {
                                 </ul>
                             </Col>
                         </Row>
+                        <Row>
+                            {
+                                (data.user?.email === 'effiegguenther@gmail.com' || 'jguentherpersonal@gmail.com') 
+                                && (
+                                    <>
+                                        <button className='blue-btn' onClick={() => setEditOpen(!editOpen)}>Edit</button>
+                                        <RecipeEditModal isOpen={editOpen} setIsOpen={setEditOpen} recipe={recipe} />
+                                    </>
+                                )
+                            }
+                        </Row>
                     </Container>
                 </Card>
                 <div className='blob' ref={blob1}></div>
@@ -207,7 +223,7 @@ export default function Recipe({ recipe }) {
             <Col>
                 <CommentList recipeId={id} />
             </Col>
-            <Modal isOpen={isOpen} toggle={() => setIsOpen(!isOpen)}>
+            <Modal isOpen={modalOpen} toggle={() => setModalOpen(!modalOpen)}>
                 {
                     pdfIsLoading
                     ? (
@@ -216,7 +232,7 @@ export default function Recipe({ recipe }) {
                     : (
                         <div className='d-flex align-items-center justify-content-center py-5'>
                             <a href={pdfUrl} target='_blank' className='me-3' rel='noreferrer'>Open PDF</a>
-                            <button className='grey-btn ms-4' onClick={() => setIsOpen(false)}>Go Back</button>
+                            <button className='grey-btn ms-4' onClick={() => setModalOpen(false)}>Go Back</button>
                         </div>
                     )
                 }

@@ -102,19 +102,11 @@ When building this I had a few main goals in mind
     - invalidates the comment query for the recipe so the comments are refreshed from the server
 
 ### TO DO
-
-frontend
-- add option to opt out of emails
-- add option to delete account
-
-backend
-- add option to delete account
+- add 'edit recipe' admin interface
 
  
 #### Future Features
-- add 'edit recipe' admin interface
 - animate success messages for edit/delete/post comments
-- add substitutions guide at the bottom of recipes page?
 - option to add pictures to comments? if so, have all pictures display near top of recipe
 - "random" recipe button
 - add option to comment as a guest?? 

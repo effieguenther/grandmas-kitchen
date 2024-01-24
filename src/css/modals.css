@@ -53,6 +53,14 @@ div.success {
     color: rgb(12, 146, 12);
 }
 
+div.edit-recipe input {
+    margin-bottom: 1em;
+}
+
+div.edit-recipe select {
+    margin-bottom: 1em;
+}
+
 
 
 
