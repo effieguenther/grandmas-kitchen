@@ -46,7 +46,7 @@ export default function Header() {
                 <DropdownToggle className='toggle'>{initial}</DropdownToggle>
                 <DropdownMenu>
                   <DropdownItem className='edit-name' onClick={() => setModalIsOpen(true) }>
-                    {name}
+                    My Account
                   </DropdownItem>
                   <DropdownItem onClick={logout}>logout</DropdownItem>
                 </DropdownMenu>

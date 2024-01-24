@@ -1,5 +1,6 @@
 import {
     Input,
+    Label,
     Modal,
     ModalHeader,
     ModalBody } from 'reactstrap';
@@ -19,12 +20,14 @@ export default function DisplayNameModal({ setIsOpen, isOpen }) {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
+    const [notifications, setNotifications] = useState(true);
     const toggle = () => setIsOpen(!isOpen);
     const slide = useSpring(slideRight);
 
     useEffect(() => {
         if (data.user) {
           setName(data.user.display_name);
+          setNotifications(data.user.notifications);
         }
       }, [data]) 
     
@@ -54,13 +57,17 @@ export default function DisplayNameModal({ setIsOpen, isOpen }) {
         setError('');
         setIsLoading(true);
         try {
-            const response = await put('users/changeDisplayName', { name: name });
-            if (response.success) {
+            const nameResponse = await put('users/changeDisplayName', { name: name });
+            const notificationResponse = await put('users/changeNotifications', { notifications: notifications });
+            if (nameResponse.success && notificationResponse.success) {
               queryClient.invalidateQueries('currentUser');
               setSuccess(true);
               setIsLoading(false);
+            } else if (!nameResponse.success) {
+              setError(nameResponse.message + ' :(')
+              setIsLoading(false);
             } else {
-              setError(response.message + ' :(')
+              setError(notificationResponse.message + ' :(')
               setIsLoading(false);
             }
         } catch (err) {
@@ -71,12 +78,24 @@ export default function DisplayNameModal({ setIsOpen, isOpen }) {
 
     return (
       <Modal isOpen={isOpen} toggle={toggle}>
-        <ModalHeader>Edit display name</ModalHeader>
+        <ModalHeader>My Account</ModalHeader>
         <ModalBody>
+          <Label>Name</Label>
           <Input 
             value={name}
             onChange={(e) => { setName(e.target.value) }}
+            className='mb-3'
           />
+          <Label>Email Notifications</Label>
+          <Input
+            type='select'
+            value={notifications}
+            onChange={(e) => { setNotifications(e.target.value) }}
+            className='mb-3'
+          >
+            <option value={true}>On</option>
+            <option value={false}>Off</option>
+          </Input>
           {
             formErr && <p className='form-err'>{formErr}</p>
           }

@@ -39,7 +39,7 @@ export default function SearchBar({ searchFunction }) {
                 </button>
                 {
                     data.user && (
-                        <button className='grey-btn' onClick={searchFavorites}>
+                        <button className='blue-btn' onClick={searchFavorites}>
                             <FontAwesomeIcon icon={faHeart} className='me-2'/>
                             My Favorites
                         </button>

@@ -103,8 +103,12 @@ When building this I had a few main goals in mind
 
 ### TO DO
 
+frontend
+- add option to opt out of emails
+- add option to delete account
+
 backend
-- add email notifications when someone comments on a recipe
+- add option to delete account
 
  
 #### Future Features
