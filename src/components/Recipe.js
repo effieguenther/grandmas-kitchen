@@ -204,8 +204,7 @@ export default function Recipe({ recipe }) {
                         </Row>
                         <Row>
                             {
-                                (data.user?.email === 'effiegguenther@gmail.com' || 'jguentherpersonal@gmail.com') 
-                                && (
+                                data.user?.email === 'effiegguenther@gmail.com' && (
                                     <>
                                         <button className='blue-btn' onClick={() => setEditOpen(!editOpen)}>Edit</button>
                                         <RecipeEditModal isOpen={editOpen} setIsOpen={setEditOpen} recipe={recipe} />
