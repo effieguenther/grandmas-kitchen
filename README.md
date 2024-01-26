@@ -1,6 +1,6 @@
 # Grandma's Kitchen
 
-In honor of our grandma who passed in 2023, Sandy Daniel, this is a digitized version of her coveted recipe box. There are over 200 tried and tested meals that we grew up eating our whole lives. Some are her own creation, and others were shared through her community and church. 
+In honor of our grandma, Sandy Daniel, this is a digitized version of her coveted recipe box. There are over 200 tried and tested meals that we grew up eating our whole lives. Some are her own creation, and others were shared through her community and church. 
 
 View the site [here](https://grandma-8ed4c.web.app/)
 View the backend [here]()
