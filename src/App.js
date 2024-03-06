@@ -1,5 +1,6 @@
 import { 
   createBrowserRouter, 
+  defer, 
   redirect,
   RouterProvider
 } from 'react-router-dom';
@@ -15,7 +16,8 @@ import './css/footer.css';
 const router = createBrowserRouter([
   {
     element: <LandingPage />,
-    path: '/'
+    path: '/',
+    errorElement: <Error />
   },
   {
     element: <LoginPage />,
@@ -23,18 +25,13 @@ const router = createBrowserRouter([
     loader: async () => {
       const verifyUser = await post('users/verify');
       if (verifyUser.success) { return redirect('/recipes') }
-      return null;
+      return defer({ verifyUser });
     },
     errorElement: <Error />
   },
   {
     element: <RecipePage />,
     path: '/recipes',
-    loader: async () => {
-      const question_answered = localStorage.getItem('question-answered');
-      if (!question_answered) { return redirect('/') }
-      return null;
-    },
     errorElement: <Error />
   }
 ]);

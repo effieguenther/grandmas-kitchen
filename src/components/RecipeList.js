@@ -16,6 +16,7 @@ export default function RecipeList() {
   const [recipes, setRecipes] = useState([]);
   const [activeRecipes, setActiveRecipes] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
+  //TODO: define recipe query to replace isLodaing/error/recipes values
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
   const [tutorial, setTutorial] = useState(true);
@@ -35,6 +36,7 @@ export default function RecipeList() {
     setActiveRecipes(recipes[activeIndex])
   }, [activeIndex]);
 
+  //TODO: replace with debouncing
   //prevents rapid fire state updates with throttling
   const handleNav = (direction) => {
     if (timerId) { return }

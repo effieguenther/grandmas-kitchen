@@ -31,10 +31,10 @@ export default function LandingScreen() {
               </p>
               <p className='question'>If God had a refrigerator, would your picture be on it?</p>
               <div className='yes-no'>
-                <Link to='/login'>
+                <Link to='/login' reloadDocument>
                   <button className='pink-btn' onClick={handleClick}>Yes</button>
                 </Link>
-                <Link to='/login'>
+                <Link to='/login'reloadDocument>
                   <button className='grey-btn' onClick={handleClick}>No</button>
                 </Link>
               </div>
