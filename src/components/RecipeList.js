@@ -43,31 +43,28 @@ export default function RecipeList() {
     setActiveRecipes(recipeData?.recipes[activeIndex]);
   }, [activeIndex]);
 
-  //TODO: replace with debouncing
-  //prevents rapid fire state updates with throttling
-  const handleNav = (direction) => {
-    if (timerId) {
-      return;
-    }
 
-    timerId = setTimeout(() => {
-      if (direction === "next") {
-        if (activeIndex === recipeData.recipes.length - 1) {
-          timerId = undefined;
-          return;
-        }
-        setActiveIndex((prevIndex) => prevIndex + 1);
-      } else if (direction === "prev") {
-        if (activeIndex === 0) {
-          timerId = undefined;
-          return;
-        }
-        setActiveIndex((prevIndex) => prevIndex - 1);
-      }
-      timerId = undefined;
-    }, 180);
-    return;
+  const debounce = (func, delay) => {
+    let timerId;
+    return function (...args) {
+      clearTimeout(timerId);
+      timerId = setTimeout(() => {
+        func.apply(this, args);
+      }, delay);
+    };
   };
+
+  const handleNav = debounce((direction) => {
+    setActiveIndex((prevIndex) => {
+      let newIndex = prevIndex;
+      if (direction === "next") {
+        newIndex = Math.min(prevIndex + 1, recipeData.recipes.length - 1);
+      } else if (direction === "prev") {
+        newIndex = Math.max(prevIndex - 1, 0);
+      }
+      return newIndex;
+    });
+  }, 180);
 
   const Tutorial = () => {
     return slideUpAnimation(
@@ -115,7 +112,6 @@ export default function RecipeList() {
       );
     return <></>;
   };
-
 
   return (
     <>
