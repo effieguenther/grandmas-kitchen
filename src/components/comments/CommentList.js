@@ -25,7 +25,7 @@ export default function CommentList({ recipeId }) {
     return isLoading 
     ? (<Loading />)
     : isError
-    ? (<p>{error}</p>)
+    ? (<p>{error.message}</p>)
     : (
         <div className='comment-list'>
             <div className='d-flex align-items-center justify-content-center'>

@@ -1,4 +1,5 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
+import { debounce } from "lodash";
 import { useQuery } from "react-query";
 import { Container } from "reactstrap";
 import { useTransition, animated } from "@react-spring/web";
@@ -12,6 +13,9 @@ import Loading from "./Loading";
 import "../css/search.css";
 
 export default function RecipeList() {
+
+  // cache and state //
+
   const [searchCriteria, setSearchCriteria] = useState(null);
   const {
     data: recipeData,
@@ -24,13 +28,15 @@ export default function RecipeList() {
     { enabled: !!searchCriteria, staleTime: Infinity }
   );
 
+  // animation variables //
+
   const [activeRecipes, setActiveRecipes] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const slideUpAnimation = useTransition(true, slideUp);
   const cardAnimation = useTransition(activeRecipes, cardSwipe);
-  let timerId = undefined;
 
-  //whenever recipes array changes, set the active recipe to first recipe
+  // maintain the current recipe as the user navigates for animation purposes //
+
   useEffect(() => {
     if (recipeData?.recipes) {
       setActiveIndex(0);
@@ -38,33 +44,24 @@ export default function RecipeList() {
     }
   }, [recipeData]);
 
-  //when activeIndex changes, set activeRecipes
   useEffect(() => {
     setActiveRecipes(recipeData?.recipes[activeIndex]);
   }, [activeIndex]);
 
-
-  const debounce = (func, delay) => {
-    let timerId;
-    return function (...args) {
-      clearTimeout(timerId);
-      timerId = setTimeout(() => {
-        func.apply(this, args);
-      }, delay);
-    };
-  };
+  // debounce the navigation for better UX //
 
   const handleNav = debounce((direction) => {
     setActiveIndex((prevIndex) => {
-      let newIndex = prevIndex;
       if (direction === "next") {
-        newIndex = Math.min(prevIndex + 1, recipeData.recipes.length - 1);
+        return prevIndex === recipeData.recipes.length - 1 ? prevIndex : prevIndex + 1;
       } else if (direction === "prev") {
-        newIndex = Math.max(prevIndex - 1, 0);
+        return prevIndex === 0 ? prevIndex : prevIndex - 1;
       }
-      return newIndex;
     });
   }, 180);
+  
+
+  // helper functions for rendering //
 
   const Tutorial = () => {
     return slideUpAnimation(
@@ -113,6 +110,8 @@ export default function RecipeList() {
     return <></>;
   };
 
+  // final return //
+
   return (
     <>
       <SearchBar searchFunction={setSearchCriteria} />
@@ -121,7 +120,7 @@ export default function RecipeList() {
         {recipeIsLoading ? (
           <Loading />
         ) : recipeIsError ? (
-          <p className="text-center mt-4">{recipeError}</p>
+          <p className="text-center mt-4">{recipeError.message}</p>
         ) : recipeData?.recipes?.length > 0 ? (
           cardAnimation((style, recipe) => (
             <animated.div style={{ ...style, width: "100%" }}>

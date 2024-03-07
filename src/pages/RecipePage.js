@@ -16,6 +16,8 @@ export default function RecipePage() {
     { staleTime: Infinity }
   );
 
+  // wait to display the page until it's confirmed if a user is logged in or not //
+
   if (isLoading) return <Loading />;
   if (isError) return <p>{error}</p>;
   return (
