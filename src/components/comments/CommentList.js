@@ -14,7 +14,7 @@ export default function CommentList({ recipeId }) {
     const [isOpen, setIsOpen] = useState(false);
     const [tooltipOpen, setTooltipOpen] = useState(false);
     const { isLoading, isError, data: commentData, error } = useQuery(['comments', recipeId], () => post(`recipes/comments/${recipeId}`));
-    const { data: userData } = useQuery('currentUser', () => post('users'));
+    const { data: userData } = useQuery('currentUser', () => post('users'), {staleTime: Infinity});
 
     useEffect(() => {
         if (commentData?.comments) {
