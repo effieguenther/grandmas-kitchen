@@ -6,7 +6,6 @@ import {
   Container,
   Modal,
   Tooltip,
-  ModalHeader,
 } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPrint, faHeart } from "@fortawesome/free-solid-svg-icons";
@@ -24,18 +23,23 @@ export default function Recipe({ recipe }) {
   const ingredient_groups = recipe.ingredients;
   const { source, category, equipment, _id: id } = recipe;
 
-  const { data } = useQuery("currentUser", () => post("users"));
+  const { data: userData } = useQuery("currentUser", () => post("users"));
+  const { ...pdfData } = useQuery(["pdf", id], async () => {
+    const response = await post(`recipes/pdf/${id}`, {}, "blob");
+    const pdfBlob = new Blob([response], { type: "application/pdf" });
+    const pdfUrl = URL.createObjectURL(pdfBlob);
+    return pdfUrl;
+  });
   const queryClient = useQueryClient();
 
   const [favorite, setFavorite] = useState(false);
   const [favIsLoading, setFavIsLoading] = useState(false);
-  const [pdfIsLoading, setPdfIsLoading] = useState(false);
-  const [pdfUrl, setPdfUrl] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [tooltipOpen, setTooltipOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
 
+  // change to mutation
   const addToFavorites = async () => {
     try {
       setFavIsLoading(true);
@@ -49,32 +53,16 @@ export default function Recipe({ recipe }) {
     }
   };
 
-  const downloadPdf = async () => {
-    setPdfIsLoading(true);
-    setModalOpen(true);
-
-    try {
-      const response = await post(`recipes/pdf/${id}`, {}, "blob");
-      console.log("response blob", response);
-      const pdfBlob = new Blob([response], { type: "application/pdf" });
-      const pdfUrl = URL.createObjectURL(pdfBlob);
-      setPdfUrl(pdfUrl);
-      setPdfIsLoading(false);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   useEffect(() => {
     setFavIsLoading(false);
   }, [favorite]);
 
   useEffect(() => {
-    if (data.user) {
-      const inFavorites = data.user.favorites.includes(id);
+    if (userData.user) {
+      const inFavorites = userData.user.favorites.includes(id);
       setFavorite(inFavorites);
     }
-  }, [data, id]);
+  }, [userData, id]);
 
   // adds randomized stains to each recipe //
 
@@ -153,8 +141,10 @@ export default function Recipe({ recipe }) {
           </ul>
         </Col>
       </Row>
+
+      {/* these buttons only appear if admin is logged in */}
       <Row>
-        {data.user?.email === "effiegguenther@gmail.com" && (
+        {userData.user?.email === "effiegguenther@gmail.com" && (
           <div className="d-flex justify-content-center">
             <button
               className="blue-btn me-2"
@@ -197,7 +187,10 @@ export default function Recipe({ recipe }) {
                   {title}
                 </Col>
                 <Col className="recipe-btns">
-                  <button onClick={downloadPdf} className="blue-btn">
+                  <button
+                    onClick={() => setModalOpen(!modalOpen)}
+                    className="blue-btn"
+                  >
                     <FontAwesomeIcon icon={faPrint} />
                   </button>
                   {favIsLoading ? (
@@ -213,7 +206,7 @@ export default function Recipe({ recipe }) {
                     <button
                       className={favorite ? "pink-btn" : "blue-btn"}
                       onClick={addToFavorites}
-                      disabled={data.user ? false : true}
+                      disabled={userData.user ? false : true}
                       id="favoriteBtn"
                     >
                       <FontAwesomeIcon icon={faHeart} />
@@ -221,7 +214,7 @@ export default function Recipe({ recipe }) {
                   )}
                   {
                     //tooltip to display on favorite button when user is not logged in
-                    !data.user && (
+                    !userData.user && (
                       <Tooltip
                         isOpen={tooltipOpen}
                         target="favoriteBtn"
@@ -261,12 +254,20 @@ export default function Recipe({ recipe }) {
       <Col>
         <CommentList recipeId={id} />
       </Col>
+
+      {/* This modal exists because for security purposes, opening a new tab has to be directly triggered by 
+      a user action. Maybe replace this with the button being disabled until loading is finished? */}
       <Modal isOpen={modalOpen} toggle={() => setModalOpen(!modalOpen)}>
-        {pdfIsLoading ? (
+        {pdfData.isLoading ? (
           <Loading />
         ) : (
           <div className="d-flex align-items-center justify-content-center py-5">
-            <a href={pdfUrl} target="_blank" className="me-3" rel="noreferrer">
+            <a
+              href={pdfData.data}
+              target="_blank"
+              className="me-3"
+              rel="noreferrer"
+            >
               Open PDF
             </a>
             <button
