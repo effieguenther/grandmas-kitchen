@@ -186,7 +186,7 @@ export default function RecipeEditModal({ isOpen, setIsOpen, recipe }) {
                             <div className='d-flex align-items-center'>
                                 <Input 
                                     key={idx + 100} 
-                                    value={directions[idx]}
+                                    value={item}
                                     onChange={(e) => {
                                         const copy = [...directions];
                                         copy[idx] = e.target.value;

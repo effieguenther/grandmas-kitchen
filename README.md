@@ -35,6 +35,8 @@ When building this I had a few main goals in mind
 
 ### TO DO
 
+- use query strings for searching to make individual recipes share-able
+
 ## BUGS
 
 - clicking rapidly on the navigation buttons breaks the index limits

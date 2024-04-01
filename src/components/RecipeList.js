@@ -3,6 +3,7 @@ import { debounce } from "lodash";
 import { useQuery } from "react-query";
 import { Container } from "reactstrap";
 import { useTransition, animated } from "@react-spring/web";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { post } from "../utils/fetch";
@@ -13,6 +14,11 @@ import Loading from "./Loading";
 import "../css/search.css";
 
 export default function RecipeList() {
+
+  // URL params //
+
+  // const { search} = useLocation();
+  // const navigate = useNavigate();
 
   // cache and state //
 
