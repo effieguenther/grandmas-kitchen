@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useQuery } from 'react-query';
-import { post } from '../utils/fetch';
+import { post } from '../../utils/fetch';
+import "./search.css";
 
 export default function SearchBar({ searchFunction }) {
     const { data } = useQuery('currentUser', () => post('users'));
@@ -39,7 +40,7 @@ export default function SearchBar({ searchFunction }) {
                 </button>
                 {
                     data.user && (
-                        <button className='blue-btn' onClick={searchFavorites}>
+                        <button className='blue-btn' onClick={searchFavorites} data-testid="see-favorites-btn">
                             <FontAwesomeIcon icon={faHeart} className='me-2'/>
                             My Favorites
                         </button>

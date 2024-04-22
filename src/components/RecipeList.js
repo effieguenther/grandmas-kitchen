@@ -9,9 +9,8 @@ import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { post } from "../utils/fetch";
 import { slideUp, cardSwipe } from "../utils/animations";
 import Recipe from "./Recipe";
-import SearchBar from "./SearchBar";
+import SearchBar from "./search-bar/SearchBar";
 import Loading from "./Loading";
-import "../css/search.css";
 
 export default function RecipeList() {
 
