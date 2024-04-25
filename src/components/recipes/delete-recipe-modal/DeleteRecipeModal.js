@@ -1,7 +1,7 @@
 import { Modal, ModalHeader } from 'reactstrap';
 import { useState, useEffect } from 'react';
-import { del } from '../utils/fetch';
-import Loading from './Loading';
+import { del } from '../../../utils/fetch';
+import Loading from '../../Loading';
 
 export default function DeleteRecipeModal({ isOpen, setIsOpen, recipeId }) {
 

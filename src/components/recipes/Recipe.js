@@ -12,11 +12,11 @@ import { faPrint, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect, useRef } from "react";
 import { useQueryClient, useQuery } from "react-query";
 import "../css/recipe.css";
-import { put, post } from "../utils/fetch";
-import CommentList from "./comments/CommentList";
+import { put, post } from "../../utils/fetch";
+import CommentList from "../comments/CommentList";
 import RecipeEditModal from "./RecipeEditModal";
-import DeleteRecipeModal from "./DeleteRecipeModal";
-import Loading from "./Loading";
+import DeleteRecipeModal from "./delete-recipe-modal/DeleteRecipeModal";
+import Loading from "../Loading";
 
 export default function Recipe({ recipe }) {
   const title = recipe.title.toUpperCase();

@@ -6,11 +6,11 @@ import { useTransition, animated } from "@react-spring/web";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { post } from "../utils/fetch";
-import { slideUp, cardSwipe } from "../utils/animations";
+import { post } from "../../utils/fetch";
+import { slideUp, cardSwipe } from "../../utils/animations";
 import Recipe from "./Recipe";
-import SearchBar from "./search-bar/SearchBar";
-import Loading from "./Loading";
+import SearchBar from "../search-bar/SearchBar";
+import Loading from "../Loading";
 
 export default function RecipeList() {
 

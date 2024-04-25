@@ -93,29 +93,4 @@ describe('SearchBar component', () => {
     });
   });
 
-  // it('should call searchFunction with empty criteria on subsequent "Search" click if no changes are made', () => {
-  //   const titleInput = screen.getByPlaceholderText('title');
-  //   const searchButton = screen.getAllByText('Search')[0];
-  
-  //   fireEvent.change(titleInput, { target: { value: 'test' } });
-  //   console.log(titleInput.value);
-  //   fireEvent.click(searchButton); // Initial search with title
-  
-  //   expect(mockSearchFunction).toHaveBeenCalledWith({
-  //     title: "",
-  //     category: "",
-  //     favorites: false
-  //   });
-  
-  //   // Simulate clearing input and clicking search again
-  //   fireEvent.change(titleInput, { target: { value: '' } });
-  //   fireEvent.click(searchButton);
-  
-  //   expect(mockSearchFunction).toHaveBeenCalledWith({
-  //     title: "",
-  //     category: "",
-  //     favorites: false
-  //   });
-  // });
-
 });
