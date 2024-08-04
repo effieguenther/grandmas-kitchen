@@ -1,7 +1,7 @@
 import { Row, Col, Container } from "reactstrap";
 import { useQuery } from "react-query";
 import { post } from "../utils/fetch";
-import RecipeList from "../components/RecipeList";
+import RecipeList from "../components/recipes/RecipeList";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Loading from "../components/Loading";

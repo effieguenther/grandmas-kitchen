@@ -1,7 +1,7 @@
 import { Modal, ModalHeader, ModalBody, Label, Input } from "reactstrap"
 import { useState, useEffect } from "react";
-import { put } from "../../utils/fetch";
-import Loading from "../Loading";
+import { put } from "../../../utils/fetch";
+import Loading from "../../Loading";
 
 export default function RecipeEditModal({ isOpen, setIsOpen, recipe }) {
     const id = recipe._id;
